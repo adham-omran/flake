@@ -3,6 +3,6 @@
 environment.systemPackages =
 [
 	config.nur.repos.mic92.hello-nur
-	config.nur.repos.renesat.activitywatch-bin
+	# config.nur.repos.renesat.activitywatch-bin
 ];
 })
