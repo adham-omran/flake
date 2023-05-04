@@ -119,6 +119,9 @@
       # Anki
       anki
 
+      # Rice
+      eww-wayland
+
     ];
   };
 
