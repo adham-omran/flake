@@ -18,7 +18,7 @@ in
 
       # KVM/Streaming
       sunshine
-      moonlight-qt # why does the shill work?
+      moonlight-qt
       barrier
 
       # Music
