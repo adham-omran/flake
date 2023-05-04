@@ -1,8 +1,4 @@
 {config, pkgs, lib, ...}:
-let
-  nur-no-pkgs = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {};
-    pdf-reader = "org.kde.okular.desktop";
-in
 {
   home = {
     stateVersion = "23.05";
