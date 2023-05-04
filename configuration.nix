@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./cachix.nix
-      ./waydroid.nix
+      ./modules/waydroid.nix
       ./modules/docker.nix
       # ./mpd.nix
     ];
