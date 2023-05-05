@@ -148,8 +148,8 @@
     };
 
     cursorTheme = {
-      name = "Numix-Cursor";
-      package = pkgs.numix-cursor-theme;
+      name = "Quintom_Ink";
+      package = pkgs.quintom-cursor-theme;
     };
 
     gtk3.extraConfig = {
