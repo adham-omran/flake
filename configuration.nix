@@ -11,6 +11,7 @@
       ./cachix.nix
       ./modules/waydroid.nix
       ./modules/docker.nix
+      ./modules/flatpak.nix
       # ./mpd.nix
     ];
 
