@@ -6,7 +6,7 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       ./cachix.nix
       ./modules/waydroid.nix
@@ -37,7 +37,7 @@
   # Set your time zone.
   time.timeZone = "Asia/Baghdad";
 
-  # Select internationalisation properties.
+  # Select internationalization properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable the X11 windowing system.
@@ -49,10 +49,11 @@
   ## sway
   programs.sway.enable = true;
   ## Until you learn to use home-manager's config style, just configure it like
-  ## everyone else.
-  # programs.sway.package = null;
+  ## normal.
+  ## programs.sway.package = null;
   programs.light.enable = true;
   security.polkit.enable = true;
+
   systemd.user.services.kanshi = {
     description = "kanshi daemon";
     serviceConfig = {
@@ -102,7 +103,6 @@
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adham = {
     isNormalUser = true;
     description = "adham";
@@ -119,24 +119,26 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     openssl
-    wget
     syncthing
     killall
+
+    ## Hyprland
     hyprland
     hyprland-protocols
     hyprland-share-picker
     xdg-desktop-portal-hyprland
+
+    ## Common to Hyprland & Sway
     waybar
-    powertop
-    plasma5Packages.plasma-thunderbolt
+
     # GNOME
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     # END OF GNOME
+
+    # Emacs ovrelay
     ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
       [
         epkgs.vterm
@@ -144,7 +146,8 @@
       ]))
   ];
   nixpkgs.overlays = [
-    ## overlay waybar for the icons
+
+    # Waybar overlay for the icons
     (self: super: {
       waybar = super.waybar.overrideAttrs (oldAttrs: {
         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
