@@ -14,6 +14,7 @@
       ./modules/flatpak.nix
       ./modules/kanata.nix
       ./modules/gnome.nix
+      ./modules/fonts.nix
       # ./modules/kde.nix
       # ./mpd.nix
     ];
@@ -226,20 +227,6 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    font-awesome
-    fira-code
-    fira-code-symbols
-    scheherazade-new
-    # For SwayWM
-    source-han-sans
-    source-han-sans-japanese
-    source-han-serif-japanese
-  ];
 
   programs.adb.enable = true;
 
