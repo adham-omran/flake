@@ -43,10 +43,7 @@
   # X11 Wacom
   services.xserver.wacom.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-  ##se SWAY STUFF
+  ## sway
   programs.sway.enable = true;
   ## Until you learn to use home-manager's config style, just configure it like
   ## everyone else.
@@ -137,16 +134,8 @@
     shell = pkgs.zsh;
   };
 
+  ## Possibly related to screen sharing
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  ## remove some kde apps
-  # environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-  #   elisa
-  # ];
-
-  # Enable automatic login for the user.
-  # services.xserver.displayManager.autoLogin.enable = true;
-  # services.xserver.displayManager.autoLogin.user = "adham";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
