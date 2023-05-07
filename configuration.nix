@@ -185,14 +185,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-    ## waydroid config
-  # virtualisation = {
-  #   waydroid.enable = true;
-  #   lxd.enable = true;
-  # };
-
-  nix =
-    {
+  # Enable flakes
+  nix = {
       package = pkgs.nixFlakes;
       extraOptions = "experimental-features = nix-command flakes";
     };
