@@ -76,6 +76,8 @@
       btop
       fd
       dmidecode # RAM stuff
+      powertop
+      wget
 
       # Applications
       poedit
