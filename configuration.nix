@@ -202,8 +202,6 @@
     options = "--delete-older-than 7d";
   };
 
-  programs.adb.enable = true;
-
   services.syncthing = {
     enable = true;
     user = "adham";
