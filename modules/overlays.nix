@@ -12,7 +12,7 @@
     (import (builtins.fetchTarball {
       ## overlay emacs for latest release
       url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      sha256 = "1jscdcq38zqgpjpbp2j34a8hn65sywxz294nnylba35fij4an80w";
+      sha256 = "1snqf7y0254w3n49mbcihvyijlpq8pw3ad00h5ppz76xwkd2fnlm";
     }))
   ];
 }
