@@ -11,7 +11,8 @@
       ./cachix.nix
       ./modules/waydroid.nix
       ./modules/docker.nix
-      ./modules/flatpak.nix
+      # ./modules/flatpak.nix
+      ./modules/packages.nix
       ./modules/kanata.nix
       ./modules/gnome.nix
       ./modules/fonts.nix
