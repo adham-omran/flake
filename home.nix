@@ -107,7 +107,6 @@
       wf-recorder
       wl-clipboard
       wofi
-      xdg-desktop-portal-wlr
 
       # Hyprland
       hyprpaper
