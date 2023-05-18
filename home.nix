@@ -108,6 +108,9 @@
       wl-clipboard
       wofi
 
+      # Virtual pointer
+      warpd
+
       # Hyprland
       hyprpaper
 
