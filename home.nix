@@ -79,6 +79,12 @@
       powertop
       wget
 
+      # gnuplot
+      gnuplot
+
+      # bitwarden
+      bitwarden
+
       # Applications
       poedit
       foliate
@@ -125,6 +131,9 @@
 
       # Rice
       eww-wayland
+
+      # Distrobox
+      distrobox
 
     ];
   };
