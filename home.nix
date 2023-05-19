@@ -78,6 +78,7 @@
       dmidecode # RAM stuff
       powertop
       wget
+      poppler_utils # PDF utilities
 
       # gnuplot
       gnuplot
