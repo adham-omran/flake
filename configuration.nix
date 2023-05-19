@@ -61,8 +61,6 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   ## Until you learn to use home-manager's config style, just configure it like
