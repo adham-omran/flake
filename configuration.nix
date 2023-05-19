@@ -209,6 +209,9 @@
 
   services.tailscale.enable = true;
 
+  ## beta cache
+  # nix.binaryCaches = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+  nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   ## nix store optimization
   nix.settings.auto-optimise-store = true;
   ## setup for garbage collection
