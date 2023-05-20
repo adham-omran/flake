@@ -18,6 +18,7 @@
       ./modules/fonts.nix
       ./modules/power.nix
       ./modules/overlays.nix
+      ./modules/sway.nix
       ./modules/tmux.nix
       # ./modules/kde.nix
       # ./mpd.nix
