@@ -136,6 +136,13 @@
       # Distrobox
       distrobox
 
+      # X11
+      arandr    # multi-monitor
+      flameshot # screenshot
+      feh     # background
+      dunst   # notifications
+      polybar # bar
+      rofi    # launcher
     ];
   };
 
@@ -169,6 +176,7 @@
     gtk3.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-size=20
       '';
     };
 
