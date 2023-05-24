@@ -20,8 +20,8 @@
       ./modules/overlays.nix
       ./modules/sway.nix
       ./modules/tmux.nix
+      ./modules/mpd.nix
       # ./modules/kde.nix
-      # ./mpd.nix
     ];
 
 
