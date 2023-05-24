@@ -3,6 +3,10 @@
   home = {
     stateVersion = "23.05";
     packages = with pkgs; [
+      # DSLR Webcam
+      # gphoto2
+      # mptlvcap (arch-distrobox) works better
+
       # General
       graphviz
       openssl
