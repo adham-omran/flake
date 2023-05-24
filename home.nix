@@ -139,10 +139,11 @@
       # X11
       arandr    # multi-monitor
       flameshot # screenshot
-      feh     # background
-      dunst   # notifications
-      polybar # bar
-      rofi    # launcher
+      feh       # background
+      dunst     # notifications
+      polybar   # bar
+      rofi      # launcher
+      ffcast    # screencast
     ];
   };
 
