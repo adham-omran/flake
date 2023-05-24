@@ -18,13 +18,9 @@
       barrier
 
       # Music
-      ## Can't use with Spotify at the moment.
-      ## The perfect state would be to use Spotify under ncmpcpp.
       playerctl
       ncmpcpp
       spotify
-      mopidy
-      mopidy-mopify
 
       # Communication
       discord
