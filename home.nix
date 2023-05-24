@@ -133,6 +133,9 @@
       # Distrobox
       distrobox
 
+      # OBS
+      obs-studio
+
       # X11
       arandr    # multi-monitor
       flameshot # screenshot
