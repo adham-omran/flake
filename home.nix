@@ -189,6 +189,15 @@
 
   home.sessionVariables.GTK_THEME = "palenight";
 
+  programs.ncmpcpp = {
+    enable = true;
+    mpdMusicDir = "/home/adham/music";
+    settings = {
+      mpd_host = "127.0.0.1";
+      mpd_port = 9900;
+      execute_on_song_change = "notify-send \"Now Playing\" \"$(mpc -p 9900 --format '%title% \\n%artist% - %album%' current)\"";
+    };
+  };
 }
 
 # Local Variables:
