@@ -151,30 +151,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    openssl
-    syncthing
-    killall
 
-    ## Hyprland
-    hyprland
-    hyprland-protocols
-    hyprland-share-picker
-    xdg-desktop-portal-hyprland
-
-    ## Common to Hyprland & Sway
-    waybar
-
-    # GNOME
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    # END OF GNOME
-
-    # Emacs ovrelay
-    ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
-      [
-        epkgs.vterm
-        epkgs.jinx
-      ]))
   ];
 
 
