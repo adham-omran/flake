@@ -52,6 +52,7 @@
 
       # Web
       google-chrome
+      nyxt
 
       # Spelling
       hunspell
