@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./cachix.nix
       ./modules/waydroid.nix
-      ./modules/docker.nix
+      ./modules/virtualization.nix
       ./modules/flatpak.nix
       ./modules/packages.nix
       ./modules/kanata.nix
