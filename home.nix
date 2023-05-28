@@ -70,6 +70,8 @@
       gtk3
 
       # Utilities
+      pass
+      tree
       ledger
       neofetch
       bat
