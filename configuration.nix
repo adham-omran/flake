@@ -146,7 +146,9 @@
   users.users.adham = {
     isNormalUser = true;
     description = "adham";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "video" "docker"];
+    extraGroups = [
+      "networkmanager" "wheel" "adbusers" "video" "docker"
+    ];
     packages = with pkgs; [
       firefox
     ];
