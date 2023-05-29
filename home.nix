@@ -147,6 +147,10 @@
       polybar   # bar
       rofi      # launcher
       ffcast    # screencast
+
+      # i3wm
+      xss-lock
+      networkmanagerapplet
     ];
   };
 
