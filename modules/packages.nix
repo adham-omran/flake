@@ -10,6 +10,8 @@
     mpc-cli
 
     openssl
+    pinentry
+    pinentry-gtk2
     syncthing
     killall
 
