@@ -8,4 +8,25 @@ My NixOS configuration flake so far.
 | Editor         | Emacs |
 
 * Literate Configuration
-There's an idea to turn my entire configuration into a literate one.
+There's an attempt to turn my entire configuration into a literate one.
+
+** Steps
+- [ ] Move everything in ~./modules~ to ~modules.org~.
+- [ ] Move ~flake.nix~ to ~nixos.org~.
+- [ ] Move ~configuration.nix~ to ~nixos.org~.
+- [ ] Move ~home.nix~ to ~nixos.org~.
+- [ ] Move ~modules.org~ to ~nixos.org~.
+
+* Future Concerns
+** VFIO
+I want to build a PC with the goal of VFIO passthrough, I have found a few
+guides but have not tested any myself.
+
+If I can't make it work I'll just dual boot with Windows.
+*** Resources
+- [[https://nixos.wiki/wiki/PCI_passthrough][PCI passthrough - NixOS Wiki]]
+- [[https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3][VFIO Passthrough on NixOS · GitHub (2019-2021)]]
+- [[https://forum.level1techs.com/t/nixos-vfio-pcie-passthrough/130916][NixOS VFIO PCIe Passthrough - Wikis & How-to Guides - Level1Techs Forums (2018-2022)]]
+- [[https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/][A GPU Passthrough Setup  for NixOS (with VR passthrough too!) | astrid.tech (2022-09-22)]]
+*** Last Resort
+- [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
