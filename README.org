@@ -1,0 +1,8 @@
+#+TITLE: My NixOS Configuration
+
+* Overview
+My NixOS configuration flake so far.
+
+* Highlights
+| Window Manager | i3wm |
+| Editor         | Emacs |
