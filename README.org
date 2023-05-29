@@ -6,3 +6,6 @@ My NixOS configuration flake so far.
 * Highlights
 | Window Manager | i3wm |
 | Editor         | Emacs |
+
+* Literate Configuration
+There's an idea to turn my entire configuration into a literate one.
