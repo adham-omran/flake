@@ -8,10 +8,6 @@
 
     mpd
     mpc-cli
-    # mopidy
-    # mopidy-mopify
-    # mopidy-spotify
-
 
     openssl
     syncthing
