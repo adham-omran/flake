@@ -18,9 +18,10 @@
       ./modules/fonts.nix
       ./modules/power.nix
       ./modules/overlays.nix
-      ./modules/sway.nix
       ./modules/tmux.nix
       ./modules/mpd.nix
+      # ./modules/hyprland.nix
+      # ./modules/sway.nix
       # ./modules/kde.nix
     ];
 
@@ -74,22 +75,6 @@
     vSync = true;
   };
 
-
-  ## sway
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-
-  services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-  };
-
-  ## Until you learn to use home-manager's config style, just configure it like
-  ## normal.
-  ## programs.sway.package = null;
   programs.light.enable = true;
   security.polkit.enable = true;
 

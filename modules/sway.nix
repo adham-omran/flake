@@ -13,7 +13,20 @@ let
   };
 in
 {
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
+
+
+  services.dbus.enable = true;
   environment.systemPackages = with pkgs; [
     dbus-sway-environment
+    waybar
   ];
 }
