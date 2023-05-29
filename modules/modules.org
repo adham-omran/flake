@@ -1,0 +1,79 @@
+#+title: Nix Modules
+#+property: header-args :results silent
+#+startup: overview
+* Packages
+#+begin_src nix :tangle packages.nix
+  { config, pkgs, callPackage, lib, ... }:
+#+end_src
+
+#+begin_src nix :tangle packages.nix
+  {
+    environment.systemPackages = with pkgs; [
+      unzip
+      cmatrix
+      libsForQt5.okular
+      rsync
+
+      mpd
+      mpc-cli
+
+      openssl
+      pinentry
+      pinentry-gtk2
+      syncthing
+      killall
+#+end_src
+
+Packages that GNOME requires.
+#+begin_src nix :tangle packages.nix
+     gnome.adwaita-icon-theme
+     gnomeExtensions.appindicator
+#+end_src
+
+Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
+#+begin_src nix :tangle packages.nix
+  # Emacs ovrelay
+  ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
+    [
+	    epkgs.vterm
+	    epkgs.jinx
+    ]))
+  ];
+
+#+end_src
+
+In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
+#+begin_src nix :tangle packages.nix
+    nixpkgs.config.permittedInsecurePackages = [
+      "nodejs-16.20.0"
+    ];
+  }
+#+end_src
+* MPD
+#+begin_src nix :tangle mpd.nix
+  {...}:
+  {
+    services.mpd = {
+      enable = true;
+      musicDirectory = "/home/adham/music";
+      extraConfig = ''
+      # must specify one or more outputs in order to play audio!
+      # (e.g. ALSA, PulseAudio, PipeWire), see next sections
+      audio_output {
+	type "pipewire"
+	name "My PipeWire Output"
+      }
+    '';
+
+      # Optional:
+      network.listenAddress = "any"; # if you want to allow non-localhost connections
+      startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+    };
+
+    services.mpd.user = "userRunningPipeWire";
+    systemd.services.mpd.environment = {
+      # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+      XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
+    };
+  }
+#+end_src
