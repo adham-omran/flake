@@ -17,15 +17,6 @@
     syncthing
     killall
 
-    ## Hyprland
-    hyprland
-    hyprland-protocols
-    hyprland-share-picker
-    xdg-desktop-portal-hyprland
-
-    ## Common to Hyprland & Sway
-    waybar
-
     # GNOME
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator

@@ -121,9 +121,6 @@
       # Virtual pointer
       warpd
 
-      # Hyprland
-      hyprpaper
-
       # Downloaders
       qbittorrent
 

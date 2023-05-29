@@ -21,7 +21,6 @@
       ./modules/sway.nix
       ./modules/tmux.nix
       ./modules/mpd.nix
-      ./modules/hyprland.nix
       # ./modules/kde.nix
     ];
 
