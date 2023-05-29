@@ -1,4 +1,5 @@
 { config, pkgs, callPackage, lib, ... }:
+
 {
   environment.systemPackages = with pkgs; [
     unzip
@@ -15,20 +16,18 @@
     syncthing
     killall
 
-    # GNOME
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    # END OF GNOME
+gnome.adwaita-icon-theme
+gnomeExtensions.appindicator
 
-    # Emacs ovrelay
-    ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
-      [
-        epkgs.vterm
-        epkgs.jinx
-      ]))
-  ];
+# Emacs ovrelay
+((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
+  [
+	  epkgs.vterm
+	  epkgs.jinx
+  ]))
+];
 
-  nixpkgs.config.permittedInsecurePackages = [
+nixpkgs.config.permittedInsecurePackages = [
     "nodejs-16.20.0"
   ];
 }
