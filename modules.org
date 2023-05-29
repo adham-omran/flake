@@ -2,11 +2,11 @@
 #+property: header-args :results silent
 #+startup: overview
 * Packages
-#+begin_src nix :tangle packages.nix
+#+begin_src nix :tangle modules/packages.nix
   { config, pkgs, callPackage, lib, ... }:
 #+end_src
 
-#+begin_src nix :tangle packages.nix
+#+begin_src nix :tangle modules/packages.nix
   {
     environment.systemPackages = with pkgs; [
       unzip
@@ -25,13 +25,13 @@
 #+end_src
 
 Packages that GNOME requires.
-#+begin_src nix :tangle packages.nix
+#+begin_src nix :tangle modules/packages.nix
      gnome.adwaita-icon-theme
      gnomeExtensions.appindicator
 #+end_src
 
 Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
-#+begin_src nix :tangle packages.nix
+#+begin_src nix :tangle modules/packages.nix
   # Emacs ovrelay
   ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
     [
@@ -43,14 +43,14 @@ Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is
 #+end_src
 
 In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
-#+begin_src nix :tangle packages.nix
+#+begin_src nix :tangle modules/packages.nix
     nixpkgs.config.permittedInsecurePackages = [
       "nodejs-16.20.0"
     ];
   }
 #+end_src
 * MPD
-#+begin_src nix :tangle mpd.nix
+#+begin_src nix :tangle modules/mpd.nix
   {...}:
   {
     services.mpd = {
