@@ -152,11 +152,12 @@
 
   programs.git = {
     enable = true;
-    userName  = "adham";
+    userName  = "adham-omran";
     userEmail = "git@adham-omran.com";
-    # signing = {
-    #   signByDefault = true;
-    # };
+    signing = {
+      signByDefault = true;
+      key = "4D37E0ADEE0B9138";
+    };
   };
 
   gtk = {
