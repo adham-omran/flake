@@ -21,6 +21,7 @@
       ./modules/sway.nix
       ./modules/tmux.nix
       ./modules/mpd.nix
+      ./modules/hyprland.nix
       # ./modules/kde.nix
     ];
 
@@ -198,10 +199,6 @@
       package = pkgs.nixFlakes;
       extraOptions = "experimental-features = nix-command flakes";
     };
-
-  programs.hyprland = {
-    enable = true;
-  };
 
   services.emacs = {
     package = pkgs.emacsUnstable;
