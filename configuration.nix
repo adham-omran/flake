@@ -7,9 +7,7 @@
 
       ./hardware-configuration.nix
       ./cachix.nix
-      ./modules/waydroid.nix
       ./modules/virtualization.nix
-      ./modules/flatpak.nix
       ./modules/packages.nix
       ./modules/kanata.nix
       ./modules/gnome.nix
