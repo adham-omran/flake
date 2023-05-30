@@ -142,11 +142,15 @@
       # X11
       arandr    # multi-monitor
       flameshot # screenshot
+      scrot     # screenshot
+      xclip     #
+      xsel      #
       feh       # background
       dunst     # notifications
       polybar   # bar
       rofi      # launcher
       ffcast    # screencast
+
 
       # i3wm
       xss-lock
