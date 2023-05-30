@@ -188,14 +188,14 @@
 
     gtk3.extraConfig = {
       Settings = ''
-        gtk-application-prefer-dark-theme=1
-        gtk-cursor-theme-size=20
+	gtk-application-prefer-dark-theme=1
+	gtk-cursor-theme-size=20
       '';
     };
 
     gtk4.extraConfig = {
       Settings = ''
-        gtk-application-prefer-dark-theme=1
+	gtk-application-prefer-dark-theme=1
       '';
     };
   };
@@ -214,7 +214,3 @@
 
   services.blueman-applet.enable = true;
 }
-
-# Local Variables:
-# jinx-local-words: "xournalpp"
-# End:
