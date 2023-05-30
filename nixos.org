@@ -1,4 +1,7 @@
 #+TITLE: NixOS Configuration
+#+PROPERTY: header-args :results silent
+#+STARTUP: overview
+
 * cachix
 * flake
 * configuration.nix
