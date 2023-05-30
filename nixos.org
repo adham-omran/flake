@@ -2,21 +2,24 @@
 * cachix
 * flake
 * configuration.nix
+:PROPERTIES:
+:header-args: :tangle configuration.nix
+:END:
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 (~nixos-help~).
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   { config, pkgs, callPackage, lib, ... }:
 
 #+end_src
 Opening bracket.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   {
 #+end_src
 ** Imports
-#+begin_src nix :tangle configuration.nix
     imports =
       [
+#+begin_src nix
 #+end_src
 *** Enabled modules
 #+begin_src nix :tangle configuration.nix
@@ -35,16 +38,16 @@ Opening bracket.
 	./modules/mpd.nix
 #+end_src
 *** Disabled modules
-#+begin_src nix
+#+begin_src nix :tangle no
   ./modules/hyprland.nix
   ./modules/sway.nix
   ./modules/kde.nix
 #+end_src
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
       ];
 #+end_src
 ** Boot
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -59,7 +62,7 @@ Opening bracket.
 Do not tangle.
 - Enables wireless support via wpa_supplicant.
 - Configure network proxy if necessary
-#+begin_src nix
+#+begin_src nix :tangle no
   networking.wireless.enable = true;
 
   networking.proxy.default = "http://user:password@proxy:port/";
@@ -67,23 +70,23 @@ Do not tangle.
 #+end_src
 
 Enable networking
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   networking.networkmanager.enable = true;
 #+end_src
 
 Set your time zone.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   time.timeZone = "Asia/Baghdad";
 #+end_src
 
 Select internationalization properties.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     i18n.defaultLocale = "en_US.UTF-8";
 #+end_src
 ** Window Manager
 - Enable the X11 windowing system.
 - Configure keymap in X11
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   services.xserver = {
     enable = true;
     layout = "us";
@@ -96,7 +99,7 @@ Enable the i3 window manager and install related packages.
 - ~i3status~: Gives you the default i3 status bar.
 - ~i3lock~: Default i3 screen locker.
 - ~i3blocks~: If you are planning on using i3blocks over i3status.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     services.xserver.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -116,7 +119,7 @@ Enable the i3 window manager and install related packages.
 - ~light~: Light backlight control command
 - [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
 - Make sure to configure the ~syncthing~ directory else it will not work.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     programs.light.enable = true;
     security.polkit.enable = true;
 
@@ -145,7 +148,7 @@ Enable the i3 window manager and install related packages.
 To enable touchpad support add ~services.xserver.libinput.enable = true;~.
 ** Audio
 Enable sound with pipewire.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -157,12 +160,12 @@ Enable sound with pipewire.
   };
 #+end_src
 ** Shell
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     programs.zsh.enable = true;
     environment.shells = with pkgs; [ zsh ];
 #+end_src
 ** User
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     users.users.adham = {
       isNormalUser = true;
       description = "adham";
@@ -180,7 +183,7 @@ Enable sound with pipewire.
 #+end_src
 
 ** GnuPG
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -189,12 +192,12 @@ Enable sound with pipewire.
 #+end_src
 ** SSH
 Enable the OpenSSH daemon.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     services.openssh.enable = true;
 #+end_src
 ** Firewall
 This does not get tangled.
-#+begin_src nix
+#+begin_src nix :tangle no
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];
     # networking.firewall.allowedUDPPorts = [ ... ];
@@ -208,12 +211,12 @@ taken. It‘s perfectly fine and recommended to leave this value at the release
 version of the first install of this system.  Before changing this value read
 the documentation for this option (e.g. man configuration.nix or on
 https://nixos.org/nixos/options.html).
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     system.stateVersion = "23.05";
 #+end_src
 ** Nix
 Enable flakes
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     nix = {
 	package = pkgs.nixFlakes;
 	extraOptions = "experimental-features = nix-command flakes";
@@ -221,17 +224,17 @@ Enable flakes
 
 #+end_src
 Use the beta cache.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
 
 #+end_src
 Nix store optimization
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     nix.settings.auto-optimise-store = true;
 #+end_src
 
 Garbage collection. Delete every week any generation that's older than 7 days.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
     nix.gc = {
       automatic = true;
       dates = "weekly";
@@ -240,12 +243,12 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 #+end_src
 
 Allow unfree packages
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
   nixpkgs.config.allowUnfree = true;
 #+end_src
 ** Closing bracket
 So that I don't worry about closing the outer-most pair of brackets.
-#+begin_src nix :tangle configuration.nix
+#+begin_src nix
 }
 #+end_src
 * modules
