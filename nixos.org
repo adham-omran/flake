@@ -1,0 +1,250 @@
+#+TITLE: NixOS Configuration
+* cachix
+* flake
+* configuration.nix
+Edit this configuration file to define what should be installed on your system.
+Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
+(~nixos-help~).
+#+begin_src nix :tangle configuration.nix
+  { config, pkgs, callPackage, lib, ... }:
+
+#+end_src
+Opening bracket.
+#+begin_src nix :tangle configuration.nix
+  {
+#+end_src
+** Imports
+#+begin_src nix :tangle configuration.nix
+    imports =
+      [
+#+end_src
+*** Enabled modules
+#+begin_src nix :tangle configuration.nix
+	./hardware-configuration.nix
+	./cachix.nix
+	./modules/waydroid.nix
+	./modules/virtualization.nix
+	./modules/flatpak.nix
+	./modules/packages.nix
+	./modules/kanata.nix
+	./modules/gnome.nix
+	./modules/fonts.nix
+	./modules/power.nix
+	./modules/overlays.nix
+	./modules/tmux.nix
+	./modules/mpd.nix
+#+end_src
+*** Disabled modules
+#+begin_src nix
+  ./modules/hyprland.nix
+  ./modules/sway.nix
+  ./modules/kde.nix
+#+end_src
+#+begin_src nix :tangle configuration.nix
+      ];
+#+end_src
+** Boot
+#+begin_src nix :tangle configuration.nix
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+    boot.extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback
+    ];
+
+    networking.hostName = "nixos";
+#+end_src
+
+Do not tangle.
+- Enables wireless support via wpa_supplicant.
+- Configure network proxy if necessary
+#+begin_src nix
+  networking.wireless.enable = true;
+
+  networking.proxy.default = "http://user:password@proxy:port/";
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+#+end_src
+
+Enable networking
+#+begin_src nix :tangle configuration.nix
+  networking.networkmanager.enable = true;
+#+end_src
+
+Set your time zone.
+#+begin_src nix :tangle configuration.nix
+  time.timeZone = "Asia/Baghdad";
+#+end_src
+
+Select internationalization properties.
+#+begin_src nix :tangle configuration.nix
+    i18n.defaultLocale = "en_US.UTF-8";
+#+end_src
+** Window Manager
+- Enable the X11 windowing system.
+- Configure keymap in X11
+#+begin_src nix :tangle configuration.nix
+  services.xserver = {
+    enable = true;
+    layout = "us";
+  };
+
+#+end_src
+
+Enable the i3 window manager and install related packages.
+
+- ~i3status~: Gives you the default i3 status bar.
+- ~i3lock~: Default i3 screen locker.
+- ~i3blocks~: If you are planning on using i3blocks over i3status.
+#+begin_src nix :tangle configuration.nix
+    services.xserver.windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+	i3status
+	i3lock
+	i3blocks
+      ];
+    };
+
+    services.picom = {
+      enable = true;
+      vSync = true;
+    };
+#+end_src
+** Services
+- ~light~: Light backlight control command
+- [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
+- Make sure to configure the ~syncthing~ directory else it will not work.
+#+begin_src nix :tangle configuration.nix
+    programs.light.enable = true;
+    security.polkit.enable = true;
+
+  services.xserver.wacom.enable = true;
+  services.printing.enable = true;
+  hardware.bluetooth.enable = true;
+  services.hardware.bolt.enable = true;
+  services.tailscale.enable = true;
+
+  services.emacs = {
+    package = pkgs.emacsUnstable;
+    enable = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    user = "adham";
+    configDir = "/home/adham/.config/syncthing";
+  };
+
+  services.blueman.enable = true;
+
+#+end_src
+
+To enable touchpad support add ~services.xserver.libinput.enable = true;~.
+** Audio
+Enable sound with pipewire.
+#+begin_src nix :tangle configuration.nix
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+#+end_src
+** Shell
+#+begin_src nix :tangle configuration.nix
+    programs.zsh.enable = true;
+    environment.shells = with pkgs; [ zsh ];
+#+end_src
+** User
+#+begin_src nix :tangle configuration.nix
+    users.users.adham = {
+      isNormalUser = true;
+      description = "adham";
+      extraGroups = [
+	"networkmanager" "wheel" "adbusers" "video" "docker"
+      ];
+      packages = with pkgs; [
+	firefox
+      ];
+      shell = pkgs.zsh;
+    };
+
+    ## Related to Wayland support
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+#+end_src
+
+** GnuPG
+#+begin_src nix :tangle configuration.nix
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gtk2";
+    };
+#+end_src
+** SSH
+Enable the OpenSSH daemon.
+#+begin_src nix :tangle configuration.nix
+    services.openssh.enable = true;
+#+end_src
+** Firewall
+This does not get tangled.
+#+begin_src nix
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
+#+end_src
+** Version
+This value determines the NixOS release from which the default settings for
+stateful data, like file locations and database versions on your system were
+taken. It‘s perfectly fine and recommended to leave this value at the release
+version of the first install of this system.  Before changing this value read
+the documentation for this option (e.g. man configuration.nix or on
+https://nixos.org/nixos/options.html).
+#+begin_src nix :tangle configuration.nix
+    system.stateVersion = "23.05";
+#+end_src
+** Nix
+Enable flakes
+#+begin_src nix :tangle configuration.nix
+    nix = {
+	package = pkgs.nixFlakes;
+	extraOptions = "experimental-features = nix-command flakes";
+      };
+
+#+end_src
+Use the beta cache.
+#+begin_src nix :tangle configuration.nix
+    nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+
+#+end_src
+Nix store optimization
+#+begin_src nix :tangle configuration.nix
+    nix.settings.auto-optimise-store = true;
+#+end_src
+
+Garbage collection. Delete every week any generation that's older than 7 days.
+#+begin_src nix :tangle configuration.nix
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+#+end_src
+
+Allow unfree packages
+#+begin_src nix :tangle configuration.nix
+  nixpkgs.config.allowUnfree = true;
+#+end_src
+** Closing bracket
+So that I don't worry about closing the outer-most pair of brackets.
+#+begin_src nix :tangle configuration.nix
+}
+#+end_src
+* modules
