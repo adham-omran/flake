@@ -65,6 +65,7 @@
   hardware.bluetooth.enable = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
+  services.flatpak.enable = true;
 
   services.emacs = {
     package = pkgs.emacsUnstable;
