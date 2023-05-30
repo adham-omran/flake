@@ -4,12 +4,18 @@
 My NixOS configuration flake so far.
 
 * Highlights
-| Window Manager | i3wm |
-| Editor         | Emacs |
+| Window Manager  | i3              |
+| Bar             | i3status        |
+| Editor          | Emacs           |
+| Terminal        | xterm           |
+| Browser         | Firefox         |
+| Notify server   | dunst           |
+| Monitor manager | arandr          |
+| Screenshot      | scrot/flameshot |
+| Bluetooth       | blueman         |
 
 * Literate Configuration
 There's an attempt to turn my entire configuration into a literate one.
-
 ** Rationale
 - Write documentation, not comments.
 - Split the configuration into sensible modules.
@@ -30,9 +36,11 @@ There's an attempt to turn my entire configuration into a literate one.
 - [ ] Move ~modules.org~ to ~nixos.org~.
 
 * Future Concerns
+Concerns for topics that are more than one year away. These do not affect the
+current configuration.
 ** VFIO
-I want to build a PC with the goal of VFIO passthrough, I have found a few
-guides but have not tested any myself.
+In the future I want to build a PC with the goal of VFIO passthrough, I have
+found a few guides but have not tested any myself.
 
 If I can't make it work I'll just dual boot with Windows.
 *** Resources
