@@ -9,7 +9,7 @@
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      # hyprland.url = "github:hyprwm/Hyprland";
+
     };
 
   outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
@@ -25,12 +25,9 @@
         nixos = lib.nixosSystem {
           inherit system;
           modules = [
-            ./configuration.nix
-            # NUR module, TODO make it work.
-            nur.nixosModules.nur
-            ./nur/config.nur
 
-            # home-manager module
+            ./configuration.nix
+
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
