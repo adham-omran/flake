@@ -17,25 +17,23 @@ Opening bracket.
   {
 #+end_src
 ** Imports
-    imports =
-      [
 #+begin_src nix
+  imports =
+    [
 #+end_src
 *** Enabled modules
-#+begin_src nix :tangle configuration.nix
-	./hardware-configuration.nix
-	./cachix.nix
-	./modules/waydroid.nix
-	./modules/virtualization.nix
-	./modules/flatpak.nix
-	./modules/packages.nix
-	./modules/kanata.nix
-	./modules/gnome.nix
-	./modules/fonts.nix
-	./modules/power.nix
-	./modules/overlays.nix
-	./modules/tmux.nix
-	./modules/mpd.nix
+#+begin_src nix
+    ./hardware-configuration.nix
+    ./cachix.nix
+    ./modules/virtualization.nix
+    ./modules/packages.nix
+    ./modules/kanata.nix
+    ./modules/gnome.nix
+    ./modules/fonts.nix
+    ./modules/power.nix
+    ./modules/overlays.nix
+    ./modules/tmux.nix
+    ./modules/mpd.nix
 #+end_src
 *** Disabled modules
 #+begin_src nix :tangle no
