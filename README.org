@@ -10,6 +10,18 @@ My NixOS configuration flake so far.
 * Literate Configuration
 There's an attempt to turn my entire configuration into a literate one.
 
+** Rationale
+- Write documentation, not comments.
+- Split the configuration into sensible modules.
+*** Pros
+- ~org-mode~ navigation of one configuration file.
+- Configure the ~extraCongif~ argument in the correct language.
+- Break-down any configuration.
+- Enable disabling of code with comments or removing them.
+*** Cons
+- Requires knowledge of ~org-mode~.
+- Requires an initial time investment to setup.
+- Mistakes could be made in the ~:tangle~ header argument.
 ** Steps
 - [ ] Move everything in ~./modules~ to ~modules.org~.
 - [ ] Move ~flake.nix~ to ~nixos.org~.
