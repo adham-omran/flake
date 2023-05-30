@@ -1,7 +1,7 @@
 #+title: Nix Modules
 #+property: header-args :results silent
 #+startup: overview
-* Packages
+* packages
 #+begin_src nix :tangle modules/packages.nix
   { config, pkgs, callPackage, lib, ... }:
 #+end_src
@@ -32,7 +32,6 @@ Packages that GNOME requires.
 
 Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
 #+begin_src nix :tangle modules/packages.nix
-  # Emacs ovrelay
   ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
     [
 	    epkgs.vterm
@@ -49,31 +48,450 @@ In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
     ];
   }
 #+end_src
-* MPD
-#+begin_src nix :tangle modules/mpd.nix
+* mpd
+:PROPERTIES:
+:header-args: :tangle modules/mpd.nix
+:END:
+#+begin_src nix
   {...}:
   {
     services.mpd = {
       enable = true;
       musicDirectory = "/home/adham/music";
       extraConfig = ''
-      # must specify one or more outputs in order to play audio!
-      # (e.g. ALSA, PulseAudio, PipeWire), see next sections
+#+end_src
+
+MPD Configuration, you must specify one or more outputs in order to play audio.
+#+begin_src conf
       audio_output {
 	type "pipewire"
 	name "My PipeWire Output"
       }
+#+end_src
+
+Closing quote for ~extraConfig~.
+#+begin_src nix
     '';
+#+end_src
+The following is optional, the ~listenAddress~ enables non-localhost connections
+while ~startWhenNeeded~ makes it so the MPD service only starts upon connection to
+its socket.
+#+begin_src nix
+  network.listenAddress = "any";
+  startWhenNeeded = true;
+  };
+#+end_src
+https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
 
-      # Optional:
-      network.listenAddress = "any"; # if you want to allow non-localhost connections
-      startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+User-id 1000 must match above user. MPD will look inside this directory for the
+PipeWire socket.
+#+begin_src nix
+  services.mpd.user = "userRunningPipeWire";
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
+  };
+  }
+#+end_src
+* kanata
+:PROPERTIES:
+:header-args: :tangle modules/kanata.nix
+:END:
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.kanata.enable = true;
+    services.kanata.package = pkgs.kanata;
+
+    services.kanata.keyboards.usb.devices = [
+      "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
+      "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+    ];
+
+    services.kanata.keyboards.usb.config = ''
+#+end_src
+
+#+begin_src lisp
+  (defvar
+    tap-timeout   150
+    hold-timeout  150
+    tt $tap-timeout
+    ht $hold-timeout
+    )
+
+  (defalias
+    qwt (layer-switch qwerty)
+    col (layer-switch colemak)
+    a (tap-hold $tt $ht a lmet)
+    r (tap-hold $tt $ht r lalt)
+    s (tap-hold $tt $ht s lctl)
+    t (tap-hold $tt $ht t lsft)
+
+    n (tap-hold $tt $ht n rsft)
+    e (tap-hold $tt $ht e rctl)
+    i (tap-hold $tt $ht i ralt)
+    o (tap-hold $tt $ht o rmet)
+
+    0 (tap-hold $tt $ht 0 M-0)
+    1 (tap-hold $tt $ht 1 M-1)
+    2 (tap-hold $tt $ht 2 M-2)
+    3 (tap-hold $tt $ht 3 M-3)
+    4 (tap-hold $tt $ht 4 M-4)
+    5 (tap-hold $tt $ht 5 M-5)
+    6 (tap-hold $tt $ht 6 M-6)
+    7 (tap-hold $tt $ht 7 M-7)
+    8 (tap-hold $tt $ht 8 M-8)
+    9 (tap-hold $tt $ht 9 M-9)
+    )
+
+  (defsrc
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc            ralt    rctl
+      )
+
+  (deflayer colemak
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  @1   @2   @3   @4   @5   @6   @7   @8   @9   @0    -    =    bspc
+      tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
+      caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
+      lsft z    x    c    v    b    k    m    ,    .    /    rsft
+      lctl lmet lalt           spc            @qwt    rctl
+      )
+
+  (deflayer qwerty
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc            @col    rctl
+      )
+#+end_src
+
+#+begin_src nix
+    '';
+  }
+#+end_src
+* fonts
+:PROPERTIES:
+:header-args: :tangle modules/fonts.nix
+:END:
+~vazir-fonts~ is a [[https://rastikerdar.github.io/vazirmatn/en][Persian-Arabic typeface family]].
+
+~fontconfig~ tells the system which font to use system-wide.
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    fonts = {
+      enableDefaultFonts = true;
+      fonts = with pkgs; [
+	noto-fonts
+	noto-fonts-cjk
+	noto-fonts-emoji
+	font-awesome
+	fira-code
+	fira-code-symbols
+	scheherazade-new
+
+	source-han-sans
+	source-han-sans-japanese
+	source-han-serif-japanese
+
+	vazir-fonts
+      ];
+
+      fontconfig = {
+	defaultFonts = {
+	  serif = [ "Noto Sans" "Noto Sans Arabic"];
+	  sansSerif = [ "Noto Sans" "Noto Sans Arabic" ];
+	  monospace = [ "Fira Code" ];
+	};
+      };
+    };
+  }
+
+#+end_src
+* sway
+:PROPERTIES:
+:header-args: :tangle modules/sway.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, lib, ... }:
+  let
+    dbus-sway-environment = pkgs.writeTextFile {
+      name = "dbus-sway-environment";
+      destination = "/bin/dbus-sway-environment";
+      executable = true;
+
+      text = ''
+#+end_src
+
+#+begin_src conf
+  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+  systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+#+end_src
+
+#+begin_src nix
+	'';
+    };
+  in
+#+end_src
+
+#+begin_src nix
+  {
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
     };
 
-    services.mpd.user = "userRunningPipeWire";
-    systemd.services.mpd.environment = {
-      # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
-      XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
     };
+
+
+    services.dbus.enable = true;
+    environment.systemPackages = with pkgs; [
+      dbus-sway-environment
+      waybar
+    ];
+  }
+#+end_src
+
+* hyprland
+:PROPERTIES:
+:header-args: :tangle modules/hyprland.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, lib, ... }:
+  {
+    programs.hyprland.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      hyprland
+      hyprland-protocols
+      hyprland-share-picker
+      hyprpaper
+      xdg-desktop-portal-hyprland
+      waybar
+    ];
+  }
+#+end_src
+
+* overlays
+:PROPERTIES:
+:header-args: :tangle modules/overlays.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    nixpkgs.overlays = [
+
+#+end_src
+** Waybar
+#+begin_src nix :tangle no
+      (self: super: {
+	waybar = super.waybar.overrideAttrs (oldAttrs: {
+	  mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+	});
+      })
+#+end_src
+** Emacs
+Overlay Emacs for latest release.
+#+begin_src nix
+      (import (builtins.fetchTarball {
+	url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+	sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
+      }))
+    ];
+#+end_src
+
+#+begin_src nix
+  }
+#+end_src
+
+* power management
+:PROPERTIES:
+:header-args: :tangle modules/power.nix
+:END:
+
+Power configuration for T480
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.power-profiles-daemon.enable = false;
+    services.tlp = {
+      enable = true;
+
+      settings = {
+	START_CHARGE_THRESH_BAT0=75;
+	STOP_CHARGE_THRESH_BAT0=95;
+
+	START_CHARGE_THRESH_BAT1=75;
+	STOP_CHARGE_THRESH_BAT1=95;
+
+	CPU_SCALING_GOVERNOR_ON_AC = "performance";
+	CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      };
+    };
+  }
+
+#+end_src
+
+* tmux
+:PROPERTIES:
+:header-args: :tangle modules/tmux.nix
+:END:
+
+#+begin_src nix
+  { pkgs, config, ... }:
+  {
+    programs.tmux = {
+      enable = true;
+
+#+end_src
+
+#+begin_src nix :tangle no
+      # shortcut = "a";
+      # aggressiveResize = true; -- Disabled to be iTerm-friendly
+      # baseIndex = 1;
+      # newSession = true;
+      # Stop tmux+escape craziness.
+      # escapeTime = 0;
+      # Force tmux to use /tmp for sockets (WSL2 compat)
+      # secureSocket = false;
+#+end_src
+
+#+begin_src nix
+      plugins = with pkgs; [
+	tmuxPlugins.better-mouse-mode
+      ];
+
+      extraConfig = ''
+#+end_src
+
+https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
+#+begin_src conf
+      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      set-environment -g COLORTERM "truecolor"
+#+end_src
+
+Mouse configuration
+#+begin_src conf :tangle no
+  set-option -g mouse on
+#+end_src
+
+** Keybindings
+Split pane commands
+#+begin_src conf :tangle no
+  bind | split-window -h -c "#{pane_current_path}"
+  bind - split-window -v -c "#{pane_current_path}"
+  bind c new-window -c "#{pane_current_path}"
+#+end_src
+
+#+begin_src nix
+      '';
+    };
+  }
+#+end_src
+
+* virtualization
+:PROPERTIES:
+:header-args: :tangle modules/virtualization.nix
+:END:
+#+begin_src nix
+  { pkgs, lib, ... }:
+  {
+    virtualisation = {
+      docker.enable = true;
+      waydroid.enable = true;
+      lxd.enable = true;
+      libvirtd.enable = true;
+    };
+
+    programs.adb.enable = true;
+    programs.dconf.enable = true;
+    environment.systemPackages = with pkgs; [ virt-manager ];
+    users.users.adham.extraGroups = [ "libvirtd" ];
+  }
+#+end_src
+* KDE
+:PROPERTIES:
+:header-args: :tangle modules/kde.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+
+    services.xserver.displayManager.sddm.enable = true;
+    services.xserver.desktopManager.plasma5.enable = true;
+
+#+end_src
+
+Remove KDE apps.
+#+begin_src nix
+    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+    ];
+  }
+#+end_src
+
+* GNOME
+:PROPERTIES:
+:header-args: :tangle modules/gnome.nix
+:END:
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    programs.dconf.enable = true;
+#+end_src
+Exclude the following packages
+| Package          | Description               |
+|------------------+---------------------------|
+| nautilus         | Files, replaced with Nemo |
+| cheese           | Webcam tool               |
+| gnome-music      | Music player              |
+| gnome-terminal   | Terminal                  |
+| gedit            | Text editor               |
+| epiphany         | Web browser               |
+| geary            | Email reader              |
+| gnome-characters | -                         |
+| totem            | Video player              |
+| tali             | Poker game                |
+| iagno            | Go game                   |
+| hitori           | Sudoku game               |
+| atomix           | Puzzle game               |
+#+begin_src nix
+    environment.gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      nautilus
+      cheese
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
   }
 #+end_src

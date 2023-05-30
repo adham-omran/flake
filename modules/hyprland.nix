@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  programs.hyprland = {
-    enable = true;
-  };
+  programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
     hyprland

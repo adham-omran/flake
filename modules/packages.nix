@@ -19,7 +19,6 @@
 gnome.adwaita-icon-theme
 gnomeExtensions.appindicator
 
-# Emacs ovrelay
 ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
   [
 	  epkgs.vterm

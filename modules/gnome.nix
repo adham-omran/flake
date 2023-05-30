@@ -5,22 +5,22 @@
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
 
-  environment.gnome.excludePackages = (with pkgs; [
+environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
   ]) ++ (with pkgs.gnome; [
-    nautilus # Files, replaced with Nemo
-    cheese # webcam tool
+    nautilus
+    cheese
     gnome-music
     gnome-terminal
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
+    gedit
+    epiphany
+    geary
     gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
+    totem
+    tali
+    iagno
+    hitori
+    atomix
   ]);
 }
