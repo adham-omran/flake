@@ -19,21 +19,26 @@ There's an attempt to turn my entire configuration into a literate one.
 ** Rationale
 - Write documentation, not comments.
 - Split the configuration into sensible modules.
-*** Pros
+** Pros
 - ~org-mode~ navigation of one configuration file.
 - Configure the ~extraCongif~ argument in the correct language.
 - Break-down any configuration.
 - Enable disabling of code with comments or removing them.
-*** Cons
+** Cons
 - Requires knowledge of ~org-mode~.
 - Requires an initial time investment to setup.
 - Mistakes could be made in the ~:tangle~ header argument.
 ** Steps
-- [ ] Move everything in ~./modules~ to ~modules.org~.
+- [X] Move everything in ~./modules~ to ~modules.org~.
+- [X] Move ~modules.org~ to ~nixos.org~.
+- [X] Move ~configuration.nix~ to ~nixos.org~.
 - [ ] Move ~flake.nix~ to ~nixos.org~.
-- [ ] Move ~configuration.nix~ to ~nixos.org~.
 - [ ] Move ~home.nix~ to ~nixos.org~.
-- [ ] Move ~modules.org~ to ~nixos.org~.
+
+* TODO Usage
+** NixOS as a Desktop
+** Development in Nix Flakes
+** Development in Distrobox
 
 * Future Concerns
 Concerns for topics that are more than one year away. These do not affect the
