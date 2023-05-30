@@ -211,6 +211,8 @@
       execute_on_song_change = "notify-send \"Now Playing\" \"$(mpc -p 9900 --format '%title% \\n%artist% - %album%' current)\"";
     };
   };
+
+  services.blueman-applet.enable = true;
 }
 
 # Local Variables:
