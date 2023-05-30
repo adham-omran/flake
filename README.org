@@ -32,9 +32,8 @@ There's an attempt to turn my entire configuration into a literate one.
 - [X] Move everything in ~./modules~ to ~modules.org~.
 - [X] Move ~modules.org~ to ~nixos.org~.
 - [X] Move ~configuration.nix~ to ~nixos.org~.
-- [ ] Move ~flake.nix~ to ~nixos.org~.
-- [ ] Move ~home.nix~ to ~nixos.org~.
-
+- [X] Move ~flake.nix~ to ~nixos.org~.
+- [X] Move ~home.nix~ to ~nixos.org~.
 * TODO Usage
 ** NixOS as a Desktop
 ** Development in Nix Flakes
