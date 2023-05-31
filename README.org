@@ -161,7 +161,6 @@ If I can't make it work I'll just dual boot with Windows.
 
 #+end_src
 * home-manger
-
 #+begin_src nix :tangle home.nix :noweb yes
   {config, pkgs, lib, ...}:
   {
@@ -405,7 +404,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
   {
     imports =
       [
-	<<config-enabled-modules>>
+		    <<config-enabled-modules>>
       ];
     <<config-boot>>
     <<config-networking>>
@@ -424,7 +423,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<nix-cache>>
     <<nix-store>>
     <<nix-gc>>
-}
+  }
 #+end_src
 ** Imports
 *** Enabled modules
