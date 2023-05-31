@@ -1,4 +1,8 @@
-#+TITLE: My NixOS Configuration
+#+TITLE: NixOS Configuration
+#+options: toc:3
+#+auto_tangle: t
+#+PROPERTY: header-args :results silent
+#+STARTUP: overview
 
 * Overview
 My NixOS configuration flake so far.
@@ -28,13 +32,6 @@ There's an attempt to turn my entire configuration into a literate one.
 - Requires knowledge of ~org-mode~.
 - Requires an initial time investment to setup.
 - Mistakes could be made in the ~:tangle~ header argument.
-** Steps
-- [X] Move everything in ~./modules~ to ~modules.org~.
-- [X] Move ~modules.org~ to ~nixos.org~.
-- [X] Move ~configuration.nix~ to ~nixos.org~.
-- [X] Move ~flake.nix~ to ~nixos.org~.
-- [X] Move ~home.nix~ to ~nixos.org~.
-- [ ] Test out styles.
 ** Styles
 I have so far found two styles to write the configuration, we can count two more
 variations if we include the property of ~:header-args~
@@ -96,3 +93,1058 @@ If I can't make it work I'll just dual boot with Windows.
 - [[https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/][A GPU Passthrough Setup  for NixOS (with VR passthrough too!) | astrid.tech (2022-09-22)]]
 *** Last Resort
 - [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
+
+* cachix
+:PROPERTIES:
+:header-args: :tangle cachix.nix
+:END:
+
+Note that this file will get overwritten by ~cachix use <name>~.
+#+begin_src nix
+  { pkgs, lib, ... }:
+  let
+    folder = ./cachix;
+    toImport = name: value: folder + ("/" + name);
+    filterCaches = key: value: value == "regular" && lib.hasSuffix ".nix" key;
+    imports = lib.mapAttrsToList toImport (lib.filterAttrs filterCaches (builtins.readDir folder));
+  in {
+    inherit imports;
+    nix.settings.substituters = ["https://cache.nixos.org/"];
+  }
+#+end_src
+* home
+:PROPERTIES:
+:header-args: :tangle home.nix
+:END:
+#+begin_src nix
+  {config, pkgs, lib, ...}:
+  {
+    home = {
+      stateVersion = "23.05";
+      packages = with pkgs; [
+	# DSLR Webcam
+	# gphoto2
+	# mptlvcap (arch-distrobox) works better
+
+	# General
+	graphviz
+	openssl
+	git
+	stow
+	kitty
+	oh-my-posh
+	zotero
+
+	# KVM/Streaming
+	sunshine
+	moonlight-qt
+	barrier
+
+	# Music
+	playerctl
+	ncmpcpp
+	spotify
+
+	# Communication
+	discord
+	telegram-desktop
+	element-desktop
+
+	# Video/Audio
+	mpv
+	ffmpeg
+	qpwgraph
+
+	# LaTeX
+	texlive.combined.scheme-full
+
+	# LibreOffice
+	libreoffice-qt
+
+	# Clojure
+	clojure
+	leiningen
+	clojure-lsp
+
+	# direnv
+	direnv
+
+	# Drawing tablet
+	rnote
+	xournalpp
+
+	# Web
+	google-chrome
+	nyxt
+
+	# Spelling
+	hunspell
+	hunspellDicts.en_US
+
+	# KDE Applications
+	libsForQt5.kcalc
+	libsForQt5.kclock
+
+	# Provide gtk-launch
+	gtk3
+
+	# Utilities
+	pass
+	tree
+	ledger
+	neofetch
+	bat
+	htop
+	btop
+	fd
+	dmidecode # RAM stuff
+	powertop
+	wget
+	poppler_utils # PDF utilities
+
+	# gnuplot
+	gnuplot
+
+	# bitwarden
+	bitwarden
+
+	# Applications
+	poedit
+	foliate
+
+	# GNOME Theme
+	paper-gtk-theme
+	pop-gtk-theme
+	gnome.adwaita-icon-theme
+	gnome.gnome-tweaks
+
+	# PDF Reader
+	zathura
+
+	# File manager
+	cinnamon.nemo
+
+	# WM Utilities
+	brightnessctl
+	libnotify
+	mako
+	pavucontrol
+	pfetch
+	slurp
+	sway-contrib.grimshot
+	swaybg
+	wf-recorder
+	wl-clipboard
+	wofi
+
+	# Virtual pointer
+	warpd
+
+	# Downloaders
+	qbittorrent
+
+	# WakaTime
+	wakatime
+
+	# Anki
+	anki
+
+	# Rice
+	eww-wayland
+
+	# Distrobox
+	distrobox
+
+	# OBS
+	obs-studio
+
+	# X11
+	arandr    # multi-monitor
+	flameshot # screenshot
+	scrot     # screenshot
+	xclip     #
+	xsel      #
+	feh       # background
+	dunst     # notifications
+	polybar   # bar
+	rofi      # launcher
+	ffcast    # screencast
+
+
+	# i3wm
+	xss-lock
+	networkmanagerapplet
+      ];
+    };
+
+    programs.git = {
+      enable = true;
+      userName  = "adham-omran";
+      userEmail = "git@adham-omran.com";
+      signing = {
+	signByDefault = true;
+	key = "4D37E0ADEE0B9138";
+      };
+    };
+
+    gtk = {
+      enable = true;
+
+      iconTheme = {
+	name = "Papirus-Dark";
+	package = pkgs.papirus-icon-theme;
+      };
+
+      theme = {
+	name = "palenight";
+	package = pkgs.palenight-theme;
+      };
+
+      cursorTheme = {
+	name = "Quintom_Ink";
+	package = pkgs.quintom-cursor-theme;
+      };
+
+      gtk3.extraConfig = {
+	Settings = ''
+	  gtk-application-prefer-dark-theme=1
+	  gtk-cursor-theme-size=20
+	'';
+      };
+
+      gtk4.extraConfig = {
+	Settings = ''
+	  gtk-application-prefer-dark-theme=1
+	'';
+      };
+    };
+
+    home.sessionVariables.GTK_THEME = "palenight";
+
+    programs.ncmpcpp = {
+      enable = true;
+      mpdMusicDir = "/home/adham/music";
+      settings = {
+	mpd_host = "127.0.0.1";
+	mpd_port = 9900;
+	execute_on_song_change = "notify-send \"Now Playing\" \"$(mpc -p 9900 --format '%title% \\n%artist% - %album%' current)\"";
+      };
+    };
+
+    services.blueman-applet.enable = true;
+  }
+
+
+#+end_src
+* flake
+:PROPERTIES:
+:header-args: :tangle flake.nix
+:END:
+
+#+begin_src nix
+  {
+    description = "Adham's System Flake";
+
+    inputs =
+      {
+	nur.url = github:nix-community/NUR;
+	nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+	home-manager = {
+	  url = "github:nix-community/home-manager";
+	  inputs.nixpkgs.follows = "nixpkgs";
+	};
+#+end_src
+
+#+begin_src nix :tangle no
+  hyprland.url = "github:hyprwm/Hyprland";
+#+end_src
+
+#+begin_src nix
+      };
+
+    outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
+      let
+	system = "x86_64-linux";
+	pkgs = import nixpkgs {
+	  inherit system;
+	  config.allowUnfree = true;
+	};
+	lib = nixpkgs.lib;
+      in {
+	nixosConfigurations = {
+	  nixos = lib.nixosSystem {
+	    inherit system;
+	    modules = [
+#+end_src
+** configuration.nix module
+#+begin_src nix
+	      ./configuration.nix
+#+end_src
+** nur module
+- [ ] Make it work.
+#+begin_src nix :tangle no
+  nur.nixosModules.nur
+  ./nur/config.nur
+#+end_src
+** home-manager module
+#+begin_src nix
+	      home-manager.nixosModules.home-manager {
+		home-manager.useGlobalPkgs = true;
+		home-manager.useUserPackages = true;
+		home-manager.users.adham = {
+		  imports = [ ./home.nix ];
+		};
+	      }
+	    ];
+	  };
+	};
+      };
+  }
+
+#+end_src
+* configuration.nix
+:PROPERTIES:
+:header-args: :tangle configuration.nix
+:END:
+Edit this configuration file to define what should be installed on your system.
+Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
+(~nixos-help~).
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+
+#+end_src
+Opening bracket.
+#+begin_src nix
+  {
+#+end_src
+** Imports
+#+begin_src nix
+  imports =
+    [
+#+end_src
+*** Enabled modules
+#+begin_src nix
+    ./hardware-configuration.nix
+    ./cachix.nix
+    ./modules/virtualization.nix
+    ./modules/packages.nix
+    ./modules/kanata.nix
+    ./modules/gnome.nix
+    ./modules/fonts.nix
+    ./modules/power.nix
+    ./modules/overlays.nix
+    ./modules/tmux.nix
+    ./modules/mpd.nix
+#+end_src
+*** Disabled modules
+#+begin_src nix :tangle no
+  ./modules/hyprland.nix
+  ./modules/sway.nix
+  ./modules/kde.nix
+#+end_src
+#+begin_src nix
+      ];
+#+end_src
+** Boot
+#+begin_src nix
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+    boot.extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback
+    ];
+
+    networking.hostName = "nixos";
+#+end_src
+
+Do not tangle.
+- Enables wireless support via wpa_supplicant.
+- Configure network proxy if necessary
+#+begin_src nix :tangle no
+  networking.wireless.enable = true;
+
+  networking.proxy.default = "http://user:password@proxy:port/";
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+#+end_src
+
+Enable networking
+#+begin_src nix
+  networking.networkmanager.enable = true;
+#+end_src
+
+Set your time zone.
+#+begin_src nix
+  time.timeZone = "Asia/Baghdad";
+#+end_src
+
+Select internationalization properties.
+#+begin_src nix
+    i18n.defaultLocale = "en_US.UTF-8";
+#+end_src
+** Window Manager
+- Enable the X11 windowing system.
+- Configure keymap in X11
+#+begin_src nix
+  services.xserver = {
+    enable = true;
+    layout = "us";
+  };
+
+#+end_src
+
+Enable the i3 window manager and install related packages.
+
+- ~i3status~: Gives you the default i3 status bar.
+- ~i3lock~: Default i3 screen locker.
+- ~i3blocks~: If you are planning on using i3blocks over i3status.
+#+begin_src nix
+    services.xserver.windowManager.i3 = {
+      enable = true;
+      package = pkgs.i3-gaps;
+      extraPackages = with pkgs; [
+	i3status
+	i3lock
+	i3blocks
+      ];
+    };
+
+    services.picom = {
+      enable = true;
+      vSync = true;
+    };
+#+end_src
+** Services
+- ~light~: Light backlight control command
+- [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
+- Make sure to configure the ~syncthing~ directory else it will not work.
+#+begin_src nix
+    programs.light.enable = true;
+    security.polkit.enable = true;
+
+  services.xserver.wacom.enable = true;
+  services.printing.enable = true;
+  hardware.bluetooth.enable = true;
+  services.hardware.bolt.enable = true;
+  services.tailscale.enable = true;
+  services.flatpak.enable = true;
+
+  services.emacs = {
+    package = pkgs.emacsUnstable;
+    enable = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    user = "adham";
+    configDir = "/home/adham/.config/syncthing";
+  };
+
+  services.blueman.enable = true;
+
+#+end_src
+
+To enable touchpad support add ~services.xserver.libinput.enable = true;~.
+** Audio
+Enable sound with pipewire.
+#+begin_src nix
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+#+end_src
+** Shell
+#+begin_src nix
+    programs.zsh.enable = true;
+    environment.shells = with pkgs; [ zsh ];
+#+end_src
+** User
+#+begin_src nix
+    users.users.adham = {
+      isNormalUser = true;
+      description = "adham";
+      extraGroups = [
+	"networkmanager" "wheel" "adbusers" "video" "docker"
+      ];
+      packages = with pkgs; [
+	firefox
+      ];
+      shell = pkgs.zsh;
+    };
+
+    ## Related to Wayland support
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+#+end_src
+
+** GnuPG
+#+begin_src nix
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gtk2";
+    };
+#+end_src
+** SSH
+Enable the OpenSSH daemon.
+#+begin_src nix
+    services.openssh.enable = true;
+#+end_src
+** Firewall
+This does not get tangled.
+#+begin_src nix :tangle no
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
+#+end_src
+** Version
+This value determines the NixOS release from which the default settings for
+stateful data, like file locations and database versions on your system were
+taken. It‘s perfectly fine and recommended to leave this value at the release
+version of the first install of this system.  Before changing this value read
+the documentation for this option (e.g. man configuration.nix or on
+https://nixos.org/nixos/options.html).
+#+begin_src nix
+    system.stateVersion = "23.05";
+#+end_src
+** Nix
+Enable flakes
+#+begin_src nix
+    nix = {
+	package = pkgs.nixFlakes;
+	extraOptions = "experimental-features = nix-command flakes";
+      };
+
+#+end_src
+Use the beta cache.
+#+begin_src nix
+    nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+
+#+end_src
+Nix store optimization
+#+begin_src nix
+    nix.settings.auto-optimise-store = true;
+#+end_src
+
+Garbage collection. Delete every week any generation that's older than 7 days.
+#+begin_src nix
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+#+end_src
+
+Allow unfree packages
+#+begin_src nix
+  nixpkgs.config.allowUnfree = true;
+#+end_src
+** Closing bracket
+So that I don't worry about closing the outer-most pair of brackets.
+#+begin_src nix
+}
+#+end_src
+* modules
+** packages
+#+begin_src nix :tangle modules/packages.nix
+  { config, pkgs, callPackage, lib, ... }:
+#+end_src
+
+#+begin_src nix :tangle modules/packages.nix
+  {
+    environment.systemPackages = with pkgs; [
+      unzip
+      cmatrix
+      libsForQt5.okular
+      rsync
+
+      mpd
+      mpc-cli
+
+      openssl
+      pinentry
+      pinentry-gtk2
+      syncthing
+      killall
+#+end_src
+
+Packages that GNOME requires.
+#+begin_src nix :tangle modules/packages.nix
+     gnome.adwaita-icon-theme
+     gnomeExtensions.appindicator
+#+end_src
+
+Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
+#+begin_src nix :tangle modules/packages.nix
+  ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
+    [
+	    epkgs.vterm
+	    epkgs.jinx
+    ]))
+  ];
+
+#+end_src
+
+In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
+#+begin_src nix :tangle modules/packages.nix
+    nixpkgs.config.permittedInsecurePackages = [
+      "nodejs-16.20.0"
+    ];
+  }
+#+end_src
+** mpd
+#+begin_src nix :noweb yes :tangle modules/mpd.nix
+  {...}:
+  {
+    services.mpd = {
+      enable = true;
+      musicDirectory = "/home/adham/music";
+      extraConfig = ''
+      <<mpd_config>>
+      '';
+
+      <<mpd_optional>>
+
+      <<mpd_socket>>
+    };
+  }
+#+end_src
+
+MPD Configuration, you must specify one or more outputs in order to play audio.
+#+name: mpd_config
+#+begin_src conf :tangle no
+      audio_output {
+	type "pipewire"
+	name "My PipeWire Output"
+      }
+#+end_src
+
+
+The following is optional, the ~listenAddress~ enables non-localhost connections
+while ~startWhenNeeded~ makes it so the MPD service only starts upon connection to
+its socket.
+#+name: mpd_optional
+#+begin_src nix
+  network.listenAddress = "any";
+  startWhenNeeded = true;
+  };
+#+end_src
+https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+
+User-id 1000 must match above user. MPD will look inside this directory for the
+PipeWire socket.
+#+name: mpd_socket
+#+begin_src nix
+  services.mpd.user = "userRunningPipeWire";
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
+#+end_src
+** kanata
+:PROPERTIES:
+:header-args: :tangle modules/kanata.nix
+:END:
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.kanata.enable = true;
+    services.kanata.package = pkgs.kanata;
+
+    services.kanata.keyboards.usb.devices = [
+      "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
+      "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+    ];
+
+    services.kanata.keyboards.usb.config = ''
+#+end_src
+
+#+begin_src lisp
+  (defvar
+    tap-timeout   150
+    hold-timeout  150
+    tt $tap-timeout
+    ht $hold-timeout
+    )
+
+  (defalias
+    qwt (layer-switch qwerty)
+    col (layer-switch colemak)
+    a (tap-hold $tt $ht a lmet)
+    r (tap-hold $tt $ht r lalt)
+    s (tap-hold $tt $ht s lctl)
+    t (tap-hold $tt $ht t lsft)
+
+    n (tap-hold $tt $ht n rsft)
+    e (tap-hold $tt $ht e rctl)
+    i (tap-hold $tt $ht i ralt)
+    o (tap-hold $tt $ht o rmet)
+
+    0 (tap-hold $tt $ht 0 M-0)
+    1 (tap-hold $tt $ht 1 M-1)
+    2 (tap-hold $tt $ht 2 M-2)
+    3 (tap-hold $tt $ht 3 M-3)
+    4 (tap-hold $tt $ht 4 M-4)
+    5 (tap-hold $tt $ht 5 M-5)
+    6 (tap-hold $tt $ht 6 M-6)
+    7 (tap-hold $tt $ht 7 M-7)
+    8 (tap-hold $tt $ht 8 M-8)
+    9 (tap-hold $tt $ht 9 M-9)
+    )
+
+  (defsrc
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc            ralt    rctl
+      )
+
+  (deflayer colemak
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  @1   @2   @3   @4   @5   @6   @7   @8   @9   @0    -    =    bspc
+      tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
+      caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
+      lsft z    x    c    v    b    k    m    ,    .    /    rsft
+      lctl lmet lalt           spc            @qwt    rctl
+      )
+
+  (deflayer qwerty
+      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+      caps a    s    d    f    g    h    j    k    l    ;    '    ret
+      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      lctl lmet lalt           spc            @col    rctl
+      )
+#+end_src
+
+#+begin_src nix
+    '';
+  }
+#+end_src
+** fonts
+:PROPERTIES:
+:header-args: :tangle modules/fonts.nix
+:END:
+~vazir-fonts~ is a [[https://rastikerdar.github.io/vazirmatn/en][Persian-Arabic typeface family]].
+
+~fontconfig~ tells the system which font to use system-wide.
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    fonts = {
+      enableDefaultFonts = true;
+      fonts = with pkgs; [
+	noto-fonts
+	noto-fonts-cjk
+	noto-fonts-emoji
+	font-awesome
+	fira-code
+	fira-code-symbols
+	scheherazade-new
+
+	source-han-sans
+	source-han-sans-japanese
+	source-han-serif-japanese
+
+	vazir-fonts
+      ];
+
+      fontconfig = {
+	defaultFonts = {
+	  serif = [ "Noto Sans" "Noto Sans Arabic"];
+	  sansSerif = [ "Noto Sans" "Noto Sans Arabic" ];
+	  monospace = [ "Fira Code" ];
+	};
+      };
+    };
+  }
+
+#+end_src
+** sway
+:PROPERTIES:
+:header-args: :tangle modules/sway.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, lib, ... }:
+  let
+    dbus-sway-environment = pkgs.writeTextFile {
+      name = "dbus-sway-environment";
+      destination = "/bin/dbus-sway-environment";
+      executable = true;
+
+      text = ''
+#+end_src
+
+#+begin_src conf
+  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+  systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+#+end_src
+
+#+begin_src nix
+	'';
+    };
+  in
+#+end_src
+
+#+begin_src nix
+  {
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+    };
+
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+    };
+
+
+    services.dbus.enable = true;
+    environment.systemPackages = with pkgs; [
+      dbus-sway-environment
+      waybar
+    ];
+  }
+#+end_src
+
+** hyprland
+:PROPERTIES:
+:header-args: :tangle modules/hyprland.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, lib, ... }:
+  {
+    programs.hyprland.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      hyprland
+      hyprland-protocols
+      hyprland-share-picker
+      hyprpaper
+      xdg-desktop-portal-hyprland
+      waybar
+    ];
+  }
+#+end_src
+
+** overlays
+:PROPERTIES:
+:header-args: :tangle modules/overlays.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    nixpkgs.overlays = [
+
+#+end_src
+*** Waybar
+#+begin_src nix :tangle no
+      (self: super: {
+	waybar = super.waybar.overrideAttrs (oldAttrs: {
+	  mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+	});
+      })
+#+end_src
+*** Emacs
+Overlay Emacs for latest release.
+#+begin_src nix
+      (import (builtins.fetchTarball {
+	url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+	sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
+      }))
+    ];
+#+end_src
+
+#+begin_src nix
+  }
+#+end_src
+
+** power management
+:PROPERTIES:
+:header-args: :tangle modules/power.nix
+:END:
+
+Power configuration for T480
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.power-profiles-daemon.enable = false;
+    services.tlp = {
+      enable = true;
+
+      settings = {
+	START_CHARGE_THRESH_BAT0=75;
+	STOP_CHARGE_THRESH_BAT0=95;
+
+	START_CHARGE_THRESH_BAT1=75;
+	STOP_CHARGE_THRESH_BAT1=95;
+
+	CPU_SCALING_GOVERNOR_ON_AC = "performance";
+	CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      };
+    };
+  }
+
+#+end_src
+
+** tmux
+:PROPERTIES:
+:header-args: :tangle modules/tmux.nix
+:END:
+
+#+begin_src nix
+  { pkgs, config, ... }:
+  {
+    programs.tmux = {
+      enable = true;
+
+#+end_src
+
+#+begin_src nix :tangle no
+      # shortcut = "a";
+      # aggressiveResize = true; -- Disabled to be iTerm-friendly
+      # baseIndex = 1;
+      # newSession = true;
+      # Stop tmux+escape craziness.
+      # escapeTime = 0;
+      # Force tmux to use /tmp for sockets (WSL2 compat)
+      # secureSocket = false;
+#+end_src
+
+#+begin_src nix
+      plugins = with pkgs; [
+	tmuxPlugins.better-mouse-mode
+      ];
+
+      extraConfig = ''
+#+end_src
+
+https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
+#+begin_src conf
+      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      set-environment -g COLORTERM "truecolor"
+#+end_src
+
+Mouse configuration
+#+begin_src conf :tangle no
+  set-option -g mouse on
+#+end_src
+
+*** Keybindings
+Split pane commands
+#+begin_src conf :tangle no
+  bind | split-window -h -c "#{pane_current_path}"
+  bind - split-window -v -c "#{pane_current_path}"
+  bind c new-window -c "#{pane_current_path}"
+#+end_src
+
+#+begin_src nix
+      '';
+    };
+  }
+#+end_src
+
+** virtualization
+:PROPERTIES:
+:header-args: :tangle modules/virtualization.nix
+:END:
+#+begin_src nix
+  { pkgs, lib, ... }:
+  {
+    virtualisation = {
+      docker.enable = true;
+      waydroid.enable = true;
+      lxd.enable = true;
+      libvirtd.enable = true;
+    };
+
+    programs.adb.enable = true;
+    programs.dconf.enable = true;
+    environment.systemPackages = with pkgs; [ virt-manager ];
+    users.users.adham.extraGroups = [ "libvirtd" ];
+  }
+#+end_src
+** KDE
+:PROPERTIES:
+:header-args: :tangle modules/kde.nix
+:END:
+
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+
+    services.xserver.displayManager.sddm.enable = true;
+    services.xserver.desktopManager.plasma5.enable = true;
+
+#+end_src
+
+Remove KDE apps.
+#+begin_src nix
+    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+    ];
+  }
+#+end_src
+
+** GNOME
+:PROPERTIES:
+:header-args: :tangle modules/gnome.nix
+:END:
+#+begin_src nix
+  { config, pkgs, callPackage, lib, ... }:
+  {
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    programs.dconf.enable = true;
+#+end_src
+Exclude the following packages
+| Package          | Description               |
+|------------------+---------------------------|
+| nautilus         | Files, replaced with Nemo |
+| cheese           | Webcam tool               |
+| gnome-music      | Music player              |
+| gnome-terminal   | Terminal                  |
+| gedit            | Text editor               |
+| epiphany         | Web browser               |
+| geary            | Email reader              |
+| gnome-characters | -                         |
+| totem            | Video player              |
+| tali             | Poker game                |
+| iagno            | Go game                   |
+| hitori           | Sudoku game               |
+| atomix           | Puzzle game               |
+#+begin_src nix
+    environment.gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      nautilus
+      cheese
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
+  }
+#+end_src
