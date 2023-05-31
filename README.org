@@ -34,6 +34,7 @@ There's an attempt to turn my entire configuration into a literate one.
 - [X] Move ~configuration.nix~ to ~nixos.org~.
 - [X] Move ~flake.nix~ to ~nixos.org~.
 - [X] Move ~home.nix~ to ~nixos.org~.
+- [ ] Test out styles.
 ** Styles
 I have so far found two styles to write the configuration, we can count two more
 variations if we include the property of ~:header-args~
