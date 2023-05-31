@@ -114,32 +114,34 @@ If I can't make it work I'll just dual boot with Windows.
 	lib = nixpkgs.lib;
       in {
 	nixosConfigurations = {
-** configuration.nix module
-#+begin_src nix
-	      ./configuration.nix
-#+end_src
-** nur module
-- [ ] Make it work.
-#+begin_src nix :tangle no
-  nur.nixosModules.nur
-  ./nur/config.nur
-#+end_src
-** home-manager module
-#+begin_src nix
-	      home-manager.nixosModules.home-manager {
-		home-manager.useGlobalPkgs = true;
-		home-manager.useUserPackages = true;
-		home-manager.users.adham = {
-		  imports = [ ./home.nix ];
+		nixos = lib.nixosSystem {
+		  inherit system;
+		  modules = [
+		    ./configuration.nix
+		    home-manager.nixosModules.home-manager {
+		      home-manager.useGlobalPkgs = true;
+		      home-manager.useUserPackages = true;
+		      home-manager.users.adham = {
+			      imports = [ ./home.nix ];
+		      };
+		    }
+		  ];
 		};
-	      }
-	    ];
-	  };
 	};
       };
   }
 
 #+end_src
+
+#+name: inputs
+#+begin_src nix
+  nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  home-manager = {
+	  url = "github:nix-community/home-manager";
+	  inputs.nixpkgs.follows = "nixpkgs";
+  };
+#+end_src
+
 * home-manger
 #+begin_src nix :tangle home.nix :noweb yes
   {config, pkgs, lib, ...}:
