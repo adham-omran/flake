@@ -3,158 +3,158 @@
   home = {
     stateVersion = "23.05";
     packages = with pkgs; [
-      # DSLR Webcam
-      # gphoto2
-      # mptlvcap (arch-distrobox) works better
+	    # DSLR Webcam
+	    # gphoto2
+	    # mptlvcap (arch-distrobox) works better
 
-      # General
-      graphviz
-      openssl
-      git
-      stow
-      kitty
-      oh-my-posh
-      zotero
+	    # General
+	    graphviz
+	    openssl
+	    git
+	    stow
+	    kitty
+	    oh-my-posh
+	    zotero
 
-      # KVM/Streaming
-      sunshine
-      moonlight-qt
-      barrier
+	    # KVM/Streaming
+	    sunshine
+	    moonlight-qt
+	    barrier
 
-      # Music
-      playerctl
-      ncmpcpp
-      spotify
+	    # Music
+	    playerctl
+	    ncmpcpp
+	    spotify
 
-      # Communication
-      discord
-      telegram-desktop
-      element-desktop
+	    # Communication
+	    discord
+	    telegram-desktop
+	    element-desktop
 
-      # Video/Audio
-      mpv
-      ffmpeg
-      qpwgraph
+	    # Video/Audio
+	    mpv
+	    ffmpeg
+	    qpwgraph
 
-      # LaTeX
-      texlive.combined.scheme-full
+	    # LaTeX
+	    texlive.combined.scheme-full
 
-      # LibreOffice
-      libreoffice-qt
+	    # LibreOffice
+	    libreoffice-qt
 
-      # Clojure
-      clojure
-      leiningen
-      clojure-lsp
+	    # Clojure
+	    clojure
+	    leiningen
+	    clojure-lsp
 
-      # direnv
-      direnv
+	    # direnv
+	    direnv
 
-      # Drawing tablet
-      rnote
-      xournalpp
+	    # Drawing tablet
+	    rnote
+	    xournalpp
 
-      # Web
-      google-chrome
-      nyxt
+	    # Web
+	    google-chrome
+	    nyxt
 
-      # Spelling
-      hunspell
-      hunspellDicts.en_US
+	    # Spelling
+	    hunspell
+	    hunspellDicts.en_US
 
-      # KDE Applications
-      libsForQt5.kcalc
-      libsForQt5.kclock
+	    # KDE Applications
+	    libsForQt5.kcalc
+	    libsForQt5.kclock
 
-      # Provide gtk-launch
-      gtk3
+	    # Provide gtk-launch
+	    gtk3
 
-      # Utilities
-      pass
-      tree
-      ledger
-      neofetch
-      bat
-      htop
-      btop
-      fd
-      dmidecode # RAM stuff
-      powertop
-      wget
-      poppler_utils # PDF utilities
+	    # Utilities
+	    pass
+	    tree
+	    ledger
+	    neofetch
+	    bat
+	    htop
+	    btop
+	    fd
+	    dmidecode # RAM stuff
+	    powertop
+	    wget
+	    poppler_utils # PDF utilities
 
-      # gnuplot
-      gnuplot
+	    # gnuplot
+	    gnuplot
 
-      # bitwarden
-      bitwarden
+	    # bitwarden
+	    bitwarden
 
-      # Applications
-      poedit
-      foliate
+	    # Applications
+	    poedit
+	    foliate
 
-      # GNOME Theme
-      paper-gtk-theme
-      pop-gtk-theme
-      gnome.adwaita-icon-theme
-      gnome.gnome-tweaks
+	    # GNOME Theme
+	    paper-gtk-theme
+	    pop-gtk-theme
+	    gnome.adwaita-icon-theme
+	    gnome.gnome-tweaks
 
-      # PDF Reader
-      zathura
+	    # PDF Reader
+	    zathura
 
-      # File manager
-      cinnamon.nemo
+	    # File manager
+	    cinnamon.nemo
 
-      # WM Utilities
-      brightnessctl
-      libnotify
-      mako
-      pavucontrol
-      pfetch
-      slurp
-      sway-contrib.grimshot
-      swaybg
-      wf-recorder
-      wl-clipboard
-      wofi
+	    # WM Utilities
+	    brightnessctl
+	    libnotify
+	    mako
+	    pavucontrol
+	    pfetch
+	    slurp
+	    sway-contrib.grimshot
+	    swaybg
+	    wf-recorder
+	    wl-clipboard
+	    wofi
 
-      # Virtual pointer
-      warpd
+	    # Virtual pointer
+	    warpd
 
-      # Downloaders
-      qbittorrent
+	    # Downloaders
+	    qbittorrent
 
-      # WakaTime
-      wakatime
+	    # WakaTime
+	    wakatime
 
-      # Anki
-      anki
+	    # Anki
+	    anki
 
-      # Rice
-      eww-wayland
+	    # Rice
+	    eww-wayland
 
-      # Distrobox
-      distrobox
+	    # Distrobox
+	    distrobox
 
-      # OBS
-      obs-studio
+	    # OBS
+	    obs-studio
 
-      # X11
-      arandr    # multi-monitor
-      flameshot # screenshot
-      scrot     # screenshot
-      xclip     #
-      xsel      #
-      feh       # background
-      dunst     # notifications
-      polybar   # bar
-      rofi      # launcher
-      ffcast    # screencast
+	    # X11
+	    arandr    # multi-monitor
+	    flameshot # screenshot
+	    scrot     # screenshot
+	    xclip     #
+	    xsel      #
+	    feh       # background
+	    dunst     # notifications
+	    polybar   # bar
+	    rofi      # launcher
+	    ffcast    # screencast
 
 
-      # i3wm
-      xss-lock
-      networkmanagerapplet
+	    # i3wm
+	    xss-lock
+	    networkmanagerapplet
     ];
   };
 
@@ -163,45 +163,11 @@
     userName  = "adham-omran";
     userEmail = "git@adham-omran.com";
     signing = {
-      signByDefault = true;
-      key = "4D37E0ADEE0B9138";
+  	  signByDefault = true;
+  	  key = "4D37E0ADEE0B9138";
     };
   };
-
-  gtk = {
-    enable = true;
-
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-
-    theme = {
-      name = "palenight";
-      package = pkgs.palenight-theme;
-    };
-
-    cursorTheme = {
-      name = "Quintom_Ink";
-      package = pkgs.quintom-cursor-theme;
-    };
-
-    gtk3.extraConfig = {
-      Settings = ''
-	gtk-application-prefer-dark-theme=1
-	gtk-cursor-theme-size=20
-      '';
-    };
-
-    gtk4.extraConfig = {
-      Settings = ''
-	gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
-
-  home.sessionVariables.GTK_THEME = "palenight";
-
+  
   programs.ncmpcpp = {
     enable = true;
     mpdMusicDir = "/home/adham/music";
@@ -211,6 +177,40 @@
       execute_on_song_change = "notify-send \"Now Playing\" \"$(mpc -p 9900 --format '%title% \\n%artist% - %album%' current)\"";
     };
   };
-
+  
   services.blueman-applet.enable = true;
+
+  gtk = {
+    enable = true;
+  
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  
+    theme = {
+      name = "palenight";
+      package = pkgs.palenight-theme;
+    };
+  
+    cursorTheme = {
+      name = "Quintom_Ink";
+      package = pkgs.quintom-cursor-theme;
+    };
+  
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-size=20
+      '';
+    };
+  
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
+  
+  home.sessionVariables.GTK_THEME = "palenight";
 }
