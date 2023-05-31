@@ -149,165 +149,28 @@ If I can't make it work I'll just dual boot with Windows.
     home = {
       stateVersion = "23.05";
       packages = with pkgs; [
-	      # DSLR Webcam
-	      # gphoto2
-	      # mptlvcap (arch-distrobox) works better
+	<<remote-control>>
 
-	      # General
-	      graphviz
-	      openssl
-	      git
-	      stow
-	      kitty
-	      oh-my-posh
-	      zotero
+	<<video-audio>>
 
-	      # KVM/Streaming
-	      sunshine
-	      moonlight-qt
-	      barrier
+	<<clojure>>
 
-	      # Music
-	      playerctl
-	      ncmpcpp
-	      spotify
+	<<cli>>
 
-	      # Communication
-	      discord
-	      telegram-desktop
-	      element-desktop
+	<<password-managers>>
 
-	      # Video/Audio
-	      mpv
-	      ffmpeg
-	      qpwgraph
+	<<applications>>
 
-	      # LaTeX
-	      texlive.combined.scheme-full
+	<<gtk-themes>>
 
-	      # LibreOffice
-	      libreoffice-qt
-
-	      # Clojure
-	      clojure
-	      leiningen
-	      clojure-lsp
-
-	      # direnv
-	      direnv
-
-	      # Drawing tablet
-	      rnote
-	      xournalpp
-
-	      # Web
-	      google-chrome
-	      nyxt
-
-	      # Spelling
-	      hunspell
-	      hunspellDicts.en_US
-
-	      # KDE Applications
-	      libsForQt5.kcalc
-	      libsForQt5.kclock
-
-	      # Provide gtk-launch
-	      gtk3
-
-	      # Utilities
-	      pass
-	      tree
-	      ledger
-	      neofetch
-	      bat
-	      htop
-	      btop
-	      fd
-	      dmidecode # RAM stuff
-	      powertop
-	      wget
-	      poppler_utils # PDF utilities
-
-	      # gnuplot
-	      gnuplot
-
-	      # bitwarden
-	      bitwarden
-
-	      # Applications
-	      poedit
-	      foliate
-
-	      # GNOME Theme
-	      paper-gtk-theme
-	      pop-gtk-theme
-	      gnome.adwaita-icon-theme
-	      gnome.gnome-tweaks
-
-	      # PDF Reader
-	      zathura
-
-	      # File manager
-	      cinnamon.nemo
-
-	      # WM Utilities
-	      brightnessctl
-	      libnotify
-	      mako
-	      pavucontrol
-	      pfetch
-	      slurp
-	      sway-contrib.grimshot
-	      swaybg
-	      wf-recorder
-	      wl-clipboard
-	      wofi
-
-	      # Virtual pointer
-	      warpd
-
-	      # Downloaders
-	      qbittorrent
-
-	      # WakaTime
-	      wakatime
-
-	      # Anki
-	      anki
-
-	      # Rice
-	      eww-wayland
-
-	      # Distrobox
-	      distrobox
-
-	      # OBS
-	      obs-studio
-
-	      # X11
-	      arandr    # multi-monitor
-	      flameshot # screenshot
-	      scrot     # screenshot
-	      xclip     #
-	      xsel      #
-	      feh       # background
-	      dunst     # notifications
-	      polybar   # bar
-	      rofi      # launcher
-	      ffcast    # screencast
-
-
-	      # i3wm
-	      xss-lock
-	      networkmanagerapplet
+	<<x11-utilities>>
       ];
     };
-
     <<home-manager-programs>>
 
     <<home-manager-gtk-theme>>
   }
+
 #+end_src
 
 #+name: home-manager-gtk-theme
@@ -347,6 +210,14 @@ If I can't make it work I'll just dual boot with Windows.
   home.sessionVariables.GTK_THEME = "palenight";
 #+end_src
 
+The themes I use
+#+name: gtk-themes
+#+begin_src text
+  paper-gtk-theme
+  pop-gtk-theme
+  gnome.adwaita-icon-theme
+#+end_src
+
 #+name: home-manager-programs
 #+begin_src nix
   programs.git = {
@@ -370,6 +241,154 @@ If I can't make it work I'll just dual boot with Windows.
   };
 
   services.blueman-applet.enable = true;
+#+end_src
+
+General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
+translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
+#+name: applications
+#+begin_src text
+  gnome.gnome-tweaks
+
+  rnote
+  xournalpp
+
+  google-chrome
+  nyxt
+
+  libsForQt5.kcalc
+  libsForQt5.kclock
+
+  anki
+  qbittorrent
+  obs-studio
+  poedit
+  foliate
+  zathura
+  cinnamon.nemo
+  libreoffice-qt
+  discord
+  telegram-desktop
+  element-desktop
+  spotify
+  zotero
+#+end_src
+
+General CLI utilities. ~gtk3~ to provide ~gtk-launch~ which is used to launch
+applications from Emacs with ~emacs-run-launcher~ although I rarely use this.
+
+[[https://github.com/89luca89/distrobox][Distrobox]] is awesome. A lot of potential.
+
+Since I'm back on X11 I could use [[https://github.com/rvaiya/warpd/][warpd]] to reduce my mouse usage even more. I
+have to set it up again though.
+
+~poppler_utils~ is related to Emacs's PDF reader but I am not sure if I even need
+it here. I'll keep it for now.
+#+name: cli
+#+begin_src text
+  texlive.combined.scheme-full
+
+  poppler_utils
+
+  warpd
+  distrobox
+
+  hunspell
+  hunspellDicts.en_US
+
+  gnuplot
+  libnotify
+  direnv
+  gtk3
+  graphviz
+  openssl
+  git
+  stow
+  tree
+  ledger
+  neofetch
+  bat
+  htop
+  btop
+  fd
+  dmidecode
+  powertop
+  wget
+  brightnessctl
+  pavucontrol
+  pfetch
+#+end_src
+
+#+name: video-audio
+#+begin_src text
+  mpv
+  ffmpeg
+  qpwgraph
+  playerctl
+  ncmpcpp
+#+end_src
+
+#+name: password-managers
+#+begin_src text
+  pass
+  bitwarden
+#+end_src
+
+The following are X11 utilities.
+#+name: x11-utilities
+#+begin_src text
+  arandr
+  flameshot
+  scrot
+  xclip
+  xsel
+  feh
+  dunst
+  rofi
+  ffcast
+  xss-lock
+  networkmanagerapplet
+#+end_src
+
+The following are utilities for sway. Currently unused and not tangled.
+#+name: sway-cli
+#+begin_src text
+  mako
+  slurp
+  sway-contrib.grimshot
+  swaybg
+  wf-recorder
+  wl-clipboard
+  wofi
+  eww-wayland
+#+end_src
+
+Currently I have Clojure installed on the user level, I want to move this into a
+flake at some point.
+#+name: clojure
+#+begin_src text
+  clojure
+  leiningen
+  clojure-lsp
+#+end_src
+
+** Using a DSLR Camera as a webcam
+This setup is not active at the moment. Although from 30 minutes of testing I
+found that the ~mptlvcap~ package which I install in an Arch-distrobox works
+better than the ~gphoto2~ application.
+#+begin_src text
+  gphoto2
+#+end_src
+
+** Controlling another computer
+~barrier~ does not work at the moment for unknown reasonr.
+
+I am using the sunshine server on another machine that dual boots Windows and
+Debian 12 and running Moonlight to access it.
+#+name: remote-control
+#+begin_src text
+  sunshine
+  moonlight-qt
+  barrier
 #+end_src
 ** TODO Setting default applications
 - [[https://discourse.nixos.org/t/set-default-application-for-mime-type-with-home-manager/17190][Set default application for mime type with home-manager - Help - NixOS Discourse]]

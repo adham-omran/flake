@@ -3,161 +3,97 @@
   home = {
     stateVersion = "23.05";
     packages = with pkgs; [
-	    # DSLR Webcam
-	    # gphoto2
-	    # mptlvcap (arch-distrobox) works better
+      sunshine
+      moonlight-qt
+      barrier
 
-	    # General
-	    graphviz
-	    openssl
-	    git
-	    stow
-	    kitty
-	    oh-my-posh
-	    zotero
+      mpv
+      ffmpeg
+      qpwgraph
+      playerctl
+      ncmpcpp
 
-	    # KVM/Streaming
-	    sunshine
-	    moonlight-qt
-	    barrier
+      clojure
+      leiningen
+      clojure-lsp
 
-	    # Music
-	    playerctl
-	    ncmpcpp
-	    spotify
+      texlive.combined.scheme-full
+      
+      poppler_utils
+      
+      warpd
+      distrobox
+      
+      hunspell
+      hunspellDicts.en_US
+      
+      gnuplot
+      libnotify
+      direnv
+      gtk3
+      graphviz
+      openssl
+      git
+      stow
+      tree
+      ledger
+      neofetch
+      bat
+      htop
+      btop
+      fd
+      dmidecode
+      powertop
+      wget
+      brightnessctl
+      pavucontrol
+      pfetch
 
-	    # Communication
-	    discord
-	    telegram-desktop
-	    element-desktop
+      pass
+      bitwarden
 
-	    # Video/Audio
-	    mpv
-	    ffmpeg
-	    qpwgraph
+      gnome.gnome-tweaks
+      
+      rnote
+      xournalpp
+      
+      google-chrome
+      nyxt
+      
+      libsForQt5.kcalc
+      libsForQt5.kclock
+      
+      anki
+      qbittorrent
+      obs-studio
+      poedit
+      foliate
+      zathura
+      cinnamon.nemo
+      libreoffice-qt
+      discord
+      telegram-desktop
+      element-desktop
+      spotify
+      zotero
 
-	    # LaTeX
-	    texlive.combined.scheme-full
+      paper-gtk-theme
+      pop-gtk-theme
+      gnome.adwaita-icon-theme
 
-	    # LibreOffice
-	    libreoffice-qt
-
-	    # Clojure
-	    clojure
-	    leiningen
-	    clojure-lsp
-
-	    # direnv
-	    direnv
-
-	    # Drawing tablet
-	    rnote
-	    xournalpp
-
-	    # Web
-	    google-chrome
-	    nyxt
-
-	    # Spelling
-	    hunspell
-	    hunspellDicts.en_US
-
-	    # KDE Applications
-	    libsForQt5.kcalc
-	    libsForQt5.kclock
-
-	    # Provide gtk-launch
-	    gtk3
-
-	    # Utilities
-	    pass
-	    tree
-	    ledger
-	    neofetch
-	    bat
-	    htop
-	    btop
-	    fd
-	    dmidecode # RAM stuff
-	    powertop
-	    wget
-	    poppler_utils # PDF utilities
-
-	    # gnuplot
-	    gnuplot
-
-	    # bitwarden
-	    bitwarden
-
-	    # Applications
-	    poedit
-	    foliate
-
-	    # GNOME Theme
-	    paper-gtk-theme
-	    pop-gtk-theme
-	    gnome.adwaita-icon-theme
-	    gnome.gnome-tweaks
-
-	    # PDF Reader
-	    zathura
-
-	    # File manager
-	    cinnamon.nemo
-
-	    # WM Utilities
-	    brightnessctl
-	    libnotify
-	    mako
-	    pavucontrol
-	    pfetch
-	    slurp
-	    sway-contrib.grimshot
-	    swaybg
-	    wf-recorder
-	    wl-clipboard
-	    wofi
-
-	    # Virtual pointer
-	    warpd
-
-	    # Downloaders
-	    qbittorrent
-
-	    # WakaTime
-	    wakatime
-
-	    # Anki
-	    anki
-
-	    # Rice
-	    eww-wayland
-
-	    # Distrobox
-	    distrobox
-
-	    # OBS
-	    obs-studio
-
-	    # X11
-	    arandr    # multi-monitor
-	    flameshot # screenshot
-	    scrot     # screenshot
-	    xclip     #
-	    xsel      #
-	    feh       # background
-	    dunst     # notifications
-	    polybar   # bar
-	    rofi      # launcher
-	    ffcast    # screencast
-
-
-	    # i3wm
-	    xss-lock
-	    networkmanagerapplet
+      arandr
+      flameshot
+      scrot
+      xclip
+      xsel
+      feh
+      dunst
+      rofi
+      ffcast
+      xss-lock
+      networkmanagerapplet
     ];
   };
-
   programs.git = {
     enable = true;
     userName  = "adham-omran";
