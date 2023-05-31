@@ -13,10 +13,12 @@ My NixOS configuration flake so far.
 | Editor          | Emacs           |
 | Terminal        | xterm           |
 | Browser         | Firefox         |
+| Launcher        | rofi            |
 | Notify server   | dunst           |
 | Monitor manager | arandr          |
 | Screenshot      | scrot/flameshot |
 | Bluetooth       | blueman         |
+| Screencast      | ffcast          |
 
 * Literate Configuration
 There's an attempt to turn my entire configuration into a literate one.
