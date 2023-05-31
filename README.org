@@ -95,45 +95,25 @@ If I can't make it work I'll just dual boot with Windows.
 - [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
 
 * flake
-:PROPERTIES:
-:header-args: :tangle flake.nix
-:END:
-
-#+begin_src nix
+#+begin_src nix :tangle flake.nix :noweb yes
   {
     description = "Adham's System Flake";
 
     inputs =
       {
-	nur.url = github:nix-community/NUR;
-	nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-	home-manager = {
-	  url = "github:nix-community/home-manager";
-	  inputs.nixpkgs.follows = "nixpkgs";
-	};
-#+end_src
-
-#+begin_src nix :tangle no
-  hyprland.url = "github:hyprwm/Hyprland";
-#+end_src
-
-#+begin_src nix
+	<<inputs>>
       };
 
-    outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
+    outputs = { self, nixpkgs, home-manager, ... }@inputs:
       let
 	system = "x86_64-linux";
 	pkgs = import nixpkgs {
-	  inherit system;
-	  config.allowUnfree = true;
+		inherit system;
+		config.allowUnfree = true;
 	};
 	lib = nixpkgs.lib;
       in {
 	nixosConfigurations = {
-	  nixos = lib.nixosSystem {
-	    inherit system;
-	    modules = [
-#+end_src
 ** configuration.nix module
 #+begin_src nix
 	      ./configuration.nix
