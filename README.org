@@ -94,24 +94,6 @@ If I can't make it work I'll just dual boot with Windows.
 *** Last Resort
 - [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
 
-* cachix
-:PROPERTIES:
-:header-args: :tangle cachix.nix
-:END:
-
-Note that this file will get overwritten by ~cachix use <name>~.
-#+begin_src nix
-  { pkgs, lib, ... }:
-  let
-    folder = ./cachix;
-    toImport = name: value: folder + ("/" + name);
-    filterCaches = key: value: value == "regular" && lib.hasSuffix ".nix" key;
-    imports = lib.mapAttrsToList toImport (lib.filterAttrs filterCaches (builtins.readDir folder));
-  in {
-    inherit imports;
-    nix.settings.substituters = ["https://cache.nixos.org/"];
-  }
-#+end_src
 * home
 :PROPERTIES:
 :header-args: :tangle home.nix
@@ -1146,5 +1128,23 @@ Exclude the following packages
       hitori
       atomix
     ]);
+  }
+#+end_src
+* cachix
+:PROPERTIES:
+:header-args: :tangle cachix.nix
+:END:
+
+Note that this file will get overwritten by ~cachix use <name>~.
+#+begin_src nix
+  { pkgs, lib, ... }:
+  let
+    folder = ./cachix;
+    toImport = name: value: folder + ("/" + name);
+    filterCaches = key: value: value == "regular" && lib.hasSuffix ".nix" key;
+    imports = lib.mapAttrsToList toImport (lib.filterAttrs filterCaches (builtins.readDir folder));
+  in {
+    inherit imports;
+    nix.settings.substituters = ["https://cache.nixos.org/"];
   }
 #+end_src
