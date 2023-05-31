@@ -34,6 +34,47 @@ There's an attempt to turn my entire configuration into a literate one.
 - [X] Move ~configuration.nix~ to ~nixos.org~.
 - [X] Move ~flake.nix~ to ~nixos.org~.
 - [X] Move ~home.nix~ to ~nixos.org~.
+** Styles
+I have so far found two styles to write the configuration, we can count two more
+variations if we include the property of ~:header-args~
+
+*** Without noweb and without ~:header-args~
+
+This is the most basic form where you include the path to the file in every
+code block.
+
+~extraConfig~ is broken into three blocks. First for the start, second for the
+configuration and the last to close the quotes.
+*** With noweb and without ~:header-args~
+
+This is also basic as you include the path to the file in every code block
+*except* those where the configuration for ~extraConfig~ is written.
+
+~extraConfig~ is broken into two blocks. One for everything except the
+~extraConfig~ argument and one for the ~extraConfig~ argument. This one is
+preferred to the first as you do not have to keep track of opening and
+closing everything.
+
+This style also requires naming the blocks for the ~extraConfig~. Potential
+names are ~program_config~ and ~program_extraConfig~.
+This is the same
+*** With noweb and with ~:header-args~
+
+This form enables omitting the path to file argument as it is included once
+in the PROPERTY drawer of the org subtree.
+
+The drawback is that every ~extraConfig~ block has to have a ~:tangle no~
+argument to avoid duplication and a broken configuration.
+*** With noweb and without ~:header-args~
+Not used yet. The strucutre could be as follows:
+
+a. One main block into which everything is included.
+b. Any number of named code blocks with their documentation and any other
+   comments.
+
+
+This would avoid any need to include ~:tangle no~ as you simply do not include the
+code block. I also noticed that this fixes code indentation problems.
 * TODO Usage
 ** NixOS as a Desktop
 ** Development in Nix Flakes
