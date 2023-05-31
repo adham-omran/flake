@@ -1,10 +1,7 @@
 { config, pkgs, callPackage, lib, ... }:
-
 {
-
   imports =
     [
-
       ./hardware-configuration.nix
       ./cachix.nix
       ./modules/virtualization.nix
@@ -16,9 +13,7 @@
       ./modules/overlays.nix
       ./modules/tmux.nix
       ./modules/mpd.nix
-
     ];
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -28,13 +23,9 @@
   ];
 
   networking.hostName = "nixos";
-
   networking.networkmanager.enable = true;
-
   time.timeZone = "Asia/Baghdad";
-
   i18n.defaultLocale = "en_US.UTF-8";
-
   services.xserver = {
     enable = true;
     layout = "us";
@@ -49,12 +40,13 @@
       i3blocks
     ];
   };
-
   services.picom = {
     enable = true;
     vSync = true;
+    opacityRules = [
+      "85:class_g = 'XTerm'"
+    ];
   };
-
   programs.light.enable = true;
   security.polkit.enable = true;
 
@@ -87,10 +79,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
-
   users.users.adham = {
     isNormalUser = true;
     description = "adham";
@@ -105,32 +95,24 @@
 
   ## Related to Wayland support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
     pinentryFlavor = "gtk2";
   };
-
   services.openssh.enable = true;
-
   system.stateVersion = "23.05";
-
+  nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
 
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
-
   nix.settings.auto-optimise-store = true;
-
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
-  nixpkgs.config.allowUnfree = true;
-
 }
