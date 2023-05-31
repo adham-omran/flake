@@ -20,8 +20,8 @@
 
     fontconfig = {
       defaultFonts = {
-	serif = [ "Noto Sans" "Noto Sans Arabic"];
-	sansSerif = [ "Noto Sans" "Noto Sans Arabic" ];
+	serif = [ "Noto Sans" "Noto Naskh Arabic"];
+	sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
 	monospace = [ "Fira Code" ];
       };
     };

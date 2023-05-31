@@ -850,13 +850,10 @@ PipeWire socket.
   }
 #+end_src
 ** fonts
-:PROPERTIES:
-:header-args: :tangle modules/fonts.nix
-:END:
 ~vazir-fonts~ is a [[https://rastikerdar.github.io/vazirmatn/en][Persian-Arabic typeface family]].
 
 ~fontconfig~ tells the system which font to use system-wide.
-#+begin_src nix
+#+begin_src nix :tangle modules/fonts.nix
   { config, pkgs, callPackage, lib, ... }:
   {
     fonts = {
@@ -879,21 +876,16 @@ PipeWire socket.
 
       fontconfig = {
 	defaultFonts = {
-	  serif = [ "Noto Sans" "Noto Sans Arabic"];
-	  sansSerif = [ "Noto Sans" "Noto Sans Arabic" ];
+	  serif = [ "Noto Sans" "Noto Naskh Arabic"];
+	  sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
 	  monospace = [ "Fira Code" ];
 	};
       };
     };
   }
-
 #+end_src
 ** sway
-:PROPERTIES:
-:header-args: :tangle modules/sway.nix
-:END:
-
-#+begin_src nix
+#+begin_src nix :tangle modules/sway.nix :noweb yes
   { config, pkgs, lib, ... }:
   let
     dbus-sway-environment = pkgs.writeTextFile {
