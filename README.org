@@ -68,8 +68,8 @@ argument to avoid duplication and a broken configuration.
 *** With noweb and without ~:header-args~
 Not used yet. The strucutre could be as follows:
 
-a. One main block into which everything is included.
-b. Any number of named code blocks with their documentation and any other
+1. One main block into which everything is included.
+2. Any number of named code blocks with their documentation and any other
    comments.
 
 
