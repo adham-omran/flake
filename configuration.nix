@@ -2,26 +2,26 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./cachix.nix
-      ./modules/virtualization.nix
-      ./modules/packages.nix
-      ./modules/kanata.nix
-      ./modules/gnome.nix
-      ./modules/fonts.nix
-      ./modules/power.nix
-      ./modules/overlays.nix
-      ./modules/tmux.nix
-      ./modules/mpd.nix
+		  ./hardware-configuration.nix
+		  ./cachix.nix
+		  ./modules/virtualization.nix
+		  ./modules/packages.nix
+		  ./modules/kanata.nix
+		  ./modules/gnome.nix
+		  ./modules/fonts.nix
+		  ./modules/power.nix
+		  ./modules/overlays.nix
+		  ./modules/tmux.nix
+		  ./modules/mpd.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
+  
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-
+  
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
@@ -30,7 +30,7 @@
     enable = true;
     layout = "us";
   };
-
+  
   services.xserver.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -47,29 +47,29 @@
       "85:class_g = 'XTerm'"
     ];
   };
-  programs.light.enable = true;
-  security.polkit.enable = true;
-
+    programs.light.enable = true;
+    security.polkit.enable = true;
+  
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
   services.flatpak.enable = true;
-
+  
   services.emacs = {
     package = pkgs.emacsUnstable;
     enable = true;
   };
-
+  
   services.syncthing = {
     enable = true;
     user = "adham";
     configDir = "/home/adham/.config/syncthing";
   };
-
+  
   services.blueman.enable = true;
-
+  
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -92,7 +92,7 @@
     ];
     shell = pkgs.zsh;
   };
-
+  
   ## Related to Wayland support
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.gnupg.agent = {
@@ -104,10 +104,10 @@
   system.stateVersion = "23.05";
   nixpkgs.config.allowUnfree = true;
   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
+      package = pkgs.nixFlakes;
+      extraOptions = "experimental-features = nix-command flakes";
+    };
+  
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   nix.settings.auto-optimise-store = true;
   nix.gc = {
