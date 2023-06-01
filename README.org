@@ -374,6 +374,7 @@ flake at some point.
   clojure-lsp
 #+end_src
 
+** mpd configuration
 #+name: mpdris2
 #+begin_src nix
   services.mpdris2 = {
@@ -383,6 +384,48 @@ flake at some point.
   };
 #+end_src
 
+#+name: mpd-home
+#+begin_src nix :noweb yes
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/adham/music";
+    network.port = 9900;
+    extraConfig = ''
+    <<mpd_config>>
+    '';
+
+    <<mpd_optional>>
+#+end_src
+
+MPD Configuration, you must specify one or more outputs in order to play audio.
+#+name: mpd_config
+#+begin_src conf
+      audio_output {
+	type "pipewire"
+	name "My PipeWire Output"
+      }
+#+end_src
+
+The following is optional, the ~listenAddress~ enables non-localhost connections
+while ~startWhenNeeded~ makes it so the MPD service only starts upon connection to
+its socket.
+#+name: mpd_optional
+#+begin_src nix
+  network.listenAddress = "any";
+  network.startWhenNeeded = true;
+  };
+#+end_src
+https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+
+User-id 1000 must match above user. MPD will look inside this directory for the
+PipeWire socket.
+#+name: mpd
+#+begin_src nix
+  services.mpd.user = "userRunningPipeWire";
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
+  };
+#+end_src
 ** Using a DSLR Camera as a webcam
 This setup is not active at the moment. Although from 30 minutes of testing I
 found that the ~mptlvcap~ package which I install in an Arch-distrobox works
