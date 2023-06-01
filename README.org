@@ -374,6 +374,15 @@ flake at some point.
   clojure-lsp
 #+end_src
 
+#+name: mpdris2
+#+begin_src nix
+  services.mpdris2 = {
+    enable = true;
+    mpd.host = "127.0.0.1";
+    mpd.port = 9900;
+  };
+#+end_src
+
 ** Using a DSLR Camera as a webcam
 This setup is not active at the moment. Although from 30 minutes of testing I
 found that the ~mptlvcap~ package which I install in an Arch-distrobox works
