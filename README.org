@@ -337,16 +337,10 @@ flake at some point.
   clojure-lsp
 #+end_src
 
-** mpd configuration
-#+name: mpdris2
-#+begin_src nix
-  services.mpdris2 = {
-    enable = true;
-    mpd.host = "127.0.0.1";
-    mpd.port = 9900;
-  };
-#+end_src
-
+** Music
+I use the [[https://www.musicpd.org/][music player daemon (mpd)]] for my local music and Spotify for the music
+I stream. I control ~mpd~ using ~mpdris2~.
+*** mpd
 #+name: mpd-home
 #+begin_src nix :noweb yes
   services.mpd = {
@@ -387,6 +381,15 @@ PipeWire socket.
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
+  };
+#+end_src
+*** mpdris2
+#+name: mpdris2
+#+begin_src nix
+  services.mpdris2 = {
+    enable = true;
+    mpd.host = "127.0.0.1";
+    mpd.port = 9900;
   };
 #+end_src
 ** Using a DSLR Camera as a webcam
