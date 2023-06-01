@@ -20,6 +20,11 @@ My NixOS configuration flake so far.
 | Bluetooth       | blueman         |
 | Screencast      | ffcast          |
 
+* TODO Usage
+These are my ideas about how I use my system.
+** NixOS as a Desktop
+** Development in Nix Flakes
+** Development in Distrobox
 * Literate Configuration
 There's an attempt to turn my entire configuration into a literate one.
 ** Rationale
@@ -75,11 +80,6 @@ Not used yet. The strucutre could be as follows:
 
 This would avoid any need to include ~:tangle no~ as you simply do not include the
 code block. I also noticed that this fixes code indentation problems.
-* TODO Usage
-** NixOS as a Desktop
-** Development in Nix Flakes
-** Development in Distrobox
-
 * Future Concerns
 Concerns for topics that are more than one year away. These do not affect the
 current configuration.
