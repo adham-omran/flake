@@ -6,17 +6,14 @@
       sunshine
       moonlight-qt
       barrier
-
       mpv
       ffmpeg
       qpwgraph
       playerctl
       ncmpcpp
-
       clojure
       leiningen
       clojure-lsp
-
       texlive.combined.scheme-full
       
       poppler_utils
@@ -49,10 +46,9 @@
       brightnessctl
       pavucontrol
       pfetch
-
       pass
       bitwarden
-
+      mpc-cli
       gnome.gnome-tweaks
       
       rnote
@@ -77,11 +73,9 @@
       element-desktop
       spotify
       zotero
-
       paper-gtk-theme
       pop-gtk-theme
       gnome.adwaita-icon-theme
-
       arandr
       flameshot
       scrot
@@ -94,6 +88,25 @@
       xss-lock
       networkmanagerapplet
     ];
+  };
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/adham/music";
+    network.port = 9900;
+    extraConfig = ''
+    audio_output {
+      type "pipewire"
+      name "My PipeWire Output"
+    }
+    '';
+  
+    network.listenAddress = "any";
+    network.startWhenNeeded = true;
+    };
+  services.mpdris2 = {
+    enable = true;
+    mpd.host = "127.0.0.1";
+    mpd.port = 9900;
   };
   programs.git = {
     enable = true;
@@ -116,7 +129,6 @@
   };
   
   services.blueman-applet.enable = true;
-
   gtk = {
     enable = true;
   
