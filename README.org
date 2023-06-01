@@ -500,7 +500,7 @@ Enable networking
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
-  <<gnome-exclusion>>
+  <<package-exclusion>>
 #+end_src
 
 Exclude the following packages
@@ -519,9 +519,14 @@ Exclude the following packages
 | iagno            | Go game                   |
 | hitori           | Sudoku game               |
 | atomix           | Puzzle game               |
-#+name: gnome-exclusion
+#+name: package-exclusion
 #+begin_src nix
-    environment.gnome.excludePackages = (with pkgs; [
+  environment = {
+    plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+    ];
+
+    gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
     ]) ++ (with pkgs.gnome; [
