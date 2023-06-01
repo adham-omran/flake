@@ -515,6 +515,8 @@ Enable networking
   i18n.defaultLocale = "en_US.UTF-8";
 #+end_src
 ** Desktop Environment
+I currently use GNOME.
+
 #+name: desktop-environment
 #+begin_src nix :noweb yes
   services.xserver.desktopManager = {
