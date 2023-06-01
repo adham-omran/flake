@@ -80,6 +80,7 @@ Not used yet. The strucutre could be as follows:
 
 This would avoid any need to include ~:tangle no~ as you simply do not include the
 code block. I also noticed that this fixes code indentation problems.
+** TODO Breakdown /modules into subtrees
 * Future Concerns
 Concerns for topics that are more than one year away. These do not affect the
 current configuration.
@@ -152,27 +153,28 @@ If I can't make it work I'll just dual boot with Windows.
       stateVersion = "23.05";
       packages = with pkgs; [
 	<<remote-control>>
-
 	<<video-audio>>
-
 	<<clojure>>
-
 	<<cli>>
-
 	<<password-managers>>
-
 	<<applications>>
-
 	<<gtk-themes>>
-
 	<<x11-utilities>>
       ];
     };
+    <<mpd-home>>
+    <<mpdris2>>
     <<home-manager-programs>>
-
     <<home-manager-gtk-theme>>
   }
-
+#+end_src
+** GTK Themes
+The themes I use
+#+name: gtk-themes
+#+begin_src text
+  paper-gtk-theme
+  pop-gtk-theme
+  gnome.adwaita-icon-theme
 #+end_src
 
 #+name: home-manager-gtk-theme
@@ -212,14 +214,7 @@ If I can't make it work I'll just dual boot with Windows.
   home.sessionVariables.GTK_THEME = "palenight";
 #+end_src
 
-The themes I use
-#+name: gtk-themes
-#+begin_src text
-  paper-gtk-theme
-  pop-gtk-theme
-  gnome.adwaita-icon-theme
-#+end_src
-
+** Programs
 #+name: home-manager-programs
 #+begin_src nix
   programs.git = {
@@ -244,11 +239,12 @@ The themes I use
 
   services.blueman-applet.enable = true;
 #+end_src
-
+** Applications
 General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
 translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
 #+name: applications
 #+begin_src text
+  mpc-cli
   gnome.gnome-tweaks
 
   rnote
@@ -274,7 +270,7 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
   spotify
   zotero
 #+end_src
-
+** Command Line Programs
 General CLI utilities. ~gtk3~ to provide ~gtk-launch~ which is used to launch
 applications from Emacs with ~emacs-run-launcher~ although I rarely use this.
 
@@ -335,7 +331,7 @@ it here. I'll keep it for now.
   pass
   bitwarden
 #+end_src
-
+** X11
 The following are X11 utilities.
 #+name: x11-utilities
 #+begin_src text
@@ -351,20 +347,7 @@ The following are X11 utilities.
   xss-lock
   networkmanagerapplet
 #+end_src
-
-The following are utilities for sway. Currently unused and not tangled.
-#+name: sway-cli
-#+begin_src text
-  mako
-  slurp
-  sway-contrib.grimshot
-  swaybg
-  wf-recorder
-  wl-clipboard
-  wofi
-  eww-wayland
-#+end_src
-
+** Clojure
 Currently I have Clojure installed on the user level, I want to move this into a
 flake at some point.
 #+name: clojure
@@ -449,9 +432,6 @@ Debian 12 and running Moonlight to access it.
 - [[https://discourse.nixos.org/t/set-default-application-for-mime-type-with-home-manager/17190][Set default application for mime type with home-manager - Help - NixOS Discourse]]
 - This sometimes conflicts with GNOME.
 * configuration.nix
-:PROPERTIES:
-:header-args:
-:END:
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 (~nixos-help~).
@@ -460,7 +440,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
   {
     imports =
       [
-		    <<config-enabled-modules>>
+		    <<modules>>
       ];
     <<config-boot>>
     <<config-networking>>
@@ -474,6 +454,14 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<user>>
     <<gpg>>
     <<ssh>>
+    <<packages>>
+    <<overlays>>
+    <<mpd>>
+    <<kanata>>
+    <<fonts>>
+    <<tmux>>
+    <<power>>
+    <<virtualization>>
     <<version>>
     <<nix-unfree>>
     <<nix-flake>>
@@ -483,25 +471,10 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
   }
 #+end_src
 ** Imports
-*** Enabled modules
-#+name: config-enabled-modules
+#+name: modules
 #+begin_src nix
     ./hardware-configuration.nix
     ./cachix.nix
-    ./modules/virtualization.nix
-    ./modules/packages.nix
-    ./modules/kanata.nix
-    ./modules/fonts.nix
-    ./modules/power.nix
-    ./modules/overlays.nix
-    ./modules/tmux.nix
-    ./modules/mpd.nix
-#+end_src
-*** Disabled modules
-#+begin_src nix
-  ./modules/hyprland.nix
-  ./modules/sway.nix
-  ./modules/kde.nix
 #+end_src
 ** Boot
 #+name: config-boot
@@ -651,7 +624,6 @@ Enable the i3 window manager and install related packages.
   xdg.portal =
     {
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
   services.emacs = {
@@ -697,7 +669,7 @@ Enable sound with pipewire.
       isNormalUser = true;
       description = "adham";
       extraGroups = [
-	"networkmanager" "wheel" "adbusers" "video" "docker"
+	"networkmanager" "wheel" "adbusers" "video" "docker" "libvirtd"
       ];
       packages = with pkgs; [
 	firefox
@@ -782,113 +754,48 @@ Garbage collection. Delete every week any generation that's older than 7 days.
       options = "--delete-older-than 7d";
     };
 #+end_src
-** Closing bracket
-So that I don't worry about closing the outer-most pair of brackets.
-#+begin_src nix
-
-#+end_src
-* modules
 ** packages
-#+begin_src nix :tangle modules/packages.nix
-  { config, pkgs, callPackage, lib, ... }:
-#+end_src
+#+name: packages
+#+begin_src nix :noweb yes
+  environment.systemPackages = with pkgs; [
+    unzip
+    cmatrix
+    libsForQt5.okular
+    rsync
 
-#+begin_src nix :tangle modules/packages.nix
-  {
-    environment.systemPackages = with pkgs; [
-      unzip
-      cmatrix
-      libsForQt5.okular
-      rsync
-
-      mpd
-      mpc-cli
-
-      openssl
-      pinentry
-      pinentry-gtk2
-      syncthing
-      killall
-#+end_src
-
-Packages that GNOME requires.
-#+begin_src nix :tangle modules/packages.nix
-     gnome.adwaita-icon-theme
-     gnomeExtensions.appindicator
+    openssl
+    pinentry
+    pinentry-gtk2
+    syncthing
+    killall
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
+    virt-manager
+    <<emacs-packages>>
+    <<insecure-packages>>
 #+end_src
 
 Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
-#+begin_src nix :tangle modules/packages.nix
+#+name: emacs-packages
+#+begin_src nix
   ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
     [
 	    epkgs.vterm
 	    epkgs.jinx
     ]))
   ];
-
 #+end_src
 
 In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
-#+begin_src nix :tangle modules/packages.nix
+#+name: insecure-packages
+#+begin_src nix
     nixpkgs.config.permittedInsecurePackages = [
       "nodejs-16.20.0"
     ];
-  }
-#+end_src
-** mpd
-#+begin_src nix :noweb yes :tangle modules/mpd.nix
-  {...}:
-  {
-    services.mpd = {
-      enable = true;
-      musicDirectory = "/home/adham/music";
-      extraConfig = ''
-      <<mpd_config>>
-      '';
-
-      <<mpd_optional>>
-
-      <<mpd_socket>>
-    };
-  }
-#+end_src
-
-MPD Configuration, you must specify one or more outputs in order to play audio.
-#+name: mpd_config
-#+begin_src conf :tangle no
-      audio_output {
-	type "pipewire"
-	name "My PipeWire Output"
-      }
-#+end_src
-
-
-The following is optional, the ~listenAddress~ enables non-localhost connections
-while ~startWhenNeeded~ makes it so the MPD service only starts upon connection to
-its socket.
-#+name: mpd_optional
-#+begin_src nix
-  network.listenAddress = "any";
-  startWhenNeeded = true;
-  };
-#+end_src
-https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
-
-User-id 1000 must match above user. MPD will look inside this directory for the
-PipeWire socket.
-#+name: mpd_socket
-#+begin_src nix
-  services.mpd.user = "userRunningPipeWire";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
 #+end_src
 ** kanata
-:PROPERTIES:
-:header-args: :tangle modules/kanata.nix
-:END:
-#+begin_src nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
+#+name: kanata
+#+begin_src nix :noweb yes
     services.kanata.enable = true;
     services.kanata.package = pkgs.kanata;
 
@@ -898,8 +805,11 @@ PipeWire socket.
     ];
 
     services.kanata.keyboards.usb.config = ''
+  <<kanata-config>>
+  '';
 #+end_src
 
+#+name: kanata-config
 #+begin_src lisp
   (defvar
     tap-timeout   150
@@ -960,18 +870,12 @@ PipeWire socket.
       lctl lmet lalt           spc            @col    rctl
       )
 #+end_src
-
-#+begin_src nix
-    '';
-  }
-#+end_src
 ** fonts
 ~vazir-fonts~ is a [[https://rastikerdar.github.io/vazirmatn/en][Persian-Arabic typeface family]].
 
 ~fontconfig~ tells the system which font to use system-wide.
-#+begin_src nix :tangle modules/fonts.nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
+#+name: fonts
+#+begin_src nix
     fonts = {
       enableDefaultFonts = true;
       fonts = with pkgs; [
@@ -998,168 +902,25 @@ PipeWire socket.
 	};
       };
     };
-  }
 #+end_src
-** sway
-#+begin_src nix :tangle modules/sway.nix :noweb yes
-  { config, pkgs, lib, ... }:
-  let
-    dbus-sway-environment = pkgs.writeTextFile {
-      name = "dbus-sway-environment";
-      destination = "/bin/dbus-sway-environment";
-      executable = true;
-
-      text = ''
-      <<sway_script>>
-	  '';
-    };
-  in
-  <<sway_programs>>
-#+end_src
-
-#+name: sway_script
-#+begin_src conf
-  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-  systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-  systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-#+end_src
-
-#+name: sway_programs
-#+begin_src nix
-  {
-    programs.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-    };
-
-    xdg.portal = {
-      enable = true;
-      wlr.enable = true;
-    };
-
-    services.dbus.enable = true;
-    environment.systemPackages = with pkgs; [
-      dbus-sway-environment
-      waybar
-    ];
-  }
-#+end_src
-
-** hyprland
-:PROPERTIES:
-:header-args: :tangle modules/hyprland.nix
-:END:
-
-#+begin_src nix
-  { config, pkgs, lib, ... }:
-  {
-    programs.hyprland.enable = true;
-
-    environment.systemPackages = with pkgs; [
-      hyprland
-      hyprland-protocols
-      hyprland-share-picker
-      hyprpaper
-      xdg-desktop-portal-hyprland
-      waybar
-    ];
-  }
-#+end_src
-
-** overlays
-:PROPERTIES:
-:header-args: :tangle modules/overlays.nix
-:END:
-
-#+begin_src nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
-    nixpkgs.overlays = [
-
-#+end_src
-*** Waybar
-#+begin_src nix :tangle no
-      (self: super: {
-	waybar = super.waybar.overrideAttrs (oldAttrs: {
-	  mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-	});
-      })
-#+end_src
-*** Emacs
-Overlay Emacs for latest release.
-#+begin_src nix
-      (import (builtins.fetchTarball {
-	url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-	sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
-      }))
-    ];
-#+end_src
-
-#+begin_src nix
-  }
-#+end_src
-
-** power management
-:PROPERTIES:
-:header-args: :tangle modules/power.nix
-:END:
-
-Power configuration for T480
-#+begin_src nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
-    services.power-profiles-daemon.enable = false;
-    services.tlp = {
-      enable = true;
-
-      settings = {
-	START_CHARGE_THRESH_BAT0=75;
-	STOP_CHARGE_THRESH_BAT0=95;
-
-	START_CHARGE_THRESH_BAT1=75;
-	STOP_CHARGE_THRESH_BAT1=95;
-
-	CPU_SCALING_GOVERNOR_ON_AC = "performance";
-	CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
-    };
-  }
-
-#+end_src
-
 ** tmux
-:PROPERTIES:
-:header-args: :tangle modules/tmux.nix
-:END:
+#+name: tmux
+#+begin_src nix :noweb yes
+  programs.tmux = {
+    enable = true;
 
-#+begin_src nix
-  { pkgs, config, ... }:
-  {
-    programs.tmux = {
-      enable = true;
+  plugins = with pkgs; [
+    tmuxPlugins.better-mouse-mode
+  ];
 
-#+end_src
-
-#+begin_src nix :tangle no
-      # shortcut = "a";
-      # aggressiveResize = true; -- Disabled to be iTerm-friendly
-      # baseIndex = 1;
-      # newSession = true;
-      # Stop tmux+escape craziness.
-      # escapeTime = 0;
-      # Force tmux to use /tmp for sockets (WSL2 compat)
-      # secureSocket = false;
-#+end_src
-
-#+begin_src nix
-      plugins = with pkgs; [
-	tmuxPlugins.better-mouse-mode
-      ];
-
-      extraConfig = ''
+  extraConfig = ''
+	    <<tmux-config>>
+	      '';
+};
 #+end_src
 
 https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
+#+name: tmux-config
 #+begin_src conf
       set -g default-terminal "xterm-256color"
       set -ga terminal-overrides ",*256col*:Tc"
@@ -1167,67 +928,56 @@ https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colo
       set-environment -g COLORTERM "truecolor"
 #+end_src
 
-Mouse configuration
-#+begin_src conf :tangle no
-  set-option -g mouse on
+** overlays
+#+name: overlays
+#+begin_src nix :noweb yes
+  nixpkgs.overlays = [
+    <<emacs>>
+  ];
 #+end_src
-
-*** Keybindings
-Split pane commands
-#+begin_src conf :tangle no
-  bind | split-window -h -c "#{pane_current_path}"
-  bind - split-window -v -c "#{pane_current_path}"
-  bind c new-window -c "#{pane_current_path}"
-#+end_src
-
+*** Emacs
+Overlay Emacs for latest release.
+#+name: emacs
 #+begin_src nix
-      '';
+      (import (builtins.fetchTarball {
+	url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+	sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
+      }))
+#+end_src
+
+** power management
+Power configuration for T480
+#+name: power
+#+begin_src nix :noweb yes
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+
+    settings = {
+      START_CHARGE_THRESH_BAT0=75;
+      STOP_CHARGE_THRESH_BAT0=95;
+
+      START_CHARGE_THRESH_BAT1=75;
+      STOP_CHARGE_THRESH_BAT1=95;
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     };
-  }
+  };
 #+end_src
 
 ** virtualization
-:PROPERTIES:
-:header-args: :tangle modules/virtualization.nix
-:END:
+#+name: virtualization
 #+begin_src nix
-  { pkgs, lib, ... }:
-  {
-    virtualisation = {
-      docker.enable = true;
-      waydroid.enable = true;
-      lxd.enable = true;
-      libvirtd.enable = true;
-    };
+  virtualisation = {
+    docker.enable = true;
+    waydroid.enable = true;
+    lxd.enable = true;
+    libvirtd.enable = true;
+  };
 
-    programs.adb.enable = true;
-    programs.dconf.enable = true;
-    environment.systemPackages = with pkgs; [ virt-manager ];
-    users.users.adham.extraGroups = [ "libvirtd" ];
-  }
+  programs.adb.enable = true;
 #+end_src
-** KDE
-:PROPERTIES:
-:header-args: :tangle modules/kde.nix
-:END:
-
-#+begin_src nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
-
-    services.xserver.displayManager.sddm.enable = true;
-    services.xserver.desktopManager.plasma5.enable = true;
-
-#+end_src
-
-Remove KDE apps.
-#+begin_src nix
-    environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-    ];
-  }
-#+end_src
-
 * cachix
 :PROPERTIES:
 :header-args: :tangle cachix.nix
