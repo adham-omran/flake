@@ -7,7 +7,6 @@
 		  ./modules/virtualization.nix
 		  ./modules/packages.nix
 		  ./modules/kanata.nix
-		  ./modules/gnome.nix
 		  ./modules/fonts.nix
 		  ./modules/power.nix
 		  ./modules/overlays.nix
@@ -47,6 +46,32 @@
       "85:class_g = 'XTerm'"
     ];
   };
+  services.xserver.displayManager = {
+    gnome.enable = true;
+    kde.enable = false;
+  };.
+  
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  programs.dconf.enable = true;
+    environment.gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      nautilus
+      cheese
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
+  }
     programs.light.enable = true;
     security.polkit.enable = true;
   
@@ -56,6 +81,11 @@
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
   services.flatpak.enable = true;
+  xdg.portal =
+    {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    };
   
   services.emacs = {
     package = pkgs.emacsUnstable;

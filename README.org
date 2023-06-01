@@ -414,6 +414,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<config-timezone>>
     <<x11>>
     <<i3>>
+    <<desktop-environment>>
     <<services>>
     <<audio>>
     <<shell>>
@@ -437,7 +438,6 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     ./modules/virtualization.nix
     ./modules/packages.nix
     ./modules/kanata.nix
-    ./modules/gnome.nix
     ./modules/fonts.nix
     ./modules/power.nix
     ./modules/overlays.nix
@@ -446,6 +446,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 #+end_src
 *** Disabled modules
 #+begin_src nix
+  ./modules/gnome.nix
   ./modules/hyprland.nix
   ./modules/sway.nix
   ./modules/kde.nix
@@ -487,6 +488,57 @@ Enable networking
 #+begin_src nix
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
+#+end_src
+** Desktop Environment
+#+name: desktop-environment
+#+begin_src nix :noweb yes
+  services.xserver.displayManager = {
+    gnome.enable = true;
+    kde.enable = false;
+  };.
+
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  programs.dconf.enable = true;
+  <<gnome-exclusion>>
+#+end_src
+
+Exclude the following packages
+| Package          | Description               |
+|------------------+---------------------------|
+| nautilus         | Files, replaced with Nemo |
+| cheese           | Webcam tool               |
+| gnome-music      | Music player              |
+| gnome-terminal   | Terminal                  |
+| gedit            | Text editor               |
+| epiphany         | Web browser               |
+| geary            | Email reader              |
+| gnome-characters | -                         |
+| totem            | Video player              |
+| tali             | Poker game                |
+| iagno            | Go game                   |
+| hitori           | Sudoku game               |
+| atomix           | Puzzle game               |
+#+name: gnome-exclusion
+#+begin_src nix
+    environment.gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      nautilus
+      cheese
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
+  }
 #+end_src
 ** Window Manager
 - Enable the X11 windowing system.
@@ -539,6 +591,11 @@ Enable the i3 window manager and install related packages.
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
   services.flatpak.enable = true;
+  xdg.portal =
+    {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    };
 
   services.emacs = {
     package = pkgs.emacsUnstable;
@@ -1114,55 +1171,6 @@ Remove KDE apps.
   }
 #+end_src
 
-** GNOME
-:PROPERTIES:
-:header-args: :tangle modules/gnome.nix
-:END:
-#+begin_src nix
-  { config, pkgs, callPackage, lib, ... }:
-  {
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
-    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-    programs.dconf.enable = true;
-#+end_src
-Exclude the following packages
-| Package          | Description               |
-|------------------+---------------------------|
-| nautilus         | Files, replaced with Nemo |
-| cheese           | Webcam tool               |
-| gnome-music      | Music player              |
-| gnome-terminal   | Terminal                  |
-| gedit            | Text editor               |
-| epiphany         | Web browser               |
-| geary            | Email reader              |
-| gnome-characters | -                         |
-| totem            | Video player              |
-| tali             | Poker game                |
-| iagno            | Go game                   |
-| hitori           | Sudoku game               |
-| atomix           | Puzzle game               |
-#+begin_src nix
-    environment.gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      nautilus
-      cheese
-      gnome-music
-      gnome-terminal
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
-  }
-#+end_src
 * cachix
 :PROPERTIES:
 :header-args: :tangle cachix.nix
