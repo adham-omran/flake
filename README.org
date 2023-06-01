@@ -297,6 +297,7 @@ it here. I'll keep it for now.
   hunspell
   hunspellDicts.en_US
 
+  yt-dlp
   gnuplot
   libnotify
   direnv
