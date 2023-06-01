@@ -148,6 +148,9 @@ If I can't make it work I'll just dual boot with Windows.
 * home-manger
 #+begin_src nix :tangle home.nix :noweb yes
   {config, pkgs, lib, ...}:
+  let
+    <<default-apps>>
+  in
   {
     home = {
       stateVersion = "23.05";
@@ -166,6 +169,7 @@ If I can't make it work I'll just dual boot with Windows.
     <<mpdris2>>
     <<home-manager-programs>>
     <<home-manager-gtk-theme>>
+    <<mimeapps>>
   }
 #+end_src
 ** GTK Themes
@@ -428,9 +432,53 @@ Debian 12 and running Moonlight to access it.
   moonlight-qt
   barrier
 #+end_src
-** TODO Setting default applications
+** Setting default applications
 - [[https://discourse.nixos.org/t/set-default-application-for-mime-type-with-home-manager/17190][Set default application for mime type with home-manager - Help - NixOS Discourse]]
-- This sometimes conflicts with GNOME.
+- This conflicts with ~~/.config/mimeapps.list~. Use either this method or rely on
+  the desktop environment to do it.
+
+#+name: default-apps
+#+begin_src nix
+  pdf-app="org.pwmt.zathura.desktop";
+  img-app="feh.desktop";
+#+end_src
+
+#+name: mimeapps
+#+begin_src nix
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = ["${pdf-app}"];
+    };
+    defaultApplications = {
+      "application/pdf" = ["${pdf-app}"];
+      "image/bmp"= ["${img-app}"];
+      "image/gif"=["${img-app}"];
+      "image/jpg"=["${img-app}"];
+      "image/pjpeg"=["${img-app}"];
+      "image/png"=["${img-app}"];
+      "image/tiff"=["${img-app}"];
+      "image/webp"=["${img-app}"];
+      "image/x-bmp"=["${img-app}"];
+      "image/x-gray"=["${img-app}"];
+      "image/x-icb"=["${img-app}"];
+      "image/x-ico"=["${img-app}"];
+      "image/x-png"=["${img-app}"];
+      "image/x-portable-anymap"=["${img-app}"];
+      "image/x-portable-bitmap"=["${img-app}"];
+      "image/x-portable-graymap"=["${img-app}"];
+      "image/x-portable-pixmap"=["${img-app}"];
+      "image/x-xbitmap"=["${img-app}"];
+      "image/x-xpixmap"=["${img-app}"];
+      "image/x-pcx"=["${img-app}"];
+      "image/svg+xml"=["${img-app}"];
+      "image/svg+xml-compressed"=["${img-app}"];
+      "image/vnd.wap.wbmp"=["${img-app}"];
+      "image/x-icns"=["${img-app}"];
+      "x-scheme-handler/element"=["element-desktop.desktop"];
+    };
+  };
+#+end_src
 * configuration.nix
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
