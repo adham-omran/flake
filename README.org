@@ -493,10 +493,10 @@ Enable networking
 ** Desktop Environment
 #+name: desktop-environment
 #+begin_src nix :noweb yes
-  services.xserver.displayManager = {
+  services.xserver.desktopManager = {
     gnome.enable = true;
-    kde.enable = false;
-  };.
+    plasma5.enable = false;
+  };
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
@@ -539,7 +539,7 @@ Exclude the following packages
       hitori
       atomix
     ]);
-  }
+  };
 #+end_src
 ** Window Manager
 - Enable the X11 windowing system.
