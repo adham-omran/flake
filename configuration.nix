@@ -4,14 +4,6 @@
     [
 		  ./hardware-configuration.nix
 		  ./cachix.nix
-		  ./modules/virtualization.nix
-		  ./modules/packages.nix
-		  ./modules/kanata.nix
-		  ./modules/fonts.nix
-		  ./modules/power.nix
-		  ./modules/overlays.nix
-		  ./modules/tmux.nix
-		  ./modules/mpd.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
