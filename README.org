@@ -20,67 +20,35 @@ My NixOS configuration flake so far.
 | Bluetooth       | blueman         |
 | Screencast      | ffcast          |
 
+This is an X11 setup as I currently have no plan on using Wayland due to the
+issue I faced with it and no need to switch.
+
 * TODO Usage
 These are my ideas about how I use my system.
 ** NixOS as a Desktop
 ** Development in Nix Flakes
 ** Development in Distrobox
 * Literate Configuration
-There's an attempt to turn my entire configuration into a literate one.
-** Rationale
-- Write documentation, not comments.
-- Split the configuration into sensible modules.
-** Pros
-- ~org-mode~ navigation of one configuration file.
-- Configure the ~extraCongif~ argument in the correct language.
-- Break-down any configuration.
-- Enable disabling of code with comments or removing them.
-** Cons
-- Requires knowledge of ~org-mode~.
-- Requires an initial time investment to setup.
-- Mistakes could be made in the ~:tangle~ header argument.
-** Styles
-I have so far found two styles to write the configuration, we can count two more
-variations if we include the property of ~:header-args~
+My entire configuration is one ~org-mode~ file.
 
-*** Without noweb and without ~:header-args~
+The pros of this setup are that you leverage all the power ~org-mode~ already
+offers for navigation of one document through subtrees. Second it allows the
+~extraCongif~ argument to be configured in the correct language. Last and
+certainly not least it enables reuse of code blocks and outright disabling code
+without commenting it out.
 
-This is the most basic form where you include the path to the file in every
-code block.
+The cons of such setup is the time required to learn ~org-mode~ if you do not use
+it and the initial setup.
 
-~extraConfig~ is broken into three blocks. First for the start, second for the
-configuration and the last to close the quotes.
-*** With noweb and without ~:header-args~
-
-This is also basic as you include the path to the file in every code block
-*except* those where the configuration for ~extraConfig~ is written.
-
-~extraConfig~ is broken into two blocks. One for everything except the
-~extraConfig~ argument and one for the ~extraConfig~ argument. This one is
-preferred to the first as you do not have to keep track of opening and
-closing everything.
-
-This style also requires naming the blocks for the ~extraConfig~. Potential
-names are ~program_config~ and ~program_extraConfig~.
-This is the same
-*** With noweb and with ~:header-args~
-
-This form enables omitting the path to file argument as it is included once
-in the PROPERTY drawer of the org subtree.
-
-The drawback is that every ~extraConfig~ block has to have a ~:tangle no~
-argument to avoid duplication and a broken configuration.
-*** With noweb and without ~:header-args~
-Not used yet. The strucutre could be as follows:
+** Style
+I use the [[https://orgmode.org/manual/Noweb-Reference-Syntax.html][noweb]] reference syntax for my code blocks. The structure at the moment
+is:
 
 1. One main block into which everything is included.
 2. Any number of named code blocks with their documentation and any other
-   comments.
+   comments. These can be ~:noweb~ blocks themselves.
 
-
-This would avoid any need to include ~:tangle no~ as you simply do not include the
-code block. I also noticed that this fixes code indentation problems.
-** TODO Breakdown /modules into subtrees
+This style avoids any need to include ~:tangle~ more than once.
 * Future Concerns
 Concerns for topics that are more than one year away. These do not affect the
 current configuration.
