@@ -447,7 +447,6 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 #+end_src
 *** Disabled modules
 #+begin_src nix
-  ./modules/gnome.nix
   ./modules/hyprland.nix
   ./modules/sway.nix
   ./modules/kde.nix
