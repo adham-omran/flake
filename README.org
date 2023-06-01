@@ -458,6 +458,27 @@ Debian 12 and running Moonlight to access it.
     };
   };
 #+end_src
+** Dotfiles
+I have not yet configured everything using home-manager. There are 3 options to
+use home-manager for dotfiles.
+1. Using home-manager options.
+2. Directly pointing to a file.
+
+   #+begin_src nix
+     xdg.configFile."i3blocks/config".source = ./i3blocks.conf;
+   #+end_src
+   This will create symlink ~$XDG_CONFIG_HOME/i3blocks/config~.
+
+3. Directly writing the configuration
+
+   #+begin_src nix
+     home.file.".gdbinit".text = ''
+	 set auto-load safe-path /nix/store
+     '';
+   #+end_src
+   This will create ~~/.gdbinit~.
+
+   Do note that I can directly into a code block with the proper syntax.
 * configuration.nix
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
