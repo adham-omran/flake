@@ -518,6 +518,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<nix-cache>>
     <<nix-store>>
     <<nix-gc>>
+    <<opengl>>
   }
 #+end_src
 ** Imports
@@ -1031,6 +1032,19 @@ Power configuration for T480
   programs.adb.enable = true;
 #+end_src
 * cachix
+** opengl
+#+name: opengl
+#+begin_src nix
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+#+end_src
 :PROPERTIES:
 :header-args: :tangle cachix.nix
 :END:
