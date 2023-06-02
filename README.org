@@ -266,6 +266,7 @@ it here. I'll keep it for now.
 #+name: cli
 #+begin_src text
   texlive.combined.scheme-full
+  eww
 
   poppler_utils
 
@@ -637,6 +638,9 @@ Exclude the following packages
 
 Enable the i3 window manager and install related packages.
 
+I have not found a bar other than i3's which supports multi-monitor and requires
+minimal setup. I want to explore ~i3blocks~ in the future.
+
 - ~i3status~: Gives you the default i3 status bar.
 - ~i3lock~: Default i3 screen locker.
 - ~i3blocks~: If you are planning on using i3blocks over i3status.
@@ -696,7 +700,6 @@ Enable the i3 window manager and install related packages.
 
 To enable touchpad support add ~services.xserver.libinput.enable = true;~.
 ** Audio
-Enable sound with pipewire.
 #+name: audio
 #+begin_src nix
   sound.enable = true;
@@ -729,11 +732,7 @@ Enable sound with pipewire.
       ];
       shell = pkgs.zsh;
     };
-
-    ## Related to Wayland support
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 #+end_src
-
 ** GnuPG
 #+name: gpg
 #+begin_src nix
@@ -744,7 +743,6 @@ Enable sound with pipewire.
     };
 #+end_src
 ** SSH
-Enable the OpenSSH daemon.
 #+name: ssh
 #+begin_src nix
     services.openssh.enable = true;
@@ -825,10 +823,9 @@ Garbage collection. Delete every week any generation that's older than 7 days.
     gnomeExtensions.appindicator
     virt-manager
     <<emacs-packages>>
-    <<insecure-packages>>
 #+end_src
 
-Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is here.
+Extend ~emacsUnstable~ with packages. ~vterm~ will not work unless this code is here.
 #+name: emacs-packages
 #+begin_src nix
   ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
@@ -837,14 +834,6 @@ Extend ~emacsUnstable~ with packages. ~vterm~ will not work untless this code is
 	    epkgs.jinx
     ]))
   ];
-#+end_src
-
-In the last two weeks as of [2023-05-29 Mon] I needed to add this to update.
-#+name: insecure-packages
-#+begin_src nix
-    nixpkgs.config.permittedInsecurePackages = [
-      "nodejs-16.20.0"
-    ];
 #+end_src
 ** kanata
 #+name: kanata
@@ -1031,7 +1020,6 @@ Power configuration for T480
 
   programs.adb.enable = true;
 #+end_src
-* cachix
 ** opengl
 #+name: opengl
 #+begin_src nix
@@ -1045,6 +1033,7 @@ Power configuration for T480
     ];
   };
 #+end_src
+** cachix
 :PROPERTIES:
 :header-args: :tangle cachix.nix
 :END:
