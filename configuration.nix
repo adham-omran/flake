@@ -118,9 +118,6 @@
     ];
     shell = pkgs.zsh;
   };
-  
-  ## Related to Wayland support
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -146,9 +143,6 @@
     	  epkgs.vterm
     	  epkgs.jinx
       ]))
-    ];
-    nixpkgs.config.permittedInsecurePackages = [
-      "nodejs-16.20.0"
     ];
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
@@ -304,5 +298,14 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
   };
 }

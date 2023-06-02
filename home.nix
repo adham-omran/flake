@@ -19,6 +19,7 @@ in
       leiningen
       clojure-lsp
       texlive.combined.scheme-full
+      eww
       
       poppler_utils
       
