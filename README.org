@@ -515,7 +515,6 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<gpg>>
     <<ssh>>
     <<packages>>
-    <<overlays>>
     <<mpd>>
     <<kanata>>
     <<fonts>>
@@ -692,11 +691,6 @@ minimal setup. I want to explore ~i3blocks~ in the future.
       enable = true;
     };
 
-  services.emacs = {
-    package = pkgs.emacsUnstable;
-    enable = true;
-  };
-
   services.syncthing = {
     enable = true;
     user = "adham";
@@ -834,16 +828,6 @@ Garbage collection. Delete every week any generation that's older than 7 days.
     <<emacs-packages>>
 #+end_src
 
-Extend ~emacsUnstable~ with packages. ~vterm~ will not work unless this code is here.
-#+name: emacs-packages
-#+begin_src nix
-  ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
-    [
-	    epkgs.vterm
-	    epkgs.jinx
-    ]))
-  ];
-#+end_src
 ** kanata
 #+name: kanata
 #+begin_src nix :noweb yes
@@ -977,23 +961,6 @@ https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colo
       set -ga terminal-overrides ",*256col*:Tc"
       set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
       set-environment -g COLORTERM "truecolor"
-#+end_src
-
-** overlays
-#+name: overlays
-#+begin_src nix :noweb yes
-  nixpkgs.overlays = [
-    <<emacs>>
-  ];
-#+end_src
-*** Emacs
-Overlay Emacs for latest release.
-#+name: emacs
-#+begin_src nix
-      (import (builtins.fetchTarball {
-	url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-	sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
-      }))
 #+end_src
 
 ** power management
