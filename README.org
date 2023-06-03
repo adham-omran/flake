@@ -483,6 +483,14 @@ use home-manager for dotfiles.
    This will create ~~/.gdbinit~.
 
    Do note that I can directly into a code block with the proper syntax.
+
+
+My only concern is that when I move programs into this style it'll be harder to
+hot-reload their configuration, sacrificing that for a more modular system.
+*** TODO Programs to move
+**** TODO warpd
+**** TODO i3
+**** TODO emacs
 * configuration.nix
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
