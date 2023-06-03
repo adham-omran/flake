@@ -83,11 +83,6 @@
       enable = true;
     };
   
-  services.emacs = {
-    package = pkgs.emacsUnstable;
-    enable = true;
-  };
-  
   services.syncthing = {
     enable = true;
     user = "adham";
@@ -138,18 +133,12 @@
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     virt-manager
-    ((emacsPackagesFor emacsUnstable).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
       [
     	  epkgs.vterm
     	  epkgs.jinx
       ]))
     ];
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
-    }))
-  ];
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";

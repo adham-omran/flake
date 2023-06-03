@@ -16,6 +16,7 @@ in
       playerctl
       ncmpcpp
       clojure
+      babashka
       leiningen
       clojure-lsp
       texlive.combined.scheme-full
