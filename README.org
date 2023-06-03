@@ -336,6 +336,7 @@ flake at some point.
 #+name: clojure
 #+begin_src text
   clojure
+  babashka
   leiningen
   clojure-lsp
 #+end_src
