@@ -1027,3 +1027,45 @@ Note that this file will get overwritten by ~cachix use <name>~.
     nix.settings.substituters = ["https://cache.nixos.org/"];
   }
 #+end_src
+** Emacs
+Emacs is my main and only editor.
+
+To use the overlay unstable use ~package = pkgs.emacsUnstable~.
+
+#+name: emacs
+#+begin_src nix
+services.emacs = {
+    enable = true;
+    package = pkgs.emacs29;
+  };
+#+end_src
+For Emacs packages that need to be built, such as ~vterm~ and ~jinx~.
+#+name: emacs-packages
+#+begin_src nix
+  ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
+    [
+	    epkgs.vterm
+	    epkgs.jinx
+    ]))
+  ];
+#+end_src
+
+*** Overlay
+The overlay is only for Emacs unstable and is currenly not in use, to use it add
+~<<overlay>>~ to the noweb references.
+
+#+name: overlays
+#+begin_src nix :noweb yes
+  nixpkgs.overlays = [
+    <<emacs-overlay>>
+  ];
+#+end_src
+
+Overlay Emacs for latest release.
+#+name: emacs-overlay
+#+begin_src nix
+  (import (builtins.fetchTarball {
+    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
+  }))
+#+end_src
