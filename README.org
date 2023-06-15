@@ -528,6 +528,8 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<nix-store>>
     <<nix-gc>>
     <<opengl>>
+    <<systemd-timers>>
+    <<systemd>>
   }
 #+end_src
 ** Imports
@@ -1068,4 +1070,31 @@ Overlay Emacs for latest release.
     url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
     sha256 = "1m7qzrg7cgsf7l4caz71q1yjngyr48z9n8z701ppbdzk66ydfjfm";
   }))
+#+end_src
+** systemd timers
+#+name: systemd-timers
+#+begin_src nix
+  systemd.user.timers."hello-world" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+	    OnBootSec = "2m";
+	    OnUnitActiveSec = "2m";
+	    Unit = "hello-world.service";
+    };
+  };
+
+  systemd.user.services."hello-world" = {
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va; /etc/profiles/per-user/adham/bin/notmuch new > /tmp/notmuch.tmp";
+    };
+  };
+#+end_src
+
+Taken from [[https://www.youtube.com/watch?v=1qd0iHadvdo][Chris Titus]].
+#+name: systemd
+#+begin_src nix
+  systemd.extraConfig = ''
+  DefaultTimeoutStopSec=10sec
+  '';
 #+end_src
