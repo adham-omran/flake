@@ -948,32 +948,34 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 ~fontconfig~ tells the system which font to use system-wide.
 #+name: fonts
 #+begin_src nix
-    fonts = {
-      enableDefaultFonts = true;
-      fonts = with pkgs; [
-	noto-fonts
-	noto-fonts-cjk
-	noto-fonts-emoji
-	font-awesome
-	fira-code
-	fira-code-symbols
-	scheherazade-new
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      font-awesome
+      fira-code
+      fira-code-symbols
+      scheherazade-new
+      jetbrains-mono
+      hack-font
 
-	source-han-sans
-	source-han-sans-japanese
-	source-han-serif-japanese
+      source-han-sans
+      source-han-sans-japanese
+      source-han-serif-japanese
 
-	vazir-fonts
-      ];
+      vazir-fonts
+    ];
 
-      fontconfig = {
-	defaultFonts = {
-	  serif = [ "Noto Sans" "Noto Naskh Arabic"];
-	  sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
-	  monospace = [ "Fira Code" ];
-	};
+    fontconfig = {
+      defaultFonts = {
+	serif = [ "Noto Sans" "Noto Naskh Arabic"];
+	sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
+	monospace = [ "JetBrains Mono" ];
       };
     };
+  };
 #+end_src
 ** tmux
 #+name: tmux
