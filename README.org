@@ -456,6 +456,7 @@ Debian 12 and running Moonlight to access it.
 #+begin_src nix
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
+  browser-app="firefox.desktop";
 #+end_src
 
 #+name: mimeapps
@@ -463,9 +464,20 @@ Debian 12 and running Moonlight to access it.
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-      "application/pdf" = ["${pdf-app}"];
+
     };
     defaultApplications = {
+      "x-scheme-handler/http"=["${browser-app}"];
+      "x-scheme-handler/https"=["${browser-app}"];
+      "x-scheme-handler/chrome"=["${browser-app}"];
+      "text/html"=["${browser-app}"];
+      "application/x-extension-htm"=["${browser-app}"];
+      "application/x-extension-html"=["${browser-app}"];
+      "application/x-extension-shtml"=["${browser-app}"];
+      "application/xhtml+xml"=["${browser-app}"];
+      "application/x-extension-xhtml"=["${browser-app}"];
+      "application/x-extension-xht"=["${browser-app}"];
+
       "application/pdf" = ["${pdf-app}"];
       "image/bmp"= ["${img-app}"];
       "image/gif"=["${img-app}"];
