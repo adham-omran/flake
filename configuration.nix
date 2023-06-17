@@ -3,7 +3,7 @@
   imports =
     [
 		  ./hardware-configuration.nix
-		  ./cachix.nix
+		    ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,12 +31,12 @@
       i3blocks
     ];
   };
+  
+  services.xserver.windowManager.dwm.enable = true;
+  
   services.picom = {
     enable = true;
     vSync = true;
-    opacityRules = [
-      "85:class_g = 'XTerm'"
-    ];
   };
   services.xserver.desktopManager = {
     gnome.enable = true;
@@ -69,15 +69,23 @@
       atomix
     ]);
   };
-    programs.light.enable = true;
-    security.polkit.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
+      slstatus = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+    })
+  ];
+  programs.light.enable = true;
+  security.polkit.enable = true;
   
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
+  
   services.flatpak.enable = true;
+  fonts.fontDir.enable = true;
   xdg.portal =
     {
       enable = true;
@@ -120,6 +128,7 @@
   };
   services.openssh.enable = true;
   environment.systemPackages = with pkgs; [
+    slstatus
     unzip
     cmatrix
     libsForQt5.okular
@@ -133,7 +142,7 @@
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     virt-manager
-    ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
     	  epkgs.vterm
     	  epkgs.jinx
@@ -143,15 +152,15 @@
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
-    services.kanata.enable = true;
-    services.kanata.package = pkgs.kanata;
+  services.kanata.enable = true;
+  services.kanata.package = pkgs.kanata;
   
-    services.kanata.keyboards.usb.devices = [
-      "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
-      "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-    ];
+  services.kanata.keyboards.usb.devices = [
+    "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
+    "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+  ];
   
-    services.kanata.keyboards.usb.config = ''
+  services.kanata.keyboards.usb.config = ''
   (defvar
     tap-timeout   150
     hold-timeout  150
@@ -221,6 +230,8 @@
       fira-code
       fira-code-symbols
       scheherazade-new
+      jetbrains-mono
+      hack-font
   
       source-han-sans
       source-han-sans-japanese
@@ -233,7 +244,7 @@
       defaultFonts = {
         serif = [ "Noto Sans" "Noto Naskh Arabic"];
         sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
-        monospace = [ "Fira Code" ];
+        monospace = [ "JetBrains Mono" ];
       };
     };
   };
@@ -277,9 +288,9 @@
   system.stateVersion = "23.05";
   nixpkgs.config.allowUnfree = true;
   nix = {
-      package = pkgs.nixFlakes;
-      extraOptions = "experimental-features = nix-command flakes";
-    };
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
   
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   nix.settings.auto-optimise-store = true;
@@ -297,4 +308,23 @@
       libvdpau-va-gl
     ];
   };
+  systemd.user.timers."hello-world" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+  	  OnBootSec = "2m";
+  	  OnUnitActiveSec = "2m";
+  	  Unit = "hello-world.service";
+    };
+  };
+  
+  systemd.user.services."hello-world" = {
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va";
+      ExecStartPost = "/etc/profiles/per-user/adham/bin/notmuch new";
+    };
+  };
+  systemd.extraConfig = ''
+  DefaultTimeoutStopSec=10sec
+  '';
 }

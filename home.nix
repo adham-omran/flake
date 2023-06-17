@@ -2,6 +2,7 @@
 let
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
+  browser-app="firefox.desktop";
 in
 {
   home = {
@@ -19,6 +20,13 @@ in
       babashka
       leiningen
       clojure-lsp
+      isync
+      msmtp
+      afew
+      notmuch
+      
+      mpc-cli
+      
       texlive.combined.scheme-full
       eww
       
@@ -54,31 +62,27 @@ in
       pfetch
       pass
       bitwarden
-      mpc-cli
+      mnemosyne
+      
       gnome.gnome-tweaks
       
-      rnote
       xournalpp
       
       google-chrome
-      nyxt
       
       libsForQt5.kcalc
       libsForQt5.kclock
       
-      anki
-      qbittorrent
       obs-studio
       poedit
       foliate
       zathura
       cinnamon.nemo
-      libreoffice-qt
+      krusader
+      
       discord
       telegram-desktop
-      element-desktop
       spotify
-      zotero
       paper-gtk-theme
       pop-gtk-theme
       gnome.adwaita-icon-theme
@@ -101,8 +105,8 @@ in
     network.port = 9900;
     extraConfig = ''
     audio_output {
-      type "pipewire"
-      name "My PipeWire Output"
+    type "pipewire"
+    name "My PipeWire Output"
     }
     '';
   
@@ -145,7 +149,7 @@ in
   
     theme = {
       name = "palenight";
-      package = pkgs.palenight-theme;
+      package = pkgs.gruvbox-gtk-theme;
     };
   
     cursorTheme = {
@@ -171,9 +175,20 @@ in
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-      "application/pdf" = ["${pdf-app}"];
+  
     };
     defaultApplications = {
+      "x-scheme-handler/http"=["${browser-app}"];
+      "x-scheme-handler/https"=["${browser-app}"];
+      "x-scheme-handler/chrome"=["${browser-app}"];
+      "text/html"=["${browser-app}"];
+      "application/x-extension-htm"=["${browser-app}"];
+      "application/x-extension-html"=["${browser-app}"];
+      "application/x-extension-shtml"=["${browser-app}"];
+      "application/xhtml+xml"=["${browser-app}"];
+      "application/x-extension-xhtml"=["${browser-app}"];
+      "application/x-extension-xht"=["${browser-app}"];
+  
       "application/pdf" = ["${pdf-app}"];
       "image/bmp"= ["${img-app}"];
       "image/gif"=["${img-app}"];
