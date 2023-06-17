@@ -1,6 +1,6 @@
 #+TITLE: NixOS Configuration
-#+options: toc:3
-#+auto_tangle: t
+#+OPTIONS: toc:3
+#+AUTO_TANGLE: t
 #+PROPERTY: header-args :results silent
 #+STARTUP: overview
 
