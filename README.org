@@ -539,6 +539,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<x11>>
     <<i3>>
     <<desktop-environment>>
+    <<dwm>>
     <<services>>
     <<audio>>
     <<shell>>
@@ -696,6 +697,9 @@ minimal setup. I want to explore ~i3blocks~ in the future.
       i3blocks
     ];
   };
+
+  services.xserver.windowManager.dwm.enable = true;
+
   services.picom = {
     enable = true;
     vSync = true;
@@ -707,6 +711,14 @@ minimal setup. I want to explore ~i3blocks~ in the future.
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
 interesting one to explore.
 
+#+name: dwm
+#+begin_src nix
+  nixpkgs.overlays = [
+    (final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
+      slstatus = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+    })
+  ];
 #+end_src
 ** Services
 - ~light~: Light backlight control command
@@ -849,6 +861,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 #+name: packages
 #+begin_src nix :noweb yes
   environment.systemPackages = with pkgs; [
+    slstatus
     unzip
     cmatrix
     libsForQt5.okular
