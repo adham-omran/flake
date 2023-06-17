@@ -257,7 +257,6 @@ General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
 translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
 #+name: applications
 #+begin_src text
-  mpc-cli
   gnome.gnome-tweaks
 
   xournalpp
@@ -272,6 +271,8 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
   foliate
   zathura
   cinnamon.nemo
+  krusader
+
   discord
   telegram-desktop
   spotify
@@ -289,6 +290,13 @@ have to set it up again though.
 it here. I'll keep it for now.
 #+name: cli
 #+begin_src text
+  isync
+  msmtp
+  afew
+  notmuch
+
+  mpc-cli
+
   texlive.combined.scheme-full
   eww
 
