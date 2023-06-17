@@ -1154,7 +1154,8 @@ Overlay Emacs for latest release.
   systemd.user.services."hello-world" = {
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va; /etc/profiles/per-user/adham/bin/notmuch new > /tmp/notmuch.tmp";
+      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va";
+      ExecStartPost = "/etc/profiles/per-user/adham/bin/notmuch new";
     };
   };
 #+end_src
