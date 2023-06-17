@@ -716,10 +716,8 @@ minimal setup. I want to explore ~i3blocks~ in the future.
   services.picom = {
     enable = true;
     vSync = true;
-    opacityRules = [
-      "85:class_g = 'XTerm'"
-    ];
   };
+#+end_src
 *** dwm
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
 interesting one to explore.
