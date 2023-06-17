@@ -260,28 +260,21 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
   mpc-cli
   gnome.gnome-tweaks
 
-  rnote
   xournalpp
 
   google-chrome
-  nyxt
 
   libsForQt5.kcalc
   libsForQt5.kclock
 
-  anki
-  qbittorrent
   obs-studio
   poedit
   foliate
   zathura
   cinnamon.nemo
-  libreoffice-qt
   discord
   telegram-desktop
-  element-desktop
   spotify
-  zotero
 #+end_src
 ** Command Line Programs
 General CLI utilities. ~gtk3~ to provide ~gtk-launch~ which is used to launch
