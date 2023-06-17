@@ -25,11 +25,40 @@ My NixOS configuration flake so far.
 This is an X11 setup as I currently have no plan on using Wayland due to the
 issue I faced with it and no need to switch.
 
-* TODO Usage
-These are my ideas about how I use my system.
-** NixOS as a Desktop
+* Usage
+These are my ideas about how I use my system.  The Nix ecosystem is based on the
+idea of reproducible builds and deployment.  Nix is the language and there's
+also the Nix package manager, NixOS is a linux distrubution based on Nix,
+Nixpkgs are the the Nix packages, about 80,000 packages.
+** NixOS as a stable workstation
+
+My idea for a stable workstation is like a set of layers, on the base there's
+the operating system, NixOS.  Above that is the window manager or desktop
+environment which is i3 in my case.  Above that are the packages installed by
+Nix and lastly the packages installed by Flatpak.
+** Flatpack for applications
+Currently I run the following applications from Flathub
+| Application | Description                  |
+|-------------+------------------------------|
+| Anki        | Spaced Repetition System     |
+| darktable   | Photo library management     |
+| LibreOffice | Office Suite                 |
+| Zotero      | Citation and PDF management  |
+| Element     | Chat client for Matrix       |
+| Sioyek      | PDF reader                   |
+| Rnote       | Handwritten notes with Wacom |
+| qBittorrent | Torrent client               |
+*** Why use Flatpak?
+- More up to date packages without having an unstable system.
+- Usually packaged by the developers themselves.
+*** Why not use Flatpak?
+As of writing ([2023-06-17 Sat]) there's no way builtin way to declare Flatpak
+packages, there's [[https://github.com/yawnt/declarative-nix-flatpak][ywant/declarative-nix-flatpak]] but I have not tested it.
 ** Development in Nix Flakes
+Currently I have flakes setup for personal development in R and C.
 ** Development in Distrobox
+I use an Ubuntu 22.04.02 LTS box for quick R development for work.  I don't
+always use this as I do most of the work over SSH.
 * Literate Configuration
 My entire configuration is one ~org-mode~ file.
 
@@ -151,6 +180,8 @@ mention the power of declarative dotfiles.
   }
 #+end_src
 ** GTK Themes
+This is based on this article: [[https://hoverbear.org/blog/declarative-gnome-configuration-in-nixos/][Declarative GNOME configuration with NixOS]]
+
 The themes I use
 #+name: gtk-themes
 #+begin_src text
@@ -672,6 +703,10 @@ minimal setup. I want to explore ~i3blocks~ in the future.
       "85:class_g = 'XTerm'"
     ];
   };
+*** dwm
+I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
+interesting one to explore.
+
 #+end_src
 ** Services
 - ~light~: Light backlight control command
