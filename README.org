@@ -1069,17 +1069,22 @@ Emacs is my main and only editor.
 
 To use the overlay unstable use ~package = pkgs.emacsUnstable~.
 
+#+name: emacs-variation
+#+begin_src text
+emacs29-pgtk
+#+end_src
+
 #+name: emacs
 #+begin_src nix
 services.emacs = {
     enable = true;
-    package = pkgs.emacs29;
+    package = pkgs.<<emacs-variation>>;
   };
 #+end_src
 For Emacs packages that need to be built, such as ~vterm~ and ~jinx~.
 #+name: emacs-packages
-#+begin_src nix
-  ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
+#+begin_src nix :noweb yes
+  ((emacsPackagesFor <<emacs-variation>>).emacsWithPackages (epkgs:
     [
 	    epkgs.vterm
 	    epkgs.jinx
