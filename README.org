@@ -734,9 +734,13 @@ interesting one to explore.
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
+      st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
     })
   ];
 #+end_src
+**** Why dwm?
+- Systray follows the active monitor.
 ** Services
 - ~light~: Light backlight control command
 - [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
@@ -881,6 +885,8 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 #+begin_src nix :noweb yes
   environment.systemPackages = with pkgs; [
     slstatus
+    st
+    dmenu
     unzip
     cmatrix
     libsForQt5.okular
