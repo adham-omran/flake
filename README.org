@@ -38,16 +38,17 @@ environment which is i3 in my case.  Above that are the packages installed by
 Nix and lastly the packages installed by Flatpak.
 ** Flatpack for applications
 Currently I run the following applications from Flathub
-| Application | Description                  |
-|-------------+------------------------------|
-| Anki        | Spaced Repetition System     |
-| darktable   | Photo library management     |
-| LibreOffice | Office Suite                 |
-| Zotero      | Citation and PDF management  |
-| Element     | Chat client for Matrix       |
-| Sioyek      | PDF reader                   |
-| Rnote       | Handwritten notes with Wacom |
-| qBittorrent | Torrent client               |
+| Application | Description                 |
+|-------------+-----------------------------|
+| Anki        | Spaced Repetition System    |
+| darktable   | Photo library management    |
+| Element     | Chat client for Matrix      |
+| LibreOffice | Office Suite                |
+| qBittorrent | Torrent client              |
+| Rnote       | Drawing app                 |
+| Sioyek      | PDF reader                  |
+| Zeal        | Offline documentation       |
+| Zotero      | Citation and PDF management |
 *** Why use Flatpak?
 - More up to date packages without having an unstable system.
 - Usually packaged by the developers themselves.
