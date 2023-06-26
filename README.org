@@ -172,6 +172,7 @@ mention the power of declarative dotfiles.
 	<<x11-utilities>>
       ];
     };
+    <<picom>>
     <<mpd-home>>
     <<mpdris2>>
     <<home-manager-programs>>
@@ -361,6 +362,15 @@ The following are X11 utilities.
   ffcast
   xss-lock
   networkmanagerapplet
+#+end_src
+*** picom
+#+name: picom
+#+begin_src nix
+  services.picom = {
+    enable = true;
+    vSync = true;
+    backend = "glx";
+  };
 #+end_src
 ** Clojure
 Currently I have Clojure installed on the user level, I want to move this into a
@@ -713,10 +723,6 @@ minimal setup. I want to explore ~i3blocks~ in the future.
 
   services.xserver.windowManager.dwm.enable = true;
 
-  services.picom = {
-    enable = true;
-    vSync = true;
-  };
 #+end_src
 *** dwm
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
