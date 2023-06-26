@@ -34,10 +34,6 @@
   
   services.xserver.windowManager.dwm.enable = true;
   
-  services.picom = {
-    enable = true;
-    vSync = true;
-  };
   services.xserver.desktopManager = {
     gnome.enable = true;
     plasma5.enable = false;
@@ -72,7 +68,9 @@
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
-      slstatus = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
+      st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
     })
   ];
   programs.light.enable = true;
@@ -129,6 +127,8 @@
   services.openssh.enable = true;
   environment.systemPackages = with pkgs; [
     slstatus
+    st
+    dmenu
     unzip
     cmatrix
     libsForQt5.okular
