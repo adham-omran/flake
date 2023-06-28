@@ -24,20 +24,20 @@ in
       msmtp
       afew
       notmuch
-
+      
       mpc-cli
-
+      
       texlive.combined.scheme-full
       eww
-
+      
       poppler_utils
-
+      
       warpd
       distrobox
-
+      
       hunspell
       hunspellDicts.en_US
-
+      
       yt-dlp
       gnuplot
       libnotify
@@ -63,21 +63,21 @@ in
       pass
       bitwarden
       gnome.gnome-tweaks
-
+      
       xournalpp
-
+      
       google-chrome
-
+      
       libsForQt5.kcalc
       libsForQt5.kclock
-
+      
       obs-studio
       poedit
       foliate
       zathura
       cinnamon.nemo
       krusader
-
+      
       discord
       telegram-desktop
       spotify
@@ -112,7 +112,7 @@ in
     name "My PipeWire Output"
     }
     '';
-
+  
     network.listenAddress = "any";
     network.startWhenNeeded = true;
     };
@@ -126,11 +126,11 @@ in
     userName  = "adham-omran";
     userEmail = "git@adham-omran.com";
     signing = {
-      signByDefault = true;
-      key = "4D37E0ADEE0B9138";
+  	  signByDefault = true;
+  	  key = "4D37E0ADEE0B9138";
     };
   };
-
+  
   programs.ncmpcpp = {
     enable = true;
     mpdMusicDir = "/home/adham/music";
@@ -140,45 +140,45 @@ in
       execute_on_song_change = "notify-send \"Now Playing\" \"$(mpc -p 9900 --format '%title% \\n%artist% - %album%' current)\"";
     };
   };
-
+  
   services.blueman-applet.enable = true;
   gtk = {
     enable = true;
-
+  
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-
+  
     theme = {
       name = "palenight";
       package = pkgs.palenight-theme;
     };
-
+  
     cursorTheme = {
       name = "Quintom_Ink";
       package = pkgs.quintom-cursor-theme;
     };
-
+  
     gtk3.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
         gtk-cursor-theme-size=20
       '';
     };
-
+  
     gtk4.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
       '';
     };
   };
-
+  
   home.sessionVariables.GTK_THEME = "palenight";
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-
+  
     };
     defaultApplications = {
       "x-scheme-handler/http"=["${browser-app}"];
@@ -191,7 +191,7 @@ in
       "application/xhtml+xml"=["${browser-app}"];
       "application/x-extension-xhtml"=["${browser-app}"];
       "application/x-extension-xht"=["${browser-app}"];
-
+  
       "application/pdf" = ["${pdf-app}"];
       "image/bmp"= ["${img-app}"];
       "image/gif"=["${img-app}"];
