@@ -570,6 +570,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
     <<user>>
     <<gpg>>
     <<ssh>>
+    <<firewall>>
     <<packages>>
     <<mpd>>
     <<kanata>>
@@ -824,14 +825,13 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
   services.openssh.enable = true;
 #+end_src
 ** Firewall
-This does not get tangled.
-
 Open ports in the firewall.
+#+name: firewall
 #+begin_src nix
-  networking.firewall.allowedTCPPorts = [ ... ];
-  networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 ];
+  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
 #+end_src
 ** Version
 This value determines the NixOS release from which the default settings for
