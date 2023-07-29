@@ -763,6 +763,7 @@ interesting one to explore.
 - Make sure to configure the ~syncthing~ directory else it will not work.
 #+name: services
 #+begin_src nix
+  programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
 
