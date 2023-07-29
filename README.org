@@ -257,13 +257,20 @@ The themes I use
 ** Applications
 General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
 translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
+
+~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
 #+begin_src text
+  vlc
+  jdk17
+  nodejs_20
+  cool-retro-term
   gnome.gnome-tweaks
 
   xournalpp
 
   google-chrome
+  geckodriver
 
   libsForQt5.kcalc
   libsForQt5.kclock
