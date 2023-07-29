@@ -3,6 +3,7 @@ let
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
+  video-app="vlc.desktop";
 in
 {
   home = {
@@ -27,6 +28,7 @@ in
       
       mpc-cli
       
+      ripgrep
       texlive.combined.scheme-full
       eww
       
@@ -62,14 +64,21 @@ in
       pfetch
       pass
       bitwarden
+      vlc
+      jdk17
+      nodejs_20
+      cool-retro-term
       gnome.gnome-tweaks
       
       xournalpp
       
       google-chrome
+      geckodriver
       
       libsForQt5.kcalc
       libsForQt5.kclock
+      libsForQt5.krdc
+      krusader
       
       obs-studio
       poedit
@@ -181,6 +190,9 @@ in
   
     };
     defaultApplications = {
+      "video/webm"=["${video-app}"];
+      "video/mp4"=["${video-app}"];
+  
       "x-scheme-handler/http"=["${browser-app}"];
       "x-scheme-handler/https"=["${browser-app}"];
       "x-scheme-handler/chrome"=["${browser-app}"];

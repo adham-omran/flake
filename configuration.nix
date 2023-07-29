@@ -3,7 +3,7 @@
   imports =
     [
 		  ./hardware-configuration.nix
-		    ./cachix.nix
+		  ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -73,6 +73,7 @@
       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
     })
   ];
+  programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
   
@@ -125,6 +126,10 @@
     pinentryFlavor = "gtk2";
   };
   services.openssh.enable = true;
+  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 ];
+  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 ];
+  # Or disable the firewall altogether.
+  networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
     slstatus
     st
@@ -308,21 +313,19 @@
       libvdpau-va-gl
     ];
   };
-  systemd.user.timers."hello-world" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-  	  OnBootSec = "2m";
-  	  OnUnitActiveSec = "2m";
-  	  Unit = "hello-world.service";
-    };
-  };
-  
-  systemd.user.services."hello-world" = {
+  systemd.user.services.mailfetch = {
+    enable = true;
+    description = "Automatically fetches for new mail when the network is up";
+    after = [ "network-online.target" ];
+    wantedBy = [ "network-online.target" ];
     serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va";
-      ExecStartPost = "/etc/profiles/per-user/adham/bin/notmuch new";
+      Restart = "always";
+      RestartSec = "60";
     };
+    path = with pkgs; [ bash notmuch isync ];
+    script = ''
+        mbsync -a
+      '';
   };
   systemd.extraConfig = ''
   DefaultTimeoutStopSec=10sec
