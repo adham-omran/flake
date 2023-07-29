@@ -478,6 +478,7 @@ Debian 12 and running Moonlight to access it.
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
+  video-app="vlc.desktop";
 #+end_src
 
 #+name: mimeapps
@@ -488,6 +489,9 @@ Debian 12 and running Moonlight to access it.
 
     };
     defaultApplications = {
+      "video/webm"=["${video-app}"];
+      "video/mp4"=["${video-app}"];
+
       "x-scheme-handler/http"=["${browser-app}"];
       "x-scheme-handler/https"=["${browser-app}"];
       "x-scheme-handler/chrome"=["${browser-app}"];
