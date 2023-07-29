@@ -462,7 +462,14 @@ Debian 12 and running Moonlight to access it.
   barrier
 #+end_src
 ** Setting default applications
-- [[https://discourse.nixos.org/t/set-default-application-for-mime-type-with-home-manager/17190][Set default application for mime type with home-manager - Help - NixOS Discourse]]
+- [[https://discourse.nixos.org/t/set-default-application-for-mime-type-with-home-manager/17190][Set default application for mime type with home-manager - Help - NixOS
+  Discourse]]
+
+  XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query filetype foo.pdf
+
+  XDG_UTILS_DEBUG_LEVEL=2 xdg-mime query default application/pdf
+
+  fd evince.desktop /
 - This conflicts with ~~/.config/mimeapps.list~. Use either this method or rely on
   the desktop environment to do it.
 
