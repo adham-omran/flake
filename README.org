@@ -267,6 +267,8 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
 
   libsForQt5.kcalc
   libsForQt5.kclock
+  libsForQt5.krdc
+  krusader
 
   obs-studio
   poedit
@@ -299,6 +301,7 @@ it here. I'll keep it for now.
 
   mpc-cli
 
+  ripgrep
   texlive.combined.scheme-full
   eww
 
