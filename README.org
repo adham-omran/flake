@@ -1170,21 +1170,19 @@ Overlay Emacs for latest release.
 ** systemd timers
 #+name: systemd-timers
 #+begin_src nix
-  systemd.user.timers."hello-world" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-	    OnBootSec = "2m";
-	    OnUnitActiveSec = "2m";
-	    Unit = "hello-world.service";
-    };
-  };
-
-  systemd.user.services."hello-world" = {
+  systemd.user.services.mailfetch = {
+    enable = true;
+    description = "Automatically fetches for new mail when the network is up";
+    after = [ "network-online.target" ];
+    wantedBy = [ "network-online.target" ];
     serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/etc/profiles/per-user/adham/bin/mbsync -Va";
-      ExecStartPost = "/etc/profiles/per-user/adham/bin/notmuch new";
+      Restart = "always";
+      RestartSec = "60";
     };
+    path = with pkgs; [ bash notmuch isync ];
+    script = ''
+	mbsync -a
+      '';
   };
 #+end_src
 
