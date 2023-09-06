@@ -3,7 +3,7 @@
   imports =
     [
 		  ./hardware-configuration.nix
-		  ./cachix.nix
+		    ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -71,6 +71,7 @@
       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
+      surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
     })
   ];
   programs.browserpass.enable = true;
@@ -107,8 +108,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  programs.zsh.enable = true;
-  environment.shells = with pkgs; [ zsh ];
+  programs.fish.enable = true;
+  environment.shells = with pkgs; [ fish ];
   users.users.adham = {
     isNormalUser = true;
     description = "adham";
@@ -118,7 +119,7 @@
     packages = with pkgs; [
       firefox
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
   programs.gnupg.agent = {
     enable = true;
@@ -126,13 +127,16 @@
     pinentryFlavor = "gtk2";
   };
   services.openssh.enable = true;
-  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 ];
-  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 ];
+  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010];
+  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
+    OVMFFull
     slstatus
     st
+    surf
+    tabbed
     dmenu
     unzip
     cmatrix
@@ -147,7 +151,7 @@
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     virt-manager
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
       [
     	  epkgs.vterm
     	  epkgs.jinx
@@ -228,6 +232,7 @@
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
+      amiri
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -313,6 +318,7 @@
       libvdpau-va-gl
     ];
   };
+  # systemd.services.NetworkManager-wait-online.enable = false;
   systemd.user.services.mailfetch = {
     enable = true;
     description = "Automatically fetches for new mail when the network is up";

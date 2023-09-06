@@ -1,5 +1,6 @@
 {config, pkgs, lib, ...}:
 let
+  archive-app="org.gnome.FileRoller.desktop";
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
@@ -21,6 +22,18 @@ in
       babashka
       leiningen
       clojure-lsp
+      firejail
+      lilypond
+      arduino
+      ncdu
+      rclone
+      mysql80
+      pscale
+      awscli2
+      
+      scream
+      zoom-us
+      
       isync
       msmtp
       afew
@@ -64,6 +77,8 @@ in
       pfetch
       pass
       bitwarden
+      frescobaldi
+      sonobus
       vlc
       jdk17
       nodejs_20
@@ -78,6 +93,7 @@ in
       libsForQt5.kcalc
       libsForQt5.kclock
       libsForQt5.krdc
+      libsForQt5.gwenview
       krusader
       
       obs-studio
@@ -190,6 +206,7 @@ in
   
     };
     defaultApplications = {
+      "application/zip"=["${archive-app}"];
       "video/webm"=["${video-app}"];
       "video/mp4"=["${video-app}"];
   
