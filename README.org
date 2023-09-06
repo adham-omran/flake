@@ -926,9 +926,11 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 #+name: packages
 #+begin_src nix :noweb yes
   environment.systemPackages = with pkgs; [
+    OVMFFull
     slstatus
     st
     surf
+    tabbed
     dmenu
     unzip
     cmatrix
