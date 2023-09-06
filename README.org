@@ -1032,6 +1032,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
+      amiri
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
