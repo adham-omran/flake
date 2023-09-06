@@ -869,8 +869,8 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
 Open ports in the firewall.
 #+name: firewall
 #+begin_src nix
-  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 ];
-  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 ];
+  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010];
+  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 #+end_src
