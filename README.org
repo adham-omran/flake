@@ -833,8 +833,8 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
 ** Shell
 #+name: shell
 #+begin_src nix
-  programs.zsh.enable = true;
-  environment.shells = with pkgs; [ zsh ];
+  programs.fish.enable = true;
+  environment.shells = with pkgs; [ fish ];
 #+end_src
 ** User
 #+name: user
@@ -848,7 +848,7 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
     packages = with pkgs; [
       firefox
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 #+end_src
 ** GnuPG
