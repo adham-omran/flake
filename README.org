@@ -676,9 +676,10 @@ I currently use GNOME.
 
 #+name: desktop-environment
 #+begin_src nix :noweb yes
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
-    gnome.enable = true;
-    plasma5.enable = false;
+    gnome.enable = false;
+    plasma5.enable = true;
   };
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
