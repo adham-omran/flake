@@ -261,6 +261,8 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
 ~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
 #+begin_src text
+  frescobaldi
+  sonobus
   vlc
   jdk17
   nodejs_20
@@ -275,6 +277,7 @@ translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
   libsForQt5.kcalc
   libsForQt5.kclock
   libsForQt5.krdc
+  libsForQt5.gwenview
   krusader
 
   obs-studio
@@ -301,6 +304,18 @@ have to set it up again though.
 it here. I'll keep it for now.
 #+name: cli
 #+begin_src text
+  firejail
+  lilypond
+  arduino
+  ncdu
+  rclone
+  mysql80
+  pscale
+  awscli2
+
+  scream
+  zoom-us
+
   isync
   msmtp
   afew
