@@ -1153,11 +1153,11 @@ Note that this file will get overwritten by ~cachix use <name>~.
 ** Emacs
 Emacs is my main and only editor.
 
-To use the overlay unstable use ~package = pkgs.emacsUnstable~.
+Other variants: ~emacsUnstable~, ~emacs29-pgtk~
 
 #+name: emacs-variation
 #+begin_src text
-emacs29-pgtk
+emacs29
 #+end_src
 
 #+name: emacs
