@@ -10,12 +10,12 @@ My NixOS configuration flake so far.
 ** What I use
 | Description     | Software        |
 |-----------------+-----------------|
-| Window Manager  | i3              |
-| Bar             | i3status        |
+| Window Manager  | dwm             |
+| Bar             | slstatus        |
 | Editor          | Emacs           |
-| Terminal        | xterm           |
+| Terminal        | st              |
 | Browser         | Firefox         |
-| Launcher        | rofi            |
+| Launcher        | dmenu           |
 | Notify server   | dunst           |
 | Monitor manager | arandr          |
 | Screenshot      | scrot/flameshot |
