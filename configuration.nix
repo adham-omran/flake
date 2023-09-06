@@ -33,6 +33,7 @@
   };
   
   services.xserver.windowManager.dwm.enable = true;
+  
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = false;
@@ -65,15 +66,15 @@
       atomix
     ]);
   };
-#   nixpkgs.overlays = [
-#     (final: prev: {
-#       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
-#       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
-#       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
-#       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
-#       surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
-#     })
-#   ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
+      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
+      st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
+      surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
+    })
+  ];
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
@@ -318,7 +319,6 @@
       libvdpau-va-gl
     ];
   };
-  # systemd.services.NetworkManager-wait-online.enable = false;
   systemd.user.services.mailfetch = {
     enable = true;
     description = "Automatically fetches for new mail when the network is up";
