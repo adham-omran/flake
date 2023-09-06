@@ -33,10 +33,10 @@
   };
   
   services.xserver.windowManager.dwm.enable = true;
-  
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
-    gnome.enable = true;
-    plasma5.enable = false;
+    gnome.enable = false;
+    plasma5.enable = true;
   };
   
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -65,15 +65,15 @@
       atomix
     ]);
   };
-  nixpkgs.overlays = [
-    (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
-      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
-      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
-      st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
-      surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
-    })
-  ];
+#   nixpkgs.overlays = [
+#     (final: prev: {
+#       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
+#       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
+#       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
+#       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
+#       surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
+#     })
+#   ];
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
