@@ -497,6 +497,7 @@ Debian 12 and running Moonlight to access it.
 
 #+name: default-apps
 #+begin_src nix
+  archive-app="org.gnome.FileRoller.desktop";
   pdf-app="org.pwmt.zathura.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
@@ -511,6 +512,7 @@ Debian 12 and running Moonlight to access it.
 
     };
     defaultApplications = {
+      "application/zip"=["${archive-app}"];
       "video/webm"=["${video-app}"];
       "video/mp4"=["${video-app}"];
 
