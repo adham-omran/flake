@@ -764,7 +764,7 @@ minimal setup. I want to explore ~i3blocks~ in the future.
   services.xserver.windowManager.dwm.enable = true;
 
 #+end_src
-*** dwm
+*** suckless
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
 interesting one to explore.
 
@@ -776,11 +776,13 @@ interesting one to explore.
       slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
+      surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
     })
   ];
 #+end_src
 **** Why dwm?
 - Systray follows the active monitor.
+- 9 tags per monitor.
 ** Services
 - ~light~: Light backlight control command
 - [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
@@ -926,6 +928,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
   environment.systemPackages = with pkgs; [
     slstatus
     st
+    surf
     dmenu
     unzip
     cmatrix
