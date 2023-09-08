@@ -253,14 +253,23 @@ The themes I use
   };
 
   services.blueman-applet.enable = true;
+  programs.sioyek = {
+    enable = true;
+    config = {
+      "should_launch_new_window" = "1";
+    };
+  };
 #+end_src
 ** Applications
 General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
-translation editor. ~zathura~ is my PDF reader. ~nemo~ is my file manager.
+translation editor. ~nemo~ is my file manager.
 
 ~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
 #+begin_src text
+  element-desktop
+  zulip
+  anki-bin
   frescobaldi
   sonobus
   vlc
@@ -498,7 +507,7 @@ Debian 12 and running Moonlight to access it.
 #+name: default-apps
 #+begin_src nix
   archive-app="org.gnome.FileRoller.desktop";
-  pdf-app="org.pwmt.zathura.desktop";
+  pdf-app="sioyek.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
   video-app="vlc.desktop";
