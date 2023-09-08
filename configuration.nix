@@ -2,8 +2,8 @@
 {
   imports =
     [
-		  ./hardware-configuration.nix
-		    ./cachix.nix
+	  ./hardware-configuration.nix
+	  ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,18 +21,6 @@
     enable = true;
     layout = "us";
   };
-  
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    package = pkgs.i3-gaps;
-    extraPackages = with pkgs; [
-      i3status
-      i3lock
-      i3blocks
-    ];
-  };
-  
-  services.xserver.windowManager.dwm.enable = true;
   
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
@@ -66,6 +54,8 @@
       atomix
     ]);
   };
+  services.xserver.windowManager.dwm.enable = true;
+  programs.slock.enable = true;
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
@@ -73,8 +63,10 @@
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
       surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
+      # slock = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/slock ;});
     })
   ];
+  programs.hyprland.enable = true;
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;

@@ -1,7 +1,7 @@
 {config, pkgs, lib, ...}:
 let
   archive-app="org.gnome.FileRoller.desktop";
-  pdf-app="org.pwmt.zathura.desktop";
+  pdf-app="sioyek.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
   video-app="vlc.desktop";
@@ -77,6 +77,9 @@ in
       pfetch
       pass
       bitwarden
+      element-desktop
+      zulip
+      anki-bin
       frescobaldi
       sonobus
       vlc
@@ -120,6 +123,9 @@ in
       ffcast
       xss-lock
       networkmanagerapplet
+      foot
+      wofi
+      sway-contrib.grimshot
     ];
   };
   services.picom = {
@@ -167,6 +173,12 @@ in
   };
   
   services.blueman-applet.enable = true;
+  programs.sioyek = {
+    enable = true;
+    config = {
+      "should_launch_new_window" = "1";
+    };
+  };
   gtk = {
     enable = true;
   
