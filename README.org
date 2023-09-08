@@ -796,6 +796,15 @@ interesting one to explore.
 **** Why dwm?
 - Systray follows the active monitor.
 - 9 tags per monitor.
+*** hyprland
+On [2023-09-06 Wed] I moved to a setup that does not require Barrier and
+supports two monitors which have a refresh rate above 60, this prompts me to
+give Hyprland a chance.
+
+#+name: hyprland
+#+begin_src nix
+programs.hyprland.enable = true;
+#+end_src
 ** Services
 - ~light~: Light backlight control command
 - [[https://nixos.wiki/wiki/Polkit][Polkit - NixOS Wiki]].
