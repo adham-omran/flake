@@ -96,9 +96,9 @@ If I can't make it work I'll just dual boot with Windows.
 *** Last Resort
 - [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
 
-* flake
+* flake.nix
 Most newer configurations are a flake, although an experimental feature at the
-moment. They offer a lot of potential with the few interactions I've had with
+moment.  They offer a lot of potential with the few interactions I've had with
 them so far.
 
 I'm running the latest stable which is ~23.05~ with [[https://nixos.wiki/wiki/Home_Manager][home-manager]] in my flake. I
@@ -647,7 +647,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 #+name: modules
 #+begin_src nix
   ./hardware-configuration.nix
-    ./cachix.nix
+  ./cachix.nix
 #+end_src
 ** Boot
 #+name: config-boot
