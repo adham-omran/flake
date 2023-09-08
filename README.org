@@ -171,6 +171,7 @@ mention the power of declarative dotfiles.
 	<<applications>>
 	<<gtk-themes>>
 	<<x11-utilities>>
+	<<wayland-utilities>>
       ];
     };
     <<picom>>
@@ -406,6 +407,13 @@ The following are X11 utilities.
     vSync = true;
     backend = "glx";
   };
+#+end_src
+** Wayland
+#+name: wayland-utilities
+#+begin_src nix
+  foot
+  wofi
+  sway-contrib.grimshot
 #+end_src
 ** Clojure
 Currently I have Clojure installed on the user level, I want to move this into a
