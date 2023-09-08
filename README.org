@@ -1245,3 +1245,7 @@ Taken from [[https://www.youtube.com/watch?v=1qd0iHadvdo][Chris Titus]].
   DefaultTimeoutStopSec=10sec
   '';
 #+end_src
+
+# Local Variables:
+# jinx-local-words: "Hyprland Wayland picom"
+# End:
