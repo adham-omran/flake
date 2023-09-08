@@ -34,13 +34,12 @@ Nixpkgs are the the Nix packages, about 80,000 packages.
 
 My idea for a stable workstation is like a set of layers, on the base there's
 the operating system, NixOS.  Above that is the window manager or desktop
-environment which is i3 in my case.  Above that are the packages installed by
+environment which is dwm in my case.  Above that are the packages installed by
 Nix and lastly the packages installed by Flatpak.
 ** Flatpack for applications
 Currently I run the following applications from Flathub
 | Application | Description                 |
 |-------------+-----------------------------|
-| Anki        | Spaced Repetition System    |
 | darktable   | Photo library management    |
 | Element     | Chat client for Matrix      |
 | LibreOffice | Office Suite                |
@@ -610,15 +609,15 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
   {
     imports =
       [
-		    <<modules>>
+	    <<modules>>
       ];
     <<config-boot>>
     <<config-networking>>
     <<config-timezone>>
     <<x11>>
-    <<i3>>
     <<desktop-environment>>
-    <<dwm>>
+    <<suckless>>
+    <<hyprland>>
     <<services>>
     <<audio>>
     <<shell>>
@@ -759,14 +758,7 @@ Exclude the following packages
 
 #+end_src
 
-Enable the i3 window manager and install related packages.
 
-I have not found a bar other than i3's which supports multi-monitor and requires
-minimal setup. I want to explore ~i3blocks~ in the future.
-
-- ~i3status~: Gives you the default i3 status bar.
-- ~i3lock~: Default i3 screen locker.
-- ~i3blocks~: If you are planning on using i3blocks over i3status.
 #+name: i3
 #+begin_src nix
   services.xserver.windowManager.i3 = {
@@ -779,15 +771,17 @@ minimal setup. I want to explore ~i3blocks~ in the future.
     ];
   };
 
-  services.xserver.windowManager.dwm.enable = true;
+
 
 #+end_src
 *** suckless
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
 interesting one to explore.
 
-#+name: dwm
+#+name: suckless
 #+begin_src nix
+  services.xserver.windowManager.dwm.enable = true;
+  programs.slock.enable = true;
   nixpkgs.overlays = [
     (final: prev: {
       dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
@@ -795,6 +789,7 @@ interesting one to explore.
       dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
       st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
       surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
+      # slock = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/slock ;});
     })
   ];
 #+end_src
