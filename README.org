@@ -8,22 +8,26 @@
 My NixOS configuration flake so far.
 
 ** What I use
-| Description     | Software        |
-|-----------------+-----------------|
-| Window Manager  | dwm             |
-| Bar             | slstatus        |
-| Editor          | Emacs           |
-| Terminal        | st              |
-| Browser         | Firefox         |
-| Launcher        | dmenu           |
-| Notify server   | dunst           |
-| Monitor manager | arandr          |
-| Screenshot      | scrot/flameshot |
-| Bluetooth       | blueman         |
-| Screencast      | ffcast          |
+| Description     | Software  |
+|-----------------+-----------|
+| Window Manager  | dwm       |
+| Bar             | slstatus  |
+| Editor          | Emacs     |
+| Terminal        | st        |
+| Browser         | Firefox   |
+| Launcher        | dmenu     |
+| Notify server   | dunst     |
+| Monitor manager | arandr    |
+| Screenshot      | flameshot |
+| Bluetooth       | blueman   |
+| Screencast      | ffcast    |
 
-This is an X11 setup as I currently have no plan on using Wayland due to the
-issue I faced with it and no need to switch.
+This is an X11 setup as I currently have no plan on using Wayland.
+
+** Multiple Machine
+On [2023-09-06 Wed] I moved my main setup to an Optiplex 9020 which means now I
+need to maintain two different ~hardware-configuration.nix~ files.  For now I want
+a complete replication for packages between the two.
 
 * Usage
 These are my ideas about how I use my system.  The Nix ecosystem is based on the
@@ -1261,5 +1265,5 @@ Taken from [[https://www.youtube.com/watch?v=1qd0iHadvdo][Chris Titus]].
 #+end_src
 
 # Local Variables:
-# jinx-local-words: "Hyprland Wayland picom"
+# jinx-local-words: "Hyprland Optiplex Wayland picom"
 # End:
