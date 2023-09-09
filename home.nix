@@ -1,6 +1,6 @@
 {config, pkgs, lib, ...}:
 let
-  archive-app="org.gnome.FileRoller.desktop";
+  archive-app="org.kde.ark.desktop";
   pdf-app="sioyek.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";

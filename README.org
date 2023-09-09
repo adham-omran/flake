@@ -545,7 +545,7 @@ Debian 12 and running Moonlight to access it.
 
 #+name: default-apps
 #+begin_src nix
-  archive-app="org.gnome.FileRoller.desktop";
+  archive-app="org.kde.ark.desktop";
   pdf-app="sioyek.desktop";
   img-app="feh.desktop";
   browser-app="firefox.desktop";
