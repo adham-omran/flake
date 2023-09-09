@@ -2,17 +2,17 @@
 {
   imports =
     [
-    ./hardware-configuration.nix
-    ./cachix.nix
+	  ./hardware-configuration.nix
+	  ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
+  
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-
+  
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
@@ -21,20 +21,20 @@
     enable = true;
     layout = "us";
   };
-
+  
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = false;
     plasma5.enable = true;
   };
-
+  
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
   environment = {
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
     ];
-
+  
     gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
@@ -70,28 +70,28 @@
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
-
+  
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
-
+  
   services.flatpak.enable = true;
   fonts.fontDir.enable = true;
   xdg.portal =
     {
       enable = true;
     };
-
+  
   services.syncthing = {
     enable = true;
     user = "adham";
     configDir = "/home/adham/.config/syncthing";
   };
-
+  
   services.blueman.enable = true;
-
+  
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -135,7 +135,7 @@
     cmatrix
     libsForQt5.okular
     rsync
-    cowsay
+  
     openssl
     pinentry
     pinentry-gtk2
@@ -146,8 +146,8 @@
     virt-manager
     ((emacsPackagesFor emacs29).emacsWithPackages (epkgs:
       [
-        epkgs.vterm
-        epkgs.jinx
+    	  epkgs.vterm
+    	  epkgs.jinx
       ]))
     ];
   services.mpd.user = "userRunningPipeWire";
@@ -156,12 +156,12 @@
   };
   services.kanata.enable = true;
   services.kanata.package = pkgs.kanata;
-
+  
   services.kanata.keyboards.usb.devices = [
     "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
     "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
   ];
-
+  
   services.kanata.keyboards.usb.config = ''
   (defvar
     tap-timeout   150
@@ -169,7 +169,7 @@
     tt $tap-timeout
     ht $hold-timeout
     )
-
+  
   (defalias
     qwt (layer-switch qwerty)
     col (layer-switch colemak)
@@ -177,12 +177,12 @@
     r (tap-hold $tt $ht r lalt)
     s (tap-hold $tt $ht s lctl)
     t (tap-hold $tt $ht t lsft)
-
+  
     n (tap-hold $tt $ht n rsft)
     e (tap-hold $tt $ht e rctl)
     i (tap-hold $tt $ht i ralt)
     o (tap-hold $tt $ht o rmet)
-
+  
     0 (tap-hold $tt $ht 0 M-0)
     1 (tap-hold $tt $ht 1 M-1)
     2 (tap-hold $tt $ht 2 M-2)
@@ -194,7 +194,7 @@
     8 (tap-hold $tt $ht 8 M-8)
     9 (tap-hold $tt $ht 9 M-9)
     )
-
+  
   (defsrc
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -203,7 +203,7 @@
       lsft z    x    c    v    b    n    m    ,    .    /    rsft
       lctl lmet lalt           spc            ralt    rctl
       )
-
+  
   (deflayer colemak
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  @1   @2   @3   @4   @5   @6   @7   @8   @9   @0    -    =    bspc
@@ -212,7 +212,7 @@
       lsft z    x    c    v    b    k    m    ,    .    /    rsft
       lctl lmet lalt           spc            @qwt    rctl
       )
-
+  
   (deflayer qwerty
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -235,14 +235,14 @@
       scheherazade-new
       jetbrains-mono
       hack-font
-
+  
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-
+  
       vazir-fonts
     ];
-
+  
     fontconfig = {
       defaultFonts = {
         serif = [ "Noto Sans" "Noto Naskh Arabic"];
@@ -253,29 +253,29 @@
   };
     programs.tmux = {
       enable = true;
-
+  
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
     ];
-
+  
     extraConfig = ''
-        set -g default-terminal "xterm-256color"
-        set -ga terminal-overrides ",*256col*:Tc"
-        set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-        set-environment -g COLORTERM "truecolor"
-          '';
+  	    set -g default-terminal "xterm-256color"
+  	    set -ga terminal-overrides ",*256col*:Tc"
+  	    set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+  	    set-environment -g COLORTERM "truecolor"
+  	      '';
   };
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
-
+  
     settings = {
       START_CHARGE_THRESH_BAT0=75;
       STOP_CHARGE_THRESH_BAT0=95;
-
+  
       START_CHARGE_THRESH_BAT1=75;
       STOP_CHARGE_THRESH_BAT1=95;
-
+  
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     };
@@ -286,7 +286,7 @@
     lxd.enable = true;
     libvirtd.enable = true;
   };
-
+  
   programs.adb.enable = true;
   system.stateVersion = "23.05";
   nixpkgs.config.allowUnfree = true;
@@ -294,7 +294,7 @@
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
-
+  
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   nix.settings.auto-optimise-store = true;
   nix.gc = {

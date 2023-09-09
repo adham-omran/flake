@@ -23,28 +23,42 @@
 	      nixos = lib.nixosSystem {
 		      inherit system;
 		      modules = [
-			./configuration.nix
-			home-manager.nixosModules.home-manager {
-			  home-manager.useGlobalPkgs = true;
-			  home-manager.useUserPackages = true;
-			  home-manager.users.adham = {
-				  imports = [ ./home.nix ];
-			  };
-			}
+			      ./configuration.nix
+			      home-manager.nixosModules.home-manager {
+				home-manager.useGlobalPkgs = true;
+				home-manager.useUserPackages = true;
+				home-manager.users.adham = {
+					imports = [ ./home.nix ];
+				};
+			      }
 		      ];
 	      };
 
-	extraStuff = lib.nixosSystem {
+	      extraStuff = lib.nixosSystem {
 		      inherit system;
 		      modules = [
 			      ./basic/configuration.nix
-			home-manager.nixosModules.home-manager {
-			  home-manager.useGlobalPkgs = true;
-			  home-manager.useUserPackages = true;
-			  home-manager.users.adham = {
-				  imports = [ ./home.nix ];
-			  };
-			}
+			      home-manager.nixosModules.home-manager {
+				home-manager.useGlobalPkgs = true;
+				home-manager.useUserPackages = true;
+				home-manager.users.adham = {
+					imports = [ ./home.nix ];
+				};
+			      }
+		      ];
+	      };
+
+	t480 = lib.nixosSystem {
+		      inherit system;
+		      modules = [
+			      ./t480/configuration.nix
+			      home-manager.nixosModules.home-manager {
+				home-manager.useGlobalPkgs = true;
+				home-manager.useUserPackages = true;
+				home-manager.users.adham = {
+					imports = [ ./home.nix ];
+				};
+			      }
 		      ];
 	      };
       };
