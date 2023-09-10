@@ -77,6 +77,7 @@ in
       pfetch
       pass
       bitwarden
+      nyxt
       element-desktop
       zulip
       anki-bin
