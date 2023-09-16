@@ -1219,7 +1219,7 @@ Other variants: ~emacsUnstable~, ~emacs29-pgtk~
 
 #+name: emacs-variation
 #+begin_src text
-emacs29
+emacs29-pgtk
 #+end_src
 
 #+name: emacs
