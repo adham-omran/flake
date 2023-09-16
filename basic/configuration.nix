@@ -74,6 +74,8 @@
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.sane.enable = true;
+  hardware.sane.openFirewall = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
   
@@ -107,7 +109,8 @@
     isNormalUser = true;
     description = "adham";
     extraGroups = [
-      "networkmanager" "wheel" "adbusers" "video" "docker" "libvirtd"
+      "networkmanager" "wheel" "adbusers" "video"
+      "docker" "libvirtd" "lp" "scanner"
     ];
     packages = with pkgs; [
       firefox
@@ -120,11 +123,12 @@
     pinentryFlavor = "gtk2";
   };
   services.openssh.enable = true;
-  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010];
-  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010];
+  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
+  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
+    canon-cups-ufr2
     OVMFFull
     slstatus
     st

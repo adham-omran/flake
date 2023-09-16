@@ -77,6 +77,8 @@ in
       pfetch
       pass
       bitwarden
+      airwindows-lv2
+      reaper
       nyxt
       element-desktop
       zulip
@@ -98,6 +100,8 @@ in
       libsForQt5.kclock
       libsForQt5.krdc
       libsForQt5.gwenview
+      libsForQt5.skanpage
+      libsForQt5.skanlite
       krusader
       
       obs-studio
