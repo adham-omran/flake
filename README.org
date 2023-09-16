@@ -638,7 +638,7 @@ hot-reload their configuration, sacrificing that for a more modular system.
 Edit this configuration file to define what should be installed on your system.
 Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
 (~nixos-help~).
-#+begin_src nix :tangle configuration.nix :tangle ./t480/configuration.nix :tangle ./basic/configuration.nix :noweb yes
+#+begin_src nix :tangle ./configuration.nix :noweb yes
   { config, pkgs, callPackage, lib, ... }:
   {
     imports =
