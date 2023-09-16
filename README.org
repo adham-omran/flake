@@ -523,7 +523,7 @@ better than the ~gphoto2~ application.
 #+end_src
 
 ** Controlling another computer
-~barrier~ does not work at the moment for unknown reasons.
+~barrier~ only works on X11.  Follow the Debian guide for [[https://wiki.debian.org/Barrier#Securing_the_communications][enabling SSL]].
 
 I am using the sunshine server on another machine that dual boots Windows and
 Debian 12 and running Moonlight to access it.
