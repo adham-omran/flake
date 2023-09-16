@@ -299,6 +299,7 @@ translation editor. ~nemo~ is my file manager.
 ~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
 #+begin_src text
+  reaper
   nyxt
   element-desktop
   zulip
