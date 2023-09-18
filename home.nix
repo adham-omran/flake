@@ -43,7 +43,6 @@ in
       
       ripgrep
       texlive.combined.scheme-full
-      eww
       
       poppler_utils
       
@@ -66,7 +65,6 @@ in
       ledger
       neofetch
       bat
-      htop
       btop
       fd
       dmidecode
@@ -77,11 +75,10 @@ in
       pfetch
       pass
       bitwarden
-      airwindows-lv2
+      zotero
       reaper
       nyxt
       element-desktop
-      zulip
       anki-bin
       frescobaldi
       sonobus
@@ -89,7 +86,6 @@ in
       jdk17
       nodejs_20
       cool-retro-term
-      gnome.gnome-tweaks
       
       xournalpp
       
@@ -100,17 +96,13 @@ in
       libsForQt5.kclock
       libsForQt5.krdc
       libsForQt5.gwenview
-      libsForQt5.skanpage
-      libsForQt5.skanlite
       krusader
       
       obs-studio
       poedit
       foliate
-      zathura
-      cinnamon.nemo
-      krusader
       
+      zulip
       discord
       telegram-desktop
       spotify

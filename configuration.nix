@@ -1,4 +1,39 @@
 { config, pkgs, callPackage, lib, ... }:
+let
+
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+  
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+  
+  # currently, there is some friction between sway and gtk:
+  # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+  # the suggested way to set gtk settings is with gsettings
+  # for gsettings to work, we need to tell it where the schemas are
+  # using the XDG_DATA_DIR environment variable
+  # run at the end of sway config
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text = let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'Dracula'
+    '';
+  };
+
+in
 {
   imports =
     [
@@ -83,10 +118,14 @@
   
   services.flatpak.enable = true;
   fonts.fontDir.enable = true;
-  xdg.portal =
-    {
-      enable = true;
-    };
+  
+  programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
   
   services.syncthing = {
     enable = true;
@@ -95,6 +134,26 @@
   };
   
   services.blueman.enable = true;
+  
+  # xdg-desktop-portal works by exposing a series of D-Bus interfaces
+  # known as portals under a well-known name
+  # (org.freedesktop.portal.Desktop) and object path
+  # (/org/freedesktop/portal/desktop).
+  # The portal interfaces include APIs for file access, opening URIs,
+  # printing and others.
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+  
+  # enable sway window manager
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
   
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -130,6 +189,23 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
+    autotiling
+    wmenu
+    foot
+    dbus-sway-environment
+    configure-gtk
+    wayland
+    xdg-utils
+    glib # gsettings
+    dracula-theme
+    gnome3.adwaita-icon-theme
+    swaylock
+    swayidle
+    grim
+    slurp
+    wl-clipboard
+    mako
+    wdisplays
     canon-cups-ufr2
     OVMFFull
     slstatus
@@ -317,6 +393,7 @@
       libvdpau-va-gl
     ];
   };
+  systemd.services.NetworkManager-wait-online.enable = false;
   systemd.user.services.mailfetch = {
     enable = true;
     description = "Automatically fetches for new mail when the network is up";
