@@ -293,8 +293,12 @@ The themes I use
   };
 #+end_src
 ** Applications
-General applications. ~foliate~ is what I use to read E-Books and ~poedit~ is a
-translation editor. ~nemo~ is my file manager.
+| Application | Usage                        |
+|-------------+------------------------------|
+| Foliate     | E-books                      |
+| Thunars     | File manager                 |
+| Zotero      | Bibliography management      |
+| Sonobus     | Share audio between machines |
 
 ~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
@@ -331,16 +335,14 @@ translation editor. ~nemo~ is my file manager.
   spotify
 #+end_src
 ** Command Line Programs
-General CLI utilities. ~gtk3~ to provide ~gtk-launch~ which is used to launch
-applications from Emacs with ~emacs-run-launcher~ although I rarely use this.
+| Application | Usage                             |
+|-------------+-----------------------------------|
+| scream      | Share audio with Windows machines |
 
 [[https://github.com/89luca89/distrobox][Distrobox]] is awesome. A lot of potential.
 
-Since I'm back on X11 I could use [[https://github.com/rvaiya/warpd/][warpd]] to reduce my mouse usage even more. I
-have to set it up again though.
-
 ~poppler_utils~ is related to Emacs's PDF reader but I am not sure if I even need
-it here. I'll keep it for now.
+it here.  I'll keep it for now.
 #+name: cli
 #+begin_src text
   firejail
@@ -454,8 +456,10 @@ flake at some point.
 #+end_src
 
 ** Music
-I use the [[https://www.musicpd.org/][music player daemon (mpd)]] for my local music and Spotify for the music
-I stream. I control ~mpd~ using ~mpdris2~.
+| Application | Usage        |
+|-------------+--------------|
+| mpd         | Local music  |
+| Spotify     | Stream music |
 *** mpd
 #+name: mpd-home
 #+begin_src nix :noweb yes
@@ -611,7 +615,7 @@ use home-manager for dotfiles.
    #+end_src
    This will create ~~/.gdbinit~.
 
-   Do note that I can directly into a code block with the proper syntax.
+   Note that I can directly into a code block with the proper syntax.
 
 
 My only concern is that when I move programs into this style it'll be harder to
@@ -795,9 +799,6 @@ Exclude the following packages
       i3blocks
     ];
   };
-
-
-
 #+end_src
 *** suckless
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
@@ -1293,7 +1294,7 @@ Note that this file will get overwritten by ~cachix use <name>~.
   }
 #+end_src
 ** Emacs
-Emacs is my main and only editor.
+Emacs is my main editor.
 
 Other variants: ~emacsUnstable~, ~emacs29-pgtk~
 
