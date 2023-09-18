@@ -1353,6 +1353,7 @@ Overlay Emacs for latest release.
 ** systemd timers
 #+name: systemd-timers
 #+begin_src nix
+  systemd.services.NetworkManager-wait-online.enable = false;
   systemd.user.services.mailfetch = {
     enable = true;
     description = "Automatically fetches for new mail when the network is up";
