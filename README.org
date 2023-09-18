@@ -310,7 +310,6 @@ translation editor. ~nemo~ is my file manager.
   jdk17
   nodejs_20
   cool-retro-term
-  gnome.gnome-tweaks
 
   xournalpp
 
@@ -326,9 +325,6 @@ translation editor. ~nemo~ is my file manager.
   obs-studio
   poedit
   foliate
-  zathura
-  cinnamon.nemo
-  krusader
 
   discord
   telegram-desktop
@@ -368,7 +364,6 @@ it here. I'll keep it for now.
 
   ripgrep
   texlive.combined.scheme-full
-  eww
 
   poppler_utils
 
@@ -391,7 +386,6 @@ it here. I'll keep it for now.
   ledger
   neofetch
   bat
-  htop
   btop
   fd
   dmidecode
@@ -514,14 +508,6 @@ PipeWire socket.
     mpd.port = 9900;
   };
 #+end_src
-** Using a DSLR Camera as a webcam
-This setup is not active at the moment. Although from 30 minutes of testing I
-found that the ~mptlvcap~ package which I install in an Arch-distrobox works
-better than the ~gphoto2~ application.
-#+begin_src text
-  gphoto2
-#+end_src
-
 ** Controlling another computer
 ~barrier~ only works on X11.  Follow the Debian guide for [[https://wiki.debian.org/Barrier#Securing_the_communications][enabling SSL]].
 
