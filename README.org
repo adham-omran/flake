@@ -300,13 +300,12 @@ The themes I use
 | Zotero      | Bibliography management      |
 | Sonobus     | Share audio between machines |
 
-~nodejs_20~ for NPM support for Clojure web applications with Kit.
 #+name: applications
 #+begin_src text
+  zotero
   reaper
   nyxt
   element-desktop
-  zulip
   anki-bin
   frescobaldi
   sonobus
@@ -330,6 +329,7 @@ The themes I use
   poedit
   foliate
 
+  zulip
   discord
   telegram-desktop
   spotify
