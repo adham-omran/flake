@@ -8,21 +8,39 @@
 My NixOS configuration flake so far.
 
 ** What I use
-| Description     | Software  |
-|-----------------+-----------|
-| Window Manager  | dwm       |
-| Bar             | slstatus  |
-| Editor          | Emacs     |
-| Terminal        | st        |
-| Browser         | Firefox   |
-| Launcher        | dmenu     |
-| Notify server   | dunst     |
-| Monitor manager | arandr    |
-| Screenshot      | flameshot |
-| Bluetooth       | blueman   |
-| Screencast      | ffcast    |
+| Description     | Software (X11) | Software (Wayland) |
+|-----------------+----------------+--------------------|
+| Window Manager  | dwm            | hyprland           |
+| Bar             | slstatus       | waybar             |
+| Editor          | Emacs          | Emacs              |
+| Terminal        | st             | foot               |
+| Browser         | Firefox        | Firefox            |
+| Launcher        | dmenu          | fuzzel             |
+| Notify server   | dunst          |                    |
+| Monitor manager | arandr         | wdisplays          |
+| Screenshot      | flameshot      | grim               |
+| Bluetooth       | blueman        |                    |
+| Screencast      | ffcast         | wf-recorder        |
 
-This is an X11 setup as I currently have no plan on using Wayland.
+I am testing Wayland again with Hyprland.  The only missing feature I require at
+the moment is a KVM application like barrier with support for Linux and Windows.
+
+*** Wayland & X11
+
+Why am I using Wayland now when I previously used X11?
+- Perfect frames makes using my high refresh rates monitors in any orientation possible.
+- The ability to use Waydroid.
+
+  What would I still use X11 for?
+- Barrier to control my Windows machine, I expect this use case will die out as
+  I'm planning an upgrade in the coming months that'll open up the possibility
+  of VFIO.
+
+*** Hyprland
+The good
+
+The bad
+- No support for vertical splits on vertical monitors.
 
 ** Multiple Machine
 On [2023-09-06 Wed] I moved my main setup to an Optiplex 9020 which means now I
@@ -32,7 +50,7 @@ a complete replication for packages between the two.
 * Usage
 These are my ideas about how I use my system.  The Nix ecosystem is based on the
 idea of reproducible builds and deployment.  Nix is the language and there's
-also the Nix package manager, NixOS is a linux distrubution based on Nix,
+also the Nix package manager, NixOS is a Linux distrubution based on Nix,
 Nixpkgs are the the Nix packages, about 80,000 packages.
 ** NixOS as a stable workstation
 
@@ -45,13 +63,9 @@ Currently I run the following applications from Flathub
 | Application | Description                 |
 |-------------+-----------------------------|
 | darktable   | Photo library management    |
-| Element     | Chat client for Matrix      |
-| LibreOffice | Office Suite                |
 | qBittorrent | Torrent client              |
 | Rnote       | Drawing app                 |
-| Sioyek      | PDF reader                  |
 | Zeal        | Offline documentation       |
-| Zotero      | Citation and PDF management |
 *** Why use Flatpak?
 - More up to date packages without having an unstable system.
 - Usually packaged by the developers themselves.
@@ -59,10 +73,7 @@ Currently I run the following applications from Flathub
 As of writing ([2023-06-17 Sat]) there's no way builtin way to declare Flatpak
 packages, there's [[https://github.com/yawnt/declarative-nix-flatpak][ywant/declarative-nix-flatpak]] but I have not tested it.
 ** Development in Nix Flakes
-Currently I have flakes setup for personal development in R and C.
-** Development in Distrobox
-I use an Ubuntu 22.04.02 LTS box for quick R development for work.  I don't
-always use this as I do most of the work over SSH.
+Currently I have flakes setup for personal projects in R and C.
 * Literate Configuration
 My entire configuration is one ~org-mode~ file.
 
@@ -92,6 +103,8 @@ In the future I want to build a PC with the goal of VFIO passthrough, I have
 found a few guides but have not tested any myself.
 
 If I can't make it work I'll just dual boot with Windows.
+
+
 *** Resources
 - [[https://nixos.wiki/wiki/PCI_passthrough][PCI passthrough - NixOS Wiki]]
 - [[https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3][VFIO Passthrough on NixOS · GitHub (2019-2021)]]
@@ -1379,5 +1392,5 @@ Taken from [[https://www.youtube.com/watch?v=1qd0iHadvdo][Chris Titus]].
 #+end_src
 
 # Local Variables:
-# jinx-local-words: "Hyprland Optiplex Wayland picom"
+# jinx-local-words: "Hyprland Optiplex Waydroid Wayland picom"
 # End:
