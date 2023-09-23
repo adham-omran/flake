@@ -306,7 +306,10 @@ The themes I use
 
 #+name: applications
 #+begin_src text
+  qbittorrent
+  chromedriver
   zotero
+  libreoffice-qt
   reaper
   nyxt
   element-desktop
