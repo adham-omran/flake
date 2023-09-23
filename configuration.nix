@@ -189,6 +189,7 @@ in
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
+    
     autotiling
     wmenu
     foot
@@ -206,6 +207,7 @@ in
     wl-clipboard
     mako
     wdisplays
+    hyprpaper
     canon-cups-ufr2
     OVMFFull
     slstatus

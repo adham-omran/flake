@@ -75,7 +75,10 @@ in
       pfetch
       pass
       bitwarden
+      qbittorrent
+      chromedriver
       zotero
+      libreoffice-qt
       reaper
       nyxt
       element-desktop
@@ -120,9 +123,14 @@ in
       ffcast
       xss-lock
       networkmanagerapplet
+      cliphist
       foot
-      wofi
       sway-contrib.grimshot
+      fuzzel
+      wf-recorder
+      (waybar.overrideAttrs (oldAttrs: {
+          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      }))
     ];
   };
   services.picom = {
@@ -149,6 +157,10 @@ in
     mpd.host = "127.0.0.1";
     mpd.port = 9900;
   };
+  programs.hexchat = {
+    enable = true;
+  };
+  
   programs.git = {
     enable = true;
     userName  = "adham-omran";
