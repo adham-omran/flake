@@ -447,9 +447,14 @@ The following are X11 utilities.
 ** Wayland
 #+name: wayland-utilities
 #+begin_src nix
+  cliphist
   foot
-  wofi
   sway-contrib.grimshot
+  fuzzel
+  wf-recorder
+  (waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+  }))
 #+end_src
 ** Clojure
 Currently I have Clojure installed on the user level, I want to move this into a
@@ -880,6 +885,7 @@ variables
 
 #+name: sway-packages
 #+begin_src text
+
   autotiling
   wmenu
   foot
@@ -1066,11 +1072,12 @@ Garbage collection. Delete every week any generation that's older than 7 days.
     options = "--delete-older-than 7d";
   };
 #+end_src
-** packages
+** Packages
 #+name: packages
 #+begin_src nix :noweb yes
   environment.systemPackages = with pkgs; [
     <<sway-packages>>
+    hyprpaper
     canon-cups-ufr2
     OVMFFull
     slstatus
