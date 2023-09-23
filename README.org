@@ -622,7 +622,6 @@ My only concern is that when I move programs into this style it'll be harder to
 hot-reload their configuration, sacrificing that for a more modular system.
 *** TODO Programs to move
 **** TODO warpd
-**** TODO i3
 **** TODO emacs
 * configuration.nix
 Edit this configuration file to define what should be installed on your system.
@@ -787,19 +786,6 @@ Exclude the following packages
 
 #+end_src
 
-
-#+name: i3
-#+begin_src nix
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    package = pkgs.i3-gaps;
-    extraPackages = with pkgs; [
-      i3status
-      i3lock
-      i3blocks
-    ];
-  };
-#+end_src
 *** suckless
 I plan to learn ~C~ at some point in the future and the ~dwm~ project could be an
 interesting one to explore.
