@@ -264,6 +264,10 @@ The themes I use
 ** Programs
 #+name: home-manager-programs
 #+begin_src nix
+  programs.hexchat = {
+    enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName  = "adham-omran";
