@@ -267,16 +267,6 @@ in
     i (tap-hold $tt $ht i ralt)
     o (tap-hold $tt $ht o rmet)
   
-    0 (tap-hold $tt $ht 0 M-0)
-    1 (tap-hold $tt $ht 1 M-1)
-    2 (tap-hold $tt $ht 2 M-2)
-    3 (tap-hold $tt $ht 3 M-3)
-    4 (tap-hold $tt $ht 4 M-4)
-    5 (tap-hold $tt $ht 5 M-5)
-    6 (tap-hold $tt $ht 6 M-6)
-    7 (tap-hold $tt $ht 7 M-7)
-    8 (tap-hold $tt $ht 8 M-8)
-    9 (tap-hold $tt $ht 9 M-9)
     )
   
   (defsrc
