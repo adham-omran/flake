@@ -22,6 +22,7 @@ in
       babashka
       leiningen
       clojure-lsp
+      python311Packages.pyclip
       firejail
       lilypond
       arduino
@@ -75,6 +76,7 @@ in
       pfetch
       pass
       bitwarden
+      gimp-with-plugins
       qbittorrent
       chromedriver
       zotero
@@ -245,6 +247,7 @@ in
       "application/pdf" = ["${pdf-app}"];
       "image/bmp"= ["${img-app}"];
       "image/gif"=["${img-app}"];
+      "image/jpeg"=["${img-app}"];
       "image/jpg"=["${img-app}"];
       "image/pjpeg"=["${img-app}"];
       "image/png"=["${img-app}"];
