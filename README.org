@@ -319,6 +319,7 @@ The themes I use
 
 #+name: applications
 #+begin_src text
+  gimp-with-plugins
   qbittorrent
   chromedriver
   zotero
@@ -365,6 +366,7 @@ The themes I use
 it here.  I'll keep it for now.
 #+name: cli
 #+begin_src text
+  python311Packages.pyclip
   firejail
   lilypond
   arduino
