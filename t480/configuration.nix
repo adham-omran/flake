@@ -59,8 +59,8 @@ in
   
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
-    gnome.enable = false;
-    plasma5.enable = true;
+    gnome.enable = true;
+    plasma5.enable = false;
   };
   
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -74,7 +74,6 @@ in
       gnome-photos
       gnome-tour
     ]) ++ (with pkgs.gnome; [
-      nautilus
       cheese
       gnome-music
       gnome-terminal
@@ -146,8 +145,9 @@ in
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  }
+  ;
   
   # enable sway window manager
   programs.sway = {
@@ -280,7 +280,7 @@ in
   
   (deflayer colemak
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-      grv  @1   @2   @3   @4   @5   @6   @7   @8   @9   @0    -    =    bspc
+      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
       tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
       caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
       lsft z    x    c    v    b    k    m    ,    .    /    rsft
