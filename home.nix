@@ -2,7 +2,7 @@
 let
   archive-app="org.kde.ark.desktop";
   pdf-app="sioyek.desktop";
-  img-app="feh.desktop";
+  img-app="org.kde.gwenview.desktop";
   browser-app="firefox.desktop";
   video-app="vlc.desktop";
 in
@@ -224,7 +224,7 @@ in
   
   home.sessionVariables.GTK_THEME = "palenight";
   xdg.mimeApps = {
-    enable = true;
+    enable = false;
     associations.added = {
   
     };
