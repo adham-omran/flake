@@ -566,7 +566,7 @@ Debian 12 and running Moonlight to access it.
 #+begin_src nix
   archive-app="org.kde.ark.desktop";
   pdf-app="sioyek.desktop";
-  img-app="feh.desktop";
+  img-app="org.kde.gwenview.desktop";
   browser-app="firefox.desktop";
   video-app="vlc.desktop";
 #+end_src
@@ -574,7 +574,7 @@ Debian 12 and running Moonlight to access it.
 #+name: mimeapps
 #+begin_src nix
   xdg.mimeApps = {
-    enable = true;
+    enable = false;
     associations.added = {
 
     };
