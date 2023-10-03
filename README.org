@@ -750,8 +750,8 @@ I currently use GNOME.
 #+begin_src nix :noweb yes
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager = {
-    gnome.enable = false;
-    plasma5.enable = true;
+    gnome.enable = true;
+    plasma5.enable = false;
   };
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -762,7 +762,6 @@ I currently use GNOME.
 Exclude the following packages
 | Package          | Description               |
 |------------------+---------------------------|
-| nautilus         | Files, replaced with Nemo |
 | cheese           | Webcam tool               |
 | gnome-music      | Music player              |
 | gnome-terminal   | Terminal                  |
@@ -786,7 +785,6 @@ Exclude the following packages
       gnome-photos
       gnome-tour
     ]) ++ (with pkgs.gnome; [
-      nautilus
       cheese
       gnome-music
       gnome-terminal
@@ -970,8 +968,9 @@ variables
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  }
+  ;
 
   # enable sway window manager
   programs.sway = {
