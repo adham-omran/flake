@@ -1093,26 +1093,27 @@ Garbage collection. Delete every week any generation that's older than 7 days.
   environment.systemPackages = with pkgs; [
     <<sway-packages>>
     hyprpaper
-    canon-cups-ufr2
-    OVMFFull
-    slstatus
-    st
-    surf
-    tabbed
-    dmenu
-    unzip
-    cmatrix
-    libsForQt5.okular
-    rsync
+      canon-cups-ufr2
+      OVMFFull
+      slstatus
+      st
+      surf
+      tabbed
+      dmenu
+      unzip
+      cmatrix
+      libsForQt5.okular
+      rsync
 
-    openssl
-    pinentry
-    pinentry-gtk2
-    syncthing
-    killall
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    virt-manager
+      openssl
+      pinentry
+      pinentry-gtk2
+      syncthing
+      killall
+      virt-manager
+      gnome.adwaita-icon-theme
+      gnomeExtensions.appindicator
+      gnome.gnome-tweaks
     <<emacs-packages>>
 #+end_src
 
