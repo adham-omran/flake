@@ -208,26 +208,27 @@ in
     mako
     wdisplays
     hyprpaper
-    canon-cups-ufr2
-    OVMFFull
-    slstatus
-    st
-    surf
-    tabbed
-    dmenu
-    unzip
-    cmatrix
-    libsForQt5.okular
-    rsync
+      canon-cups-ufr2
+      OVMFFull
+      slstatus
+      st
+      surf
+      tabbed
+      dmenu
+      unzip
+      cmatrix
+      libsForQt5.okular
+      rsync
   
-    openssl
-    pinentry
-    pinentry-gtk2
-    syncthing
-    killall
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    virt-manager
+      openssl
+      pinentry
+      pinentry-gtk2
+      syncthing
+      killall
+      virt-manager
+      gnome.adwaita-icon-theme
+      gnomeExtensions.appindicator
+      gnome.gnome-tweaks
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
     	  epkgs.vterm
