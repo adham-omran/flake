@@ -22,6 +22,7 @@ in
       babashka
       leiningen
       clojure-lsp
+      imagemagick
       python311Packages.pyclip
       firejail
       lilypond
