@@ -97,9 +97,6 @@ in
       google-chrome
       geckodriver
       
-      libsForQt5.kcalc
-      libsForQt5.kclock
-      libsForQt5.krdc
       libsForQt5.gwenview
       krusader
       
