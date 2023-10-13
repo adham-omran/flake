@@ -364,6 +364,7 @@ The themes I use
 it here.  I'll keep it for now.
 #+name: cli
 #+begin_src text
+  imagemagick
   python311Packages.pyclip
   firejail
   lilypond
