@@ -50,7 +50,7 @@ a complete replication for packages between the two.
 * Usage
 These are my ideas about how I use my system.  The Nix ecosystem is based on the
 idea of reproducible builds and deployment.  Nix is the language and there's
-also the Nix package manager, NixOS is a Linux distrubution based on Nix,
+also the Nix package manager, NixOS is a Linux distribution based on Nix,
 Nixpkgs are the the Nix packages, about 80,000 packages.
 ** NixOS as a stable workstation
 
@@ -58,7 +58,7 @@ My idea for a stable workstation is like a set of layers, on the base there's
 the operating system, NixOS.  Above that is the window manager or desktop
 environment which is dwm in my case.  Above that are the packages installed by
 Nix and lastly the packages installed by Flatpak.
-** Flatpack for applications
+** Flatpak for applications
 Currently I run the following applications from Flathub
 | Application | Description                 |
 |-------------+-----------------------------|
@@ -104,14 +104,15 @@ found a few guides but have not tested any myself.
 
 If I can't make it work I'll just dual boot with Windows.
 
-
 *** Resources
 - [[https://nixos.wiki/wiki/PCI_passthrough][PCI passthrough - NixOS Wiki]]
 - [[https://gist.github.com/CRTified/43b7ce84cd238673f7f24652c85980b3][VFIO Passthrough on NixOS · GitHub (2019-2021)]]
 - [[https://forum.level1techs.com/t/nixos-vfio-pcie-passthrough/130916][NixOS VFIO PCIe Passthrough - Wikis & How-to Guides - Level1Techs Forums (2018-2022)]]
 - [[https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/][A GPU Passthrough Setup  for NixOS (with VR passthrough too!) | astrid.tech (2022-09-22)]]
-*** Last Resort
-- [ ] Can this be done with ~virt-manager~ installed inside an Arch Linux ~distrobox~?
+*** Proxmox
+I could run Proxmox as the base and NixOS on top as a VM with a GPU passed to
+it.  This would enable me to run Windows in a VM too with GPU passthrough, I do
+not know the limitations of this approach.
 
 * flake.nix
 Most newer configurations are a flake, although an experimental feature at the
@@ -1089,6 +1090,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 #+begin_src nix :noweb yes
   environment.systemPackages = with pkgs; [
     <<sway-packages>>
+
     hyprpaper
       canon-cups-ufr2
       OVMFFull
@@ -1335,7 +1337,7 @@ For Emacs packages that need to be built, such as ~vterm~ and ~jinx~.
 #+end_src
 
 *** Overlay
-The overlay is only for Emacs unstable and is currenly not in use, to use it add
+The overlay is only for Emacs unstable and is currently not in use, to use it add
 ~<<overlay>>~ to the noweb references.
 
 #+name: overlays
@@ -1382,5 +1384,5 @@ Taken from [[https://www.youtube.com/watch?v=1qd0iHadvdo][Chris Titus]].
 #+end_src
 
 # Local Variables:
-# jinx-local-words: "Hyprland Optiplex Waydroid Wayland picom"
+# jinx-local-words: "Flatpack Flatpak Hyprland Nixpkgs Optiplex Proxmox Screencast Waydroid Wayland arandr blueman cachix dmenu dunst dwm ffcast flameshot fuzzel hyprland noweb passthrough picom slstatus systemd waybar wdisplays wf"
 # End:
