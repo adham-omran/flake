@@ -783,7 +783,6 @@ Exclude the following packages
       gnome-photos
       gnome-tour
     ]) ++ (with pkgs.gnome; [
-      cheese
       gnome-music
       gnome-terminal
       gedit
