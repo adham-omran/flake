@@ -51,7 +51,7 @@
         t480 = lib.nixosSystem {
           inherit system;
           modules = [
-            ./configuration.nix
+            ./t480/configuration.nix
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

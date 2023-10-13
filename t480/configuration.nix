@@ -74,7 +74,6 @@ in
       gnome-photos
       gnome-tour
     ]) ++ (with pkgs.gnome; [
-      cheese
       gnome-music
       gnome-terminal
       gedit
@@ -207,6 +206,7 @@ in
     wl-clipboard
     mako
     wdisplays
+  
     hyprpaper
       canon-cups-ufr2
       OVMFFull
