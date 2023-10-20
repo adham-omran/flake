@@ -77,6 +77,7 @@ in
       pfetch
       pass
       bitwarden
+      freetube
       gimp-with-plugins
       qbittorrent
       chromedriver
