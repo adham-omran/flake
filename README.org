@@ -320,6 +320,7 @@ The themes I use
 
 #+name: applications
 #+begin_src text
+  freetube
   gimp-with-plugins
   qbittorrent
   chromedriver
