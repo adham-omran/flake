@@ -187,6 +187,7 @@ in
     enable = true;
     config = {
       "should_launch_new_window" = "1";
+      "shared_database_path" = "/home/adham/docs/sioyek-shared/";
     };
   };
   gtk = {
