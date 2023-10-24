@@ -51,8 +51,9 @@ in
       warpd
       distrobox
       
-      hunspell
-      hunspellDicts.en_US
+      aspell
+      aspellDicts.en
+      aspellDicts.ar
       
       yt-dlp
       gnuplot
@@ -85,7 +86,6 @@ in
       libreoffice-qt
       reaper
       nyxt
-      element-desktop
       anki-bin
       frescobaldi
       sonobus
@@ -167,8 +167,8 @@ in
     userName  = "adham-omran";
     userEmail = "git@adham-omran.com";
     signing = {
-  	  signByDefault = true;
-  	  key = "4D37E0ADEE0B9138";
+            signByDefault = true;
+            key = "4D37E0ADEE0B9138";
     };
   };
   
@@ -187,7 +187,7 @@ in
     enable = true;
     config = {
       "should_launch_new_window" = "1";
-      "shared_database_path" = "/home/adham/docs/sioyek-shared/";
+      "shared_database_path" = "/home/adham/docs/sioyek-shared/shared.db";
     };
   };
   gtk = {

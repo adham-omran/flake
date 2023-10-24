@@ -37,8 +37,8 @@ in
 {
   imports =
     [
-	  ./hardware-configuration.nix
-	  ./cachix.nix
+          ./hardware-configuration.nix
+          ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -231,8 +231,8 @@ in
       gnome.gnome-tweaks
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
-    	  epkgs.vterm
-    	  epkgs.jinx
+              epkgs.vterm
+              epkgs.jinx
       ]))
     ];
   services.mpd.user = "userRunningPipeWire";
@@ -334,11 +334,11 @@ in
     ];
   
     extraConfig = ''
-  	    set -g default-terminal "xterm-256color"
-  	    set -ga terminal-overrides ",*256col*:Tc"
-  	    set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-  	    set-environment -g COLORTERM "truecolor"
-  	      '';
+              set -g default-terminal "xterm-256color"
+              set -ga terminal-overrides ",*256col*:Tc"
+              set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+              set-environment -g COLORTERM "truecolor"
+                '';
   };
   services.power-profiles-daemon.enable = false;
   services.tlp = {
