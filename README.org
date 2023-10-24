@@ -127,8 +127,8 @@ mention the power of declarative dotfiles.
 #+begin_src nix
   nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
   home-manager = {
-	  url = "github:nix-community/home-manager/release-23.05";
-	  inputs.nixpkgs.follows = "nixpkgs";
+          url = "github:nix-community/home-manager/release-23.05";
+          inputs.nixpkgs.follows = "nixpkgs";
   };
 #+end_src
 
@@ -138,61 +138,61 @@ mention the power of declarative dotfiles.
 
     inputs =
       {
-	<<inputs>>
+        <<inputs>>
       };
 
     outputs = { self, nixpkgs, home-manager, ... }@inputs:
       let
-	system = "x86_64-linux";
-	pkgs = import nixpkgs {
-		inherit system;
-		config.allowUnfree = true;
-	};
-	lib = nixpkgs.lib;
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+        };
+        lib = nixpkgs.lib;
       in {
-	nixosConfigurations = {
-		nixos = lib.nixosSystem {
-			inherit system;
-			modules = [
-				./configuration.nix
-				home-manager.nixosModules.home-manager {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.users.adham = {
-						imports = [ ./home.nix ];
-					};
-				}
-			];
-		};
+        nixosConfigurations = {
+                nixos = lib.nixosSystem {
+                        inherit system;
+                        modules = [
+                                ./configuration.nix
+                                home-manager.nixosModules.home-manager {
+                                        home-manager.useGlobalPkgs = true;
+                                        home-manager.useUserPackages = true;
+                                        home-manager.users.adham = {
+                                                imports = [ ./home.nix ];
+                                        };
+                                }
+                        ];
+                };
 
-		extraStuff = lib.nixosSystem {
-			inherit system;
-			modules = [
-				./basic/configuration.nix
-				home-manager.nixosModules.home-manager {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.users.adham = {
-						imports = [ ./home.nix ];
-					};
-				}
-			];
-		};
+                extraStuff = lib.nixosSystem {
+                        inherit system;
+                        modules = [
+                                ./basic/configuration.nix
+                                home-manager.nixosModules.home-manager {
+                                        home-manager.useGlobalPkgs = true;
+                                        home-manager.useUserPackages = true;
+                                        home-manager.users.adham = {
+                                                imports = [ ./home.nix ];
+                                        };
+                                }
+                        ];
+                };
 
-		t480 = lib.nixosSystem {
-			inherit system;
-			modules = [
-				./t480/configuration.nix
-				home-manager.nixosModules.home-manager {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.users.adham = {
-						imports = [ ./home.nix ];
-					};
-				}
-			];
-		};
-	};
+                t480 = lib.nixosSystem {
+                        inherit system;
+                        modules = [
+                                ./t480/configuration.nix
+                                home-manager.nixosModules.home-manager {
+                                        home-manager.useGlobalPkgs = true;
+                                        home-manager.useUserPackages = true;
+                                        home-manager.users.adham = {
+                                                imports = [ ./home.nix ];
+                                        };
+                                }
+                        ];
+                };
+        };
       };
   }
 
@@ -208,15 +208,15 @@ mention the power of declarative dotfiles.
     home = {
       stateVersion = "23.05";
       packages = with pkgs; [
-	<<remote-control>>
-	<<video-audio>>
-	<<clojure>>
-	<<cli>>
-	<<password-managers>>
-	<<applications>>
-	<<gtk-themes>>
-	<<x11-utilities>>
-	<<wayland-utilities>>
+        <<remote-control>>
+        <<video-audio>>
+        <<clojure>>
+        <<cli>>
+        <<password-managers>>
+        <<applications>>
+        <<gtk-themes>>
+        <<x11-utilities>>
+        <<wayland-utilities>>
       ];
     };
     <<picom>>
@@ -260,14 +260,14 @@ The themes I use
 
     gtk3.extraConfig = {
       Settings = ''
-	gtk-application-prefer-dark-theme=1
-	gtk-cursor-theme-size=20
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-size=20
       '';
     };
 
     gtk4.extraConfig = {
       Settings = ''
-	gtk-application-prefer-dark-theme=1
+        gtk-application-prefer-dark-theme=1
       '';
     };
   };
@@ -287,8 +287,8 @@ The themes I use
     userName  = "adham-omran";
     userEmail = "git@adham-omran.com";
     signing = {
-	    signByDefault = true;
-	    key = "4D37E0ADEE0B9138";
+            signByDefault = true;
+            key = "4D37E0ADEE0B9138";
     };
   };
 
@@ -639,7 +639,7 @@ use home-manager for dotfiles.
 
    #+begin_src nix
      home.file.".gdbinit".text = ''
-	 set auto-load safe-path /nix/store
+         set auto-load safe-path /nix/store
      '';
    #+end_src
    This will create ~~/.gdbinit~.
@@ -666,7 +666,7 @@ Help is available in the ~configuration.nix(5)~ man page and in the NixOS manual
   {
     imports =
       [
-	    <<modules>>
+            <<modules>>
       ];
     <<config-boot>>
     <<config-networking>>
@@ -1214,9 +1214,9 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 
     fontconfig = {
       defaultFonts = {
-	serif = [ "Noto Sans" "Noto Naskh Arabic"];
-	sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
-	monospace = [ "JetBrains Mono" ];
+        serif = [ "Noto Sans" "Noto Naskh Arabic"];
+        sansSerif = [ "Noto Sans" "Noto Naskh Arabic" ];
+        monospace = [ "JetBrains Mono" ];
       };
     };
   };
@@ -1232,8 +1232,8 @@ Garbage collection. Delete every week any generation that's older than 7 days.
   ];
 
   extraConfig = ''
-	    <<tmux-config>>
-	      '';
+            <<tmux-config>>
+              '';
 };
 #+end_src
 
@@ -1332,8 +1332,8 @@ For Emacs packages that need to be built, such as ~vterm~ and ~jinx~.
 #+begin_src nix :noweb yes
   ((emacsPackagesFor <<emacs-variation>>).emacsWithPackages (epkgs:
     [
-	    epkgs.vterm
-	    epkgs.jinx
+            epkgs.vterm
+            epkgs.jinx
     ]))
   ];
 #+end_src
@@ -1372,7 +1372,7 @@ Overlay Emacs for latest release.
     };
     path = with pkgs; [ bash notmuch isync ];
     script = ''
-	mbsync -a
+        mbsync -a
       '';
   };
 #+end_src
