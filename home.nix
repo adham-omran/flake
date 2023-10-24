@@ -190,39 +190,7 @@ in
       "shared_database_path" = "/home/adham/docs/sioyek-shared/shared.db";
     };
   };
-  gtk = {
-    enable = true;
-  
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-  
-    theme = {
-      name = "palenight";
-      package = pkgs.palenight-theme;
-    };
-  
-    cursorTheme = {
-      name = "Quintom_Ink";
-      package = pkgs.quintom-cursor-theme;
-    };
-  
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-        gtk-cursor-theme-size=20
-      '';
-    };
-  
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
-  
-  home.sessionVariables.GTK_THEME = "palenight";
+
   xdg.mimeApps = {
     enable = false;
     associations.added = {

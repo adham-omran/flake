@@ -223,7 +223,7 @@ mention the power of declarative dotfiles.
     <<mpd-home>>
     <<mpdris2>>
     <<home-manager-programs>>
-    <<home-manager-gtk-theme>>
+
     <<mimeapps>>
   }
 #+end_src
