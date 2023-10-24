@@ -395,8 +395,9 @@ it here.  I'll keep it for now.
   warpd
   distrobox
 
-  hunspell
-  hunspellDicts.en_US
+  aspell
+  aspellDicts.en
+  aspellDicts.ar
 
   yt-dlp
   gnuplot
