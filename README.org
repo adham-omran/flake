@@ -329,7 +329,6 @@ The themes I use
   libreoffice-qt
   reaper
   nyxt
-  element-desktop
   anki-bin
   frescobaldi
   sonobus
