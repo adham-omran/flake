@@ -1051,6 +1051,13 @@ https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05";
 #+end_src
 ** Nix
+#+begin_src nix
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
+  ];
+#+end_src
+
+
 Allow unfree packages
 #+name: nix-unfree
 #+begin_src nix
