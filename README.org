@@ -1057,7 +1057,6 @@ https://nixos.org/nixos/options.html).
   ];
 #+end_src
 
-
 Allow unfree packages
 #+name: nix-unfree
 #+begin_src nix
