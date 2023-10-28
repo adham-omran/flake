@@ -8,6 +8,17 @@
 My NixOS configuration flake so far.
 
 ** What I use
+| Description         | Software (Wayland) |
+|---------------------+--------------------|
+| Desktop Environment | GNOME              |
+| Editor              | Emacs              |
+| Terminal            | foot               |
+| Browser             | Firefox            |
+
+GNOME (Wayland) works fine for my current use-cases and I am enjoying the
+one-workspace per application workflow.
+
+** What I used to use
 | Description     | Software (X11) | Software (Wayland) |
 |-----------------+----------------+--------------------|
 | Window Manager  | dwm            | hyprland           |
