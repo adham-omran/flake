@@ -1204,6 +1204,10 @@ Garbage collection. Delete every week any generation that's older than 7 days.
 ~vazir-fonts~ is a [[https://rastikerdar.github.io/vazirmatn/en][Persian-Arabic typeface family]].
 
 ~fontconfig~ tells the system which font to use system-wide.
+
+- [ ] When upgrading to ~23.11~ make sure to rename ~noto-fonts-emoji~ to
+  ~noto-fonts-color-emoji~.  See [[https://nixos.org/manual/nixos/unstable/release-notes#sec-release-23.11-incompatibilities][NixOS 23.11 - Backward Incompatibilities]] and
+  [[https://github.com/NixOS/nixpkgs/issues/221181][#221181]].
 #+name: fonts
 #+begin_src nix
   fonts = {
