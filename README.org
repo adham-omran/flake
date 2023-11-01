@@ -76,7 +76,6 @@ Currently I run the following applications from Flathub
 | darktable   | Photo library management    |
 | qBittorrent | Torrent client              |
 | Rnote       | Drawing app                 |
-| Zeal        | Offline documentation       |
 *** Why use Flatpak?
 - More up to date packages without having an unstable system.
 - Usually packaged by the developers themselves.
@@ -332,6 +331,7 @@ The themes I use
 
 #+name: applications
 #+begin_src text
+  zeal
   freetube
   gimp-with-plugins
   qbittorrent
