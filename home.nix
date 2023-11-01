@@ -78,6 +78,7 @@ in
       pfetch
       pass
       bitwarden
+      zeal
       freetube
       gimp-with-plugins
       qbittorrent
