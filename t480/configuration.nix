@@ -364,6 +364,11 @@ in
   
   programs.adb.enable = true;
   system.stateVersion = "23.05";
+  nixpkgs.config.permittedInsecurePackages = [
+    "zotero-6.0.26"
+    "electron-24.8.6"
+    "electron-22.3.27"
+  ];
   nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
