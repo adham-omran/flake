@@ -361,7 +361,6 @@ The themes I use
   foliate
 
   zulip
-  discord
   telegram-desktop
   spotify
 #+end_src
