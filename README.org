@@ -74,8 +74,6 @@ Currently I run the following applications from Flathub
 | Application | Description                 |
 |-------------+-----------------------------|
 | darktable   | Photo library management    |
-| qBittorrent | Torrent client              |
-| Rnote       | Drawing app                 |
 *** Why use Flatpak?
 - More up to date packages without having an unstable system.
 - Usually packaged by the developers themselves.
