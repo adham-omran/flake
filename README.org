@@ -1341,10 +1341,10 @@ emacs29-pgtk
 
 #+name: emacs
 #+begin_src nix
-services.emacs = {
-    enable = true;
-    package = pkgs.<<emacs-variation>>;
-  };
+  services.emacs = {
+      enable = true;
+      package = import /home/adham/.emacs.d {pkgs = pkgs.<<emacs-variation>>};
+    };
 #+end_src
 For Emacs packages that need to be built, such as ~vterm~ and ~jinx~.
 #+name: emacs-packages
