@@ -22,6 +22,7 @@ in
       babashka
       leiningen
       clojure-lsp
+      activitywatch
       imagemagick
       python311Packages.pyclip
       firejail
@@ -108,7 +109,6 @@ in
       foliate
       
       zulip
-      discord
       telegram-desktop
       spotify
       paper-gtk-theme
