@@ -761,7 +761,7 @@ I currently use GNOME.
 
 #+name: desktop-environment
 #+begin_src nix :noweb yes
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = true;
     plasma5.enable = false;
