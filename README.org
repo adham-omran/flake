@@ -974,10 +974,7 @@ variables
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  }
-  ;
+  };
 
   # enable sway window manager
   programs.sway = {
@@ -1043,7 +1040,6 @@ Open ports in the firewall.
 #+begin_src nix
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
-  # Or disable the firewall altogether.
   networking.firewall.enable = true;
 #+end_src
 ** Version
