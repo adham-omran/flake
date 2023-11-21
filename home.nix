@@ -79,6 +79,7 @@ in
       pfetch
       pass
       bitwarden
+      element-desktop
       zeal
       freetube
       gimp-with-plugins
