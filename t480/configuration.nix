@@ -57,7 +57,7 @@ in
     layout = "us";
   };
   
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = true;
     plasma5.enable = false;
@@ -117,11 +117,6 @@ in
   services.flatpak.enable = true;
   fonts.fontDir.enable = true;
   
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
   
@@ -143,10 +138,7 @@ in
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  }
-  ;
+  };
   
   # enable sway window manager
   programs.sway = {
@@ -185,7 +177,6 @@ in
   services.openssh.enable = true;
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
-  # Or disable the firewall altogether.
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
     
