@@ -329,7 +329,7 @@ The themes I use
 
 #+name: applications
 #+begin_src text
-  element-desktop
+  element-desktop-wayland
   zeal
   freetube
   gimp-with-plugins
