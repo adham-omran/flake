@@ -286,6 +286,11 @@ The themes I use
 ** Programs
 #+name: home-manager-programs
 #+begin_src nix
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
+
   programs.hexchat = {
     enable = true;
   };
