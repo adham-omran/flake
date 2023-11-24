@@ -79,7 +79,7 @@ in
       pfetch
       pass
       bitwarden
-      element-desktop
+      element-desktop-wayland
       zeal
       freetube
       gimp-with-plugins
@@ -160,6 +160,11 @@ in
     mpd.host = "127.0.0.1";
     mpd.port = 9900;
   };
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
+  
   programs.hexchat = {
     enable = true;
   };
