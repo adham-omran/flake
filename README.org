@@ -448,7 +448,6 @@ it here.  I'll keep it for now.
 #+name: password-managers
 #+begin_src text
   pass
-  bitwarden
 #+end_src
 ** X11
 The following are X11 utilities.

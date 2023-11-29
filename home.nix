@@ -78,7 +78,6 @@ in
       pavucontrol
       pfetch
       pass
-      bitwarden
       element-desktop-wayland
       zeal
       freetube
