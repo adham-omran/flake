@@ -172,7 +172,7 @@ in
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
   services.openssh.enable = true;
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
@@ -214,6 +214,7 @@ in
       openssl
       pinentry
       pinentry-gtk2
+      pinentry-gnome
       syncthing
       killall
       virt-manager

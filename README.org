@@ -1029,7 +1029,7 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
 #+end_src
 ** SSH
@@ -1129,6 +1129,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
       openssl
       pinentry
       pinentry-gtk2
+      pinentry-gnome
       syncthing
       killall
       virt-manager
