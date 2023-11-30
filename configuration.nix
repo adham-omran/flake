@@ -354,7 +354,7 @@ in
   };
   
   programs.adb.enable = true;
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   nixpkgs.config.permittedInsecurePackages = [
     "zotero-6.0.26"
     "electron-24.8.6"

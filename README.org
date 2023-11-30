@@ -127,15 +127,15 @@ Most newer configurations are a flake, although an experimental feature at the
 moment.  They offer a lot of potential with the few interactions I've had with
 them so far.
 
-I'm running the latest stable which is ~23.05~ with [[https://nixos.wiki/wiki/Home_Manager][home-manager]] in my flake. I
+I'm running the latest stable which is ~23.11~ with [[https://nixos.wiki/wiki/Home_Manager][home-manager]] in my flake. I
 find the separation between the user and the system quite interesting not to
 mention the power of declarative dotfiles.
 
 #+name: inputs
 #+begin_src nix
-  nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+  nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
   home-manager = {
-          url = "github:nix-community/home-manager/release-23.05";
+          url = "github:nix-community/home-manager/release-23.11";
           inputs.nixpkgs.follows = "nixpkgs";
   };
 #+end_src
@@ -214,7 +214,7 @@ mention the power of declarative dotfiles.
   in
   {
     home = {
-      stateVersion = "23.05";
+      stateVersion = "23.11";
       packages = with pkgs; [
         <<remote-control>>
         <<video-audio>>
@@ -1054,7 +1054,7 @@ the documentation for this option (e.g. man configuration.nix or on
 https://nixos.org/nixos/options.html).
 #+name: version
 #+begin_src nix
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 #+end_src
 ** Nix
 | Package          | Reason        |
