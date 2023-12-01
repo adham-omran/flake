@@ -1066,8 +1066,6 @@ https://nixos.org/nixos/options.html).
 #+begin_src nix
   nixpkgs.config.permittedInsecurePackages = [
     "zotero-6.0.26"
-    "electron-24.8.6"
-    "electron-22.3.27"
   ];
 #+end_src
 

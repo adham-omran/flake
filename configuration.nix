@@ -358,8 +358,6 @@ in
   system.stateVersion = "23.11";
   nixpkgs.config.permittedInsecurePackages = [
     "zotero-6.0.26"
-    "electron-24.8.6"
-    "electron-22.3.27"
   ];
   nixpkgs.config.allowUnfree = true;
   nix = {
