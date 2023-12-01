@@ -164,10 +164,6 @@ in
     package = pkgs.vscode.fhs;
   };
   
-  programs.hexchat = {
-    enable = true;
-  };
-  
   programs.git = {
     enable = true;
     userName  = "adham-omran";

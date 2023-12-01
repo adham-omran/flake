@@ -291,10 +291,6 @@ The themes I use
     package = pkgs.vscode.fhs;
   };
 
-  programs.hexchat = {
-    enable = true;
-  };
-
   programs.git = {
     enable = true;
     userName  = "adham-omran";
