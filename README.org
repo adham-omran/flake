@@ -762,6 +762,7 @@ Enable networking
 ** Desktop Environment
 I currently use GNOME.
 
+Enable Electron for [[https://nixos.wiki/wiki/Wayland][Wayland]] by setting ~NIXOS_OZONE_WL~ to "1".
 #+name: desktop-environment
 #+begin_src nix :noweb yes
   services.xserver.displayManager.gdm.enable = true;
@@ -769,6 +770,7 @@ I currently use GNOME.
     gnome.enable = true;
     plasma5.enable = false;
   };
+ environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;

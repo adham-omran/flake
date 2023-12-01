@@ -57,36 +57,37 @@ in
     layout = "us";
   };
   
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager = {
-    gnome.enable = true;
-    plasma5.enable = false;
-  };
+   services.xserver.displayManager.gdm.enable = true;
+   services.xserver.desktopManager = {
+     gnome.enable = true;
+     plasma5.enable = false;
+   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-  programs.dconf.enable = true;
-  environment = {
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-    ];
-  
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-terminal
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
-  };
+   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+   programs.dconf.enable = true;
+   environment = {
+     plasma5.excludePackages = with pkgs.libsForQt5; [
+       elisa
+     ];
+   
+     gnome.excludePackages = (with pkgs; [
+       gnome-photos
+       gnome-tour
+     ]) ++ (with pkgs.gnome; [
+       gnome-music
+       gnome-terminal
+       gedit
+       epiphany
+       geary
+       gnome-characters
+       totem
+       tali
+       iagno
+       hitori
+       atomix
+     ]);
+   };
   services.xserver.windowManager.dwm.enable = true;
   programs.slock.enable = true;
   nixpkgs.overlays = [
