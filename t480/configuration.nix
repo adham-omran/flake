@@ -5,14 +5,14 @@ let
     name = "dbus-sway-environment";
     destination = "/bin/dbus-sway-environment";
     executable = true;
-
+  
     text = ''
       dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
       systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
       systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
     '';
   };
-
+  
   # currently, there is some friction between sway and gtk:
   # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
   # the suggested way to set gtk settings is with gsettings
@@ -37,17 +37,17 @@ in
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./cachix.nix
+          ./hardware-configuration.nix
+          ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
+  
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-
+  
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
@@ -56,20 +56,20 @@ in
     enable = true;
     layout = "us";
   };
-
+  
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = true;
     plasma5.enable = false;
   };
-
+  
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
   environment = {
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
     ];
-
+  
     gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
@@ -103,7 +103,7 @@ in
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
-
+  
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
@@ -113,21 +113,21 @@ in
   hardware.sane.openFirewall = true;
   services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
-
+  
   services.flatpak.enable = true;
   fonts.fontDir.enable = true;
-
+  
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
-
+  
   services.syncthing = {
     enable = true;
     user = "adham";
     configDir = "/home/adham/.config/syncthing";
   };
-
+  
   services.blueman.enable = true;
-
+  
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
   # (org.freedesktop.portal.Desktop) and object path
@@ -139,13 +139,13 @@ in
     enable = true;
     wlr.enable = true;
   };
-
+  
   # enable sway window manager
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
   };
-
+  
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -179,7 +179,7 @@ in
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
-
+    
     autotiling
     wmenu
     foot
@@ -197,62 +197,62 @@ in
     wl-clipboard
     mako
     wdisplays
-
+  
     (python39.withPackages(ps: with ps; [ pandas requests
                                           epc orjson
                                           sexpdata six
                                           setuptools paramiko
                                           rapidfuzz
                                         ]))
-
+  
     hyprpaper
-    canon-cups-ufr2
-    OVMFFull
-    slstatus
-    st
-    surf
-    tabbed
-    dmenu
-    unzip
-    cmatrix
-    libsForQt5.okular
-    rsync
-
-    openssl
-    pinentry
-    pinentry-gtk2
-    syncthing
-    killall
-    virt-manager
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    gnome.gnome-tweaks
+      canon-cups-ufr2
+      OVMFFull
+      slstatus
+      st
+      surf
+      tabbed
+      dmenu
+      unzip
+      cmatrix
+      libsForQt5.okular
+      rsync
+  
+      openssl
+      pinentry
+      pinentry-gtk2
+      syncthing
+      killall
+      virt-manager
+      gnome.adwaita-icon-theme
+      gnomeExtensions.appindicator
+      gnome.gnome-tweaks
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
-        epkgs.vterm
-        epkgs.jinx
+              epkgs.vterm
+              epkgs.jinx
       ]))
-  ];
+    ];
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
   services.kanata.enable = true;
   services.kanata.package = pkgs.kanata;
-
+  
   services.kanata.keyboards.usb.devices = [
     "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
     "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
   ];
-
+  
   services.kanata.keyboards.usb.config = ''
   (defvar
     tap-timeout   150
     hold-timeout  150
     tt $tap-timeout
     ht $hold-timeout
-  )
-
+    )
+  
   (defalias
     qwt (layer-switch qwerty)
     col (layer-switch colemak)
@@ -260,14 +260,14 @@ in
     r (tap-hold $tt $ht r lalt)
     s (tap-hold $tt $ht s lctl)
     t (tap-hold $tt $ht t lsft)
-
+  
     n (tap-hold $tt $ht n rsft)
     e (tap-hold $tt $ht e rctl)
     i (tap-hold $tt $ht i ralt)
     o (tap-hold $tt $ht o rmet)
-
-  )
-
+  
+    )
+  
   (defsrc
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -275,8 +275,8 @@ in
       caps a    s    d    f    g    h    j    k    l    ;    '    ret
       lsft z    x    c    v    b    n    m    ,    .    /    rsft
       lctl lmet lalt           spc            ralt    rctl
-  )
-
+      )
+  
   (deflayer colemak
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -284,8 +284,8 @@ in
       caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
       lsft z    x    c    v    b    k    m    ,    .    /    rsft
       lctl lmet lalt           spc            @qwt    rctl
-  )
-
+      )
+  
   (deflayer qwerty
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -293,7 +293,7 @@ in
       caps a    s    d    f    g    h    j    k    l    ;    '    ret
       lsft z    x    c    v    b    n    m    ,    .    /    rsft
       lctl lmet lalt           spc            @col    rctl
-  )
+      )
   '';
   fonts = {
     enableDefaultFonts = true;
@@ -308,14 +308,14 @@ in
       scheherazade-new
       jetbrains-mono
       hack-font
-
+  
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-
+  
       vazir-fonts
     ];
-
+  
     fontconfig = {
       defaultFonts = {
         serif = [ "Noto Sans" "Noto Naskh Arabic"];
@@ -324,13 +324,13 @@ in
       };
     };
   };
-  programs.tmux = {
-    enable = true;
-
+    programs.tmux = {
+      enable = true;
+  
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
     ];
-
+  
     extraConfig = ''
               set -g default-terminal "xterm-256color"
               set -ga terminal-overrides ",*256col*:Tc"
@@ -341,14 +341,14 @@ in
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
-
+  
     settings = {
       START_CHARGE_THRESH_BAT0=75;
       STOP_CHARGE_THRESH_BAT0=95;
-
+  
       START_CHARGE_THRESH_BAT1=75;
       STOP_CHARGE_THRESH_BAT1=95;
-
+  
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     };
@@ -359,7 +359,7 @@ in
     lxd.enable = true;
     libvirtd.enable = true;
   };
-
+  
   programs.adb.enable = true;
   system.stateVersion = "23.05";
   nixpkgs.config.permittedInsecurePackages = [
@@ -372,7 +372,7 @@ in
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
-
+  
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   nix.settings.auto-optimise-store = true;
   nix.gc = {
