@@ -22,6 +22,7 @@ in
       babashka
       leiningen
       clojure-lsp
+      multimarkdown
       activitywatch
       imagemagick
       python311Packages.pyclip

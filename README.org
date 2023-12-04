@@ -379,6 +379,7 @@ The themes I use
 it here.  I'll keep it for now.
 #+name: cli
 #+begin_src text
+  multimarkdown
   activitywatch
   imagemagick
   python311Packages.pyclip
