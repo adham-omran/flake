@@ -1113,6 +1113,13 @@ Garbage collection. Delete every week any generation that's older than 7 days.
   environment.systemPackages = with pkgs; [
     <<sway-packages>>
 
+    (python39.withPackages(ps: with ps; [ pandas requests
+                                          epc orjson
+                                          sexpdata six
+                                          setuptools paramiko
+                                          rapidfuzz
+                                        ]))
+
     hyprpaper
       canon-cups-ufr2
       OVMFFull

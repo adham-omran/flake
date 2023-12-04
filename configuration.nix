@@ -198,6 +198,13 @@ in
     mako
     wdisplays
   
+    (python39.withPackages(ps: with ps; [ pandas requests
+                                          epc orjson
+                                          sexpdata six
+                                          setuptools paramiko
+                                          rapidfuzz
+                                        ]))
+  
     hyprpaper
       canon-cups-ufr2
       OVMFFull
