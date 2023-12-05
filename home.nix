@@ -22,6 +22,7 @@ in
       babashka
       leiningen
       clojure-lsp
+      graalvm-ce
       multimarkdown
       activitywatch
       imagemagick
