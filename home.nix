@@ -8,7 +8,7 @@ let
 in
 {
   home = {
-    stateVersion = "23.05";
+    stateVersion = "23.11";
     packages = with pkgs; [
       sunshine
       moonlight-qt
@@ -164,10 +164,6 @@ in
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
-  };
-  
-  programs.hexchat = {
-    enable = true;
   };
   
   programs.git = {

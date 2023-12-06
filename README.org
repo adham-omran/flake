@@ -127,16 +127,16 @@ Most newer configurations are a flake, although an experimental feature at the
 moment.  They offer a lot of potential with the few interactions I've had with
 them so far.
 
-I'm running the latest stable which is ~23.05~ with [[https://nixos.wiki/wiki/Home_Manager][home-manager]] in my flake. I
+I'm running the latest stable which is ~23.11~ with [[https://nixos.wiki/wiki/Home_Manager][home-manager]] in my flake. I
 find the separation between the user and the system quite interesting not to
 mention the power of declarative dotfiles.
 
 #+name: inputs
 #+begin_src nix
-  nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+  nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
   home-manager = {
-          url = "github:nix-community/home-manager/release-23.05";
-          inputs.nixpkgs.follows = "nixpkgs";
+    url = "github:nix-community/home-manager/release-23.11";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 #+end_src
 
@@ -153,57 +153,42 @@ mention the power of declarative dotfiles.
       let
         system = "x86_64-linux";
         pkgs = import nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
+          inherit system;
+          config.allowUnfree = true;
         };
         lib = nixpkgs.lib;
       in {
         nixosConfigurations = {
-                nixos = lib.nixosSystem {
-                        inherit system;
-                        modules = [
-                                ./configuration.nix
-                                home-manager.nixosModules.home-manager {
-                                        home-manager.useGlobalPkgs = true;
-                                        home-manager.useUserPackages = true;
-                                        home-manager.users.adham = {
-                                                imports = [ ./home.nix ];
-                                        };
-                                }
-                        ];
+          nixos = lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./configuration.nix
+              home-manager.nixosModules.home-manager {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.adham = {
+                  imports = [ ./home.nix ];
                 };
+              }
+            ];
+          };
 
-                extraStuff = lib.nixosSystem {
-                        inherit system;
-                        modules = [
-                                ./basic/configuration.nix
-                                home-manager.nixosModules.home-manager {
-                                        home-manager.useGlobalPkgs = true;
-                                        home-manager.useUserPackages = true;
-                                        home-manager.users.adham = {
-                                                imports = [ ./home.nix ];
-                                        };
-                                }
-                        ];
+          t480 = lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./t480/configuration.nix
+              home-manager.nixosModules.home-manager {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.adham = {
+                  imports = [ ./home.nix ];
                 };
-
-                t480 = lib.nixosSystem {
-                        inherit system;
-                        modules = [
-                                ./t480/configuration.nix
-                                home-manager.nixosModules.home-manager {
-                                        home-manager.useGlobalPkgs = true;
-                                        home-manager.useUserPackages = true;
-                                        home-manager.users.adham = {
-                                                imports = [ ./home.nix ];
-                                        };
-                                }
-                        ];
-                };
+              }
+            ];
+          };
         };
       };
   }
-
 #+end_src
 
 * home-manger
@@ -214,7 +199,7 @@ mention the power of declarative dotfiles.
   in
   {
     home = {
-      stateVersion = "23.05";
+      stateVersion = "23.11";
       packages = with pkgs; [
         <<remote-control>>
         <<video-audio>>
@@ -291,10 +276,6 @@ The themes I use
     package = pkgs.vscode.fhs;
   };
 
-  programs.hexchat = {
-    enable = true;
-  };
-
   programs.git = {
     enable = true;
     userName  = "adham-omran";
@@ -328,7 +309,6 @@ The themes I use
 | Application | Usage                        |
 |-------------+------------------------------|
 | Foliate     | E-books                      |
-| Thunars     | File manager                 |
 | Zotero      | Bibliography management      |
 | Sonobus     | Share audio between machines |
 
@@ -764,6 +744,7 @@ Enable networking
 ** Desktop Environment
 I currently use GNOME.
 
+Enable Electron for [[https://nixos.wiki/wiki/Wayland][Wayland]] by setting ~NIXOS_OZONE_WL~ to "1".
 #+name: desktop-environment
 #+begin_src nix :noweb yes
   services.xserver.displayManager.gdm.enable = true;
@@ -771,6 +752,7 @@ I currently use GNOME.
     gnome.enable = true;
     plasma5.enable = false;
   };
+ environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
@@ -1031,7 +1013,7 @@ To enable touchpad support add ~services.xserver.libinput.enable = true;~.
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
 #+end_src
 ** SSH
@@ -1056,7 +1038,7 @@ the documentation for this option (e.g. man configuration.nix or on
 https://nixos.org/nixos/options.html).
 #+name: version
 #+begin_src nix
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 #+end_src
 ** Nix
 | Package          | Reason        |
@@ -1068,8 +1050,6 @@ https://nixos.org/nixos/options.html).
 #+begin_src nix
   nixpkgs.config.permittedInsecurePackages = [
     "zotero-6.0.26"
-    "electron-24.8.6"
-    "electron-22.3.27"
   ];
 #+end_src
 
@@ -1138,6 +1118,7 @@ Garbage collection. Delete every week any generation that's older than 7 days.
       openssl
       pinentry
       pinentry-gtk2
+      pinentry-gnome
       syncthing
       killall
       virt-manager
