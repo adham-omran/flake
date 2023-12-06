@@ -199,7 +199,7 @@ in
     mako
     wdisplays
   
-    (python39.withPackages(ps: with ps; [ pandas requests
+    (python3.withPackages(ps: with ps; [ pandas requests
                                           epc orjson
                                           sexpdata six
                                           setuptools paramiko

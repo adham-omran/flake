@@ -94,7 +94,6 @@ in
       frescobaldi
       sonobus
       vlc
-      jdk17
       nodejs_20
       cool-retro-term
       
