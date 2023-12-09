@@ -57,36 +57,37 @@ in
     layout = "us";
   };
   
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager = {
-    gnome.enable = true;
-    plasma5.enable = false;
-  };
+   services.xserver.displayManager.gdm.enable = true;
+   services.xserver.desktopManager = {
+     gnome.enable = true;
+     plasma5.enable = false;
+   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-  programs.dconf.enable = true;
-  environment = {
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-    ];
-  
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-terminal
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
-  };
+   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+   programs.dconf.enable = true;
+   environment = {
+     plasma5.excludePackages = with pkgs.libsForQt5; [
+       elisa
+     ];
+   
+     gnome.excludePackages = (with pkgs; [
+       gnome-photos
+       gnome-tour
+     ]) ++ (with pkgs.gnome; [
+       gnome-music
+       gnome-terminal
+       gedit
+       epiphany
+       geary
+       gnome-characters
+       totem
+       tali
+       iagno
+       hitori
+       atomix
+     ]);
+   };
   services.xserver.windowManager.dwm.enable = true;
   programs.slock.enable = true;
   nixpkgs.overlays = [
@@ -172,7 +173,7 @@ in
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryFlavor = "gnome3";
   };
   services.openssh.enable = true;
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
@@ -198,7 +199,7 @@ in
     mako
     wdisplays
   
-    (python39.withPackages(ps: with ps; [ pandas requests
+    (python3.withPackages(ps: with ps; [ pandas requests
                                           epc orjson
                                           sexpdata six
                                           setuptools paramiko
@@ -221,6 +222,7 @@ in
       openssl
       pinentry
       pinentry-gtk2
+      pinentry-gnome
       syncthing
       killall
       virt-manager
@@ -361,11 +363,9 @@ in
   };
   
   programs.adb.enable = true;
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   nixpkgs.config.permittedInsecurePackages = [
     "zotero-6.0.26"
-    "electron-24.8.6"
-    "electron-22.3.27"
   ];
   nixpkgs.config.allowUnfree = true;
   nix = {
