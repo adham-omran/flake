@@ -212,7 +212,6 @@ mention the power of declarative dotfiles.
         <<wayland-utilities>>
       ];
     };
-    <<picom>>
     <<mpd-home>>
     <<mpdris2>>
     <<home-manager-programs>>

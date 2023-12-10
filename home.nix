@@ -136,11 +136,6 @@ in
       }))
     ];
   };
-  services.picom = {
-    enable = true;
-    vSync = true;
-    backend = "glx";
-  };
   services.mpd = {
     enable = true;
     musicDirectory = "/home/adham/music";
