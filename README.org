@@ -389,9 +389,9 @@ it here.  I'll keep it for now.
   warpd
   distrobox
 
-  aspell
-  aspellDicts.en
-  aspellDicts.ar
+  hunspell
+  hunspellDicts.en_US
+
 
   yt-dlp
   gnuplot

@@ -54,9 +54,9 @@ in
       warpd
       distrobox
       
-      aspell
-      aspellDicts.en
-      aspellDicts.ar
+      hunspell
+      hunspellDicts.en_US
+      
       
       yt-dlp
       gnuplot
