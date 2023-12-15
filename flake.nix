@@ -47,6 +47,20 @@
             }
           ];
         };
+
+        vm = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./vm/configuration.nix
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.adham = {
+                imports = [ ./home.nix ];
+              };
+            }
+          ];
+        };
       };
     };
 }
