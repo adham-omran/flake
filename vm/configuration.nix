@@ -120,8 +120,6 @@
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
     foot
-    dbus-sway-environment
-    configure-gtk
     wayland
     xdg-utils
     glib # gsettings
@@ -166,13 +164,6 @@
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
-  services.kanata.enable = true;
-  services.kanata.package = pkgs.kanata;
-
-  services.kanata.keyboards.usb.devices = [
-    "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
-    "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-  ];
 
   fonts = {
     enableDefaultFonts = true;
