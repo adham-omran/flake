@@ -2,8 +2,8 @@
 {
   imports =
     [
-          ./hardware-configuration.nix
-          ./cachix.nix
+      ./hardware-configuration.nix
+      ./cachix.nix
     ];
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
@@ -22,37 +22,37 @@
     layout = "us";
   };
 
-   services.xserver.displayManager.gdm.enable = true;
-   services.xserver.desktopManager = {
-     gnome.enable = true;
-     plasma5.enable = false;
-   };
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager = {
+    gnome.enable = true;
+    plasma5.enable = false;
+  };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-   programs.dconf.enable = true;
-   environment = {
-     plasma5.excludePackages = with pkgs.libsForQt5; [
-       elisa
-     ];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  programs.dconf.enable = true;
+  environment = {
+    plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+    ];
 
-     gnome.excludePackages = (with pkgs; [
-       gnome-photos
-       gnome-tour
-     ]) ++ (with pkgs.gnome; [
-       gnome-music
-       gnome-terminal
-       gedit
-       epiphany
-       geary
-       gnome-characters
-       totem
-       tali
-       iagno
-       hitori
-       atomix
-     ]);
-   };
+    gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
+  };
   programs.browserpass.enable = true;
   programs.light.enable = true;
   security.polkit.enable = true;
@@ -194,8 +194,8 @@
       };
     };
   };
-    programs.tmux = {
-      enable = true;
+  programs.tmux = {
+    enable = true;
 
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
