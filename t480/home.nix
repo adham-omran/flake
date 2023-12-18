@@ -3,9 +3,6 @@
   home = {
     stateVersion = "23.11";
     packages = with pkgs; [
-      sunshine
-      moonlight-qt
-      barrier
       mpv
       ffmpeg
       qpwgraph
@@ -19,23 +16,13 @@
       multimarkdown
       activitywatch
       imagemagick
-      python311Packages.pyclip
-      firejail
       lilypond
-      arduino
       ncdu
-      rclone
       mysql80
-      pscale
       awscli2
 
       scream
       zoom-us
-
-      isync
-      msmtp
-      afew
-      notmuch
 
       mpc-cli
 
@@ -44,12 +31,8 @@
 
       poppler_utils
 
-      warpd
-      distrobox
-
       hunspell
       hunspellDicts.en_US
-
 
       yt-dlp
       gnuplot
@@ -75,31 +58,20 @@
       pass
       element-desktop-wayland
       zeal
-      freetube
       gimp-with-plugins
       qbittorrent
       chromedriver
       zotero
       libreoffice-qt
-      reaper
-      nyxt
       anki-bin
       frescobaldi
-      sonobus
       vlc
       nodejs_20
-      cool-retro-term
-
-      xournalpp
 
       google-chrome
       geckodriver
 
-      libsForQt5.gwenview
-      krusader
-
       obs-studio
-      poedit
       foliate
 
       zulip
@@ -124,9 +96,6 @@
       sway-contrib.grimshot
       fuzzel
       wf-recorder
-      (waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      }))
     ];
   };
   services.mpd = {
