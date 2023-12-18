@@ -3,6 +3,7 @@
   home = {
     stateVersion = "23.11";
     packages = with pkgs; [
+      nil
       mpv
       ffmpeg
       qpwgraph

@@ -56,7 +56,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
-                imports = [ ./home.nix ];
+                imports = [ ./vm/home.nix ];
               };
             }
           ];
