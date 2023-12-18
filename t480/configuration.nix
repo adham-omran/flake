@@ -149,8 +149,6 @@
     autotiling
     wmenu
     foot
-    dbus-sway-environment
-    configure-gtk
     wayland
     xdg-utils
     dracula-theme
