@@ -49,7 +49,6 @@
       hunspell
       hunspellDicts.en_US
 
-
       yt-dlp
       gnuplot
       libnotify

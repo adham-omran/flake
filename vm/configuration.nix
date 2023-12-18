@@ -13,7 +13,7 @@
     v4l2loopback
   ];
 
-  networking.hostName = "PC-01";
+  networking.hostName = "marduk";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -259,3 +259,7 @@
   DefaultTimeoutStopSec=10sec
   '';
 }
+
+# Local Variables:
+# jinx-local-words: "marduk"
+# End:
