@@ -13,7 +13,7 @@
     v4l2loopback
   ];
 
-  networking.hostName = "nixos";
+  networking.hostName = "t480";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
