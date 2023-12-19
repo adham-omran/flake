@@ -2,8 +2,8 @@
 {
   imports =
     [
-          ./hardware-configuration.nix
-          ./cachix.nix
+      ./hardware-configuration.nix
+      ./cachix.nix
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,37 +22,37 @@
     layout = "us";
   };
 
-   services.xserver.displayManager.gdm.enable = true;
-   services.xserver.desktopManager = {
-     gnome.enable = true;
-     plasma5.enable = false;
-   };
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager = {
+    gnome.enable = true;
+    plasma5.enable = false;
+  };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-   programs.dconf.enable = true;
-   environment = {
-     plasma5.excludePackages = with pkgs.libsForQt5; [
-       elisa
-     ];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  programs.dconf.enable = true;
+  environment = {
+    plasma5.excludePackages = with pkgs.libsForQt5; [
+      elisa
+    ];
 
-     gnome.excludePackages = (with pkgs; [
-       gnome-photos
-       gnome-tour
-     ]) ++ (with pkgs.gnome; [
-       gnome-music
-       gnome-terminal
-       gedit
-       epiphany
-       geary
-       gnome-characters
-       totem
-       tali
-       iagno
-       hitori
-       atomix
-     ]);
-   };
+    gnome.excludePackages = (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]) ++ (with pkgs.gnome; [
+      gnome-music
+      gnome-terminal
+      gedit
+      epiphany
+      geary
+      gnome-characters
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ]);
+  };
   services.xserver.windowManager.dwm.enable = true;
   programs.slock.enable = true;
   nixpkgs.overlays = [
@@ -156,41 +156,41 @@
     wl-clipboard
 
     (python3.withPackages(ps: with ps; [ pandas requests
-                                          epc orjson
-                                          sexpdata six
-                                          setuptools paramiko
-                                          rapidfuzz
-                                        ]))
+                                         epc orjson
+                                         sexpdata six
+                                         setuptools paramiko
+                                         rapidfuzz
+                                       ]))
 
     hyprpaper
-      canon-cups-ufr2
-      OVMFFull
-      slstatus
-      st
-      surf
-      tabbed
-      dmenu
-      unzip
-      cmatrix
-      libsForQt5.okular
-      rsync
+    canon-cups-ufr2
+    OVMFFull
+    slstatus
+    st
+    surf
+    tabbed
+    dmenu
+    unzip
+    cmatrix
+    libsForQt5.okular
+    rsync
 
-      openssl
-      pinentry
-      pinentry-gtk2
-      pinentry-gnome
-      syncthing
-      killall
-      virt-manager
-      gnome.adwaita-icon-theme
-      gnomeExtensions.appindicator
-      gnome.gnome-tweaks
+    openssl
+    pinentry
+    pinentry-gtk2
+    pinentry-gnome
+    syncthing
+    killall
+    virt-manager
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
+    gnome.gnome-tweaks
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
-              epkgs.vterm
-              epkgs.jinx
+        epkgs.vterm
+        epkgs.jinx
       ]))
-    ];
+  ];
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
@@ -209,7 +209,7 @@
     hold-timeout  150
     tt $tap-timeout
     ht $hold-timeout
-    )
+  )
 
   (defalias
     qwt (layer-switch qwerty)
@@ -224,7 +224,7 @@
     i (tap-hold $tt $ht i ralt)
     o (tap-hold $tt $ht o rmet)
 
-    )
+  )
 
   (defsrc
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
@@ -233,7 +233,7 @@
       caps a    s    d    f    g    h    j    k    l    ;    '    ret
       lsft z    x    c    v    b    n    m    ,    .    /    rsft
       lctl lmet lalt           spc            ralt    rctl
-      )
+  )
 
   (deflayer colemak
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
@@ -242,7 +242,7 @@
       caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
       lsft z    x    c    v    b    k    m    ,    .    /    rsft
       lctl lmet lalt           spc            @qwt    rctl
-      )
+  )
 
   (deflayer qwerty
       esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
@@ -251,7 +251,7 @@
       caps a    s    d    f    g    h    j    k    l    ;    '    ret
       lsft z    x    c    v    b    n    m    ,    .    /    rsft
       lctl lmet lalt           spc            @col    rctl
-      )
+  )
   '';
   fonts = {
     enableDefaultPackages = true;
