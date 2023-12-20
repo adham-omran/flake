@@ -125,11 +125,16 @@
     glib # gsettings
     swaylock
     swayidle
-    (python3.withPackages(ps: with ps; [ pandas requests
-                                         epc orjson
-                                         sexpdata six
-                                         setuptools paramiko
+    (python3.withPackages(ps: with ps; [ pandas
+                                         requests
+                                         epc
+                                         orjson
+                                         sexpdata
+                                         six
+                                         setuptools
+                                         paramiko
                                          rapidfuzz
+                                         pip
                                        ]))
     hyprpaper
     canon-cups-ufr2
