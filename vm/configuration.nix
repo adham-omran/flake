@@ -54,6 +54,7 @@
     ]);
   };
   programs.browserpass.enable = true;
+  programs.firefox.nativeMessagingHosts.browserpass = true;
   programs.light.enable = true;
   security.polkit.enable = true;
 
