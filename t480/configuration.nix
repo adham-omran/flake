@@ -53,20 +53,10 @@
       atomix
     ]);
   };
-  services.xserver.windowManager.dwm.enable = true;
-  programs.slock.enable = true;
-  nixpkgs.overlays = [
-    (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/adham/code/suckless/dwm ;});
-      slstatus = prev.slstatus.overrideAttrs (old: { src = /home/adham/code/suckless/slstatus ;});
-      dmenu = prev.dmenu.overrideAttrs (old: { src = /home/adham/code/suckless/dmenu ;});
-      st = prev.st.overrideAttrs (old: { src = /home/adham/code/suckless/st ;});
-      surf = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/surf ;});
-      # slock = prev.surf.overrideAttrs (old: { src = /home/adham/code/suckless/slock ;});
-    })
-  ];
+
   programs.hyprland.enable = true;
   programs.browserpass.enable = true;
+  programs.firefox.nativeMessagingHosts.browserpass = true;
   programs.light.enable = true;
   security.polkit.enable = true;
 
@@ -94,22 +84,10 @@
 
   services.blueman.enable = true;
 
-  # xdg-desktop-portal works by exposing a series of D-Bus interfaces
-  # known as portals under a well-known name
-  # (org.freedesktop.portal.Desktop) and object path
-  # (/org/freedesktop/portal/desktop).
-  # The portal interfaces include APIs for file access, opening URIs,
-  # printing and others.
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-  };
-
-  # enable sway window manager
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
   };
 
   sound.enable = true;
@@ -146,13 +124,9 @@
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
 
-    autotiling
-    wmenu
     foot
     wayland
     xdg-utils
-    dracula-theme
-    gnome3.adwaita-icon-theme
     wl-clipboard
 
     (python3.withPackages(ps: with ps; [ pandas requests
