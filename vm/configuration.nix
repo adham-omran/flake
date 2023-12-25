@@ -160,12 +160,17 @@
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     gnome.gnome-tweaks
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
-      [
-        epkgs.vterm
-        epkgs.jinx
-      ]))
   ];
+  services.emacs = {
+    enable = true;
+    package = with pkgs; (
+      (emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+        epkgs: [
+          epkgs.vterm
+          epkgs.jinx
+        ]
+      ));
+  };
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
