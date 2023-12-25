@@ -17,7 +17,6 @@
       leiningen
       clojure-lsp
       graalvm-ce
-      ardour
       multimarkdown
       activitywatch
       imagemagick
