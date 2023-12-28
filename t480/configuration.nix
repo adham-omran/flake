@@ -165,6 +165,7 @@
         epkgs.jinx
       ]))
   ];
+  services.vnstat.enable = true;
   services.mpd.user = "userRunningPipeWire";
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
