@@ -24,7 +24,7 @@
     };
 
   fileSystems."/mnt/pool" = {
-    device = "192.168.0.209:/mnt/pool";
+    device = "192.168.1.103:/mnt/pool";
     fsType = "nfs";
   };
 
