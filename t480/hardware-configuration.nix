@@ -23,10 +23,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/pool" = {
-    device = "192.168.1.103:/mnt/pool";
-    fsType = "nfs";
-  };
+  # fileSystems."/mnt/pool" = {
+  #   device = "192.168.1.103:/mnt/pool";
+  #   fsType = "nfs";
+  # };
 
 
 
