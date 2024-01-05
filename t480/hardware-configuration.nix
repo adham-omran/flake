@@ -23,12 +23,6 @@
       fsType = "vfat";
     };
 
-  # fileSystems."/mnt/pool" = {
-  #   device = "192.168.1.103:/mnt/pool";
-  #   fsType = "nfs";
-  # };
-
-
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/b040c8e8-5615-420c-b1d4-9a2df1cdc6c9"; }
