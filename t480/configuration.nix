@@ -90,6 +90,7 @@ in
   services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
   services.ipp-usb.enable = true;
