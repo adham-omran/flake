@@ -277,11 +277,6 @@ in
     hyprpaper
     canon-cups-ufr2
     OVMFFull
-    slstatus
-    st
-    surf
-    tabbed
-    dmenu
     unzip
     cmatrix
     libsForQt5.okular
