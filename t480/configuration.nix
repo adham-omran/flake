@@ -152,25 +152,18 @@ in
     mpv
     ffmpeg
     qpwgraph
-    playerctl
-    ncmpcpp
     clojure
     babashka
     leiningen
     clojure-lsp
     graalvm-ce
     multimarkdown
-    activitywatch
     imagemagick
-    lilypond
     ncdu
     mysql80
     awscli2
 
-    scream
     zoom-us
-
-    mpc-cli
 
     ripgrep
     texlive.combined.scheme-full
@@ -209,13 +202,9 @@ in
     zotero
     libreoffice-qt
     anki-bin
-    frescobaldi
-    vlc
     nodejs_20
 
     google-chrome
-    geckodriver
-
     obs-studio
     foliate
 
@@ -225,8 +214,6 @@ in
     paper-gtk-theme
     pop-gtk-theme
     gnome.adwaita-icon-theme
-    arandr
-    flameshot
     scrot
     xclip
     xsel
@@ -234,7 +221,6 @@ in
     dunst
     rofi
     ffcast
-    xss-lock
     networkmanagerapplet
     cliphist
     foot
