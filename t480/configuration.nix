@@ -402,8 +402,8 @@ in
       };
     };
   };
-    programs.tmux = {
-      enable = true;
+  programs.tmux = {
+    enable = true;
 
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
