@@ -128,7 +128,7 @@ in
     description = "adham";
     extraGroups = [
       "networkmanager" "wheel" "adbusers" "video"
-      "docker" "libvirtd" "lp" "scanner" "audio"
+      "docker" "libvirtd" "lp" "scanner" "audio" "input"
     ];
     packages = with pkgs; [
       firefox
