@@ -465,4 +465,10 @@ in
   systemd.extraConfig = ''
   DefaultTimeoutStopSec=10sec
   '';
+
+  networking.extraHosts =
+  ''
+    192.168.1.203    gilgamesh.home.arpa gilgamesh
+    100.109.223.43   jellyfin.home.arpa jellyfin
+  '';
 }
