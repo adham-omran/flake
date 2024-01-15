@@ -123,6 +123,121 @@
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.enable = true;
   environment.systemPackages = with pkgs; [
+    # packages from home-manager
+    vnstat
+    nil
+    mpv
+    ffmpeg
+    qpwgraph
+    playerctl
+    ncmpcpp
+    clojure
+    babashka
+    leiningen
+    clojure-lsp
+    graalvm-ce
+    multimarkdown
+    activitywatch
+    imagemagick
+    lilypond
+    ncdu
+    mysql80
+    awscli2
+
+    scream
+    zoom-us
+
+    mpc-cli
+
+    ripgrep
+    texlive.combined.scheme-full
+
+    poppler_utils
+
+    hunspell
+    hunspellDicts.en_US
+
+    yt-dlp
+    gnuplot
+    libnotify
+    direnv
+    gtk3
+    graphviz
+    openssl
+    git
+    stow
+    tree
+    ledger
+    neofetch
+    bat
+    btop
+    fd
+    dmidecode
+    powertop
+    wget
+    brightnessctl
+    pavucontrol
+    pass
+    element-desktop-wayland
+    zeal
+    gimp-with-plugins
+    qbittorrent
+    chromedriver
+    zotero
+    libreoffice-qt
+    anki-bin
+    frescobaldi
+    vlc
+    nodejs_20
+
+    google-chrome
+    geckodriver
+
+    obs-studio
+    foliate
+
+    zulip
+    telegram-desktop
+    spotify
+    paper-gtk-theme
+    pop-gtk-theme
+    gnome.adwaita-icon-theme
+    arandr
+    flameshot
+    scrot
+    xclip
+    xsel
+    feh
+    dunst
+    rofi
+    ffcast
+    xss-lock
+    networkmanagerapplet
+    cliphist
+    foot
+    sway-contrib.grimshot
+    fuzzel
+    wf-recorder
+    # git
+    git
+    # Sway
+    waybar
+    dbus   # make dbus-update-activation-environment available in the path
+    dbus-sway-environment
+    configure-gtk
+    wayland
+    xdg-utils # for opening default programs when clicking links
+    glib # gsettings
+    dracula-theme # gtk theme
+    gnome3.adwaita-icon-theme  # default gnome cursors
+    swaylock
+    swayidle
+    grim         # screenshot functionality
+    slurp        # screenshot functionality
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    bemenu       # wayland clone of dmenu
+    mako         # notification system developed by swaywm maintainer
+    wdisplays    # tool to configure displays
 
     foot
     wayland
