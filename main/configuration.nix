@@ -148,6 +148,7 @@ in
     pinentryFlavor = "gnome3";
   };
   services.openssh.enable = true;
+  services.mullvad-vpn.enable = true;
 
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
