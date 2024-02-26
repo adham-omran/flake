@@ -28,6 +28,13 @@
       fsType = "vfat";
     };
 
+
+  fileSystems."/mnt/pool" = {
+    device = "truenas:/mnt/pool";
+    fsType = "nfs";
+  };
+
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
