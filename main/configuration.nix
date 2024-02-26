@@ -378,8 +378,8 @@ in
   virtualisation = {
       podman = {
       enable = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;};
+      defaultNetwork.settings.dns_enabled = true;
+      };
     docker.enable = true;
     lxd.enable = true;
     libvirtd.enable = true;
