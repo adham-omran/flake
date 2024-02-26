@@ -147,19 +147,29 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # audio
+    reaper
+    calf
+    ladspaPlugins
+    tap-plugins
+    lsp-plugins
+    distrho
+    zam-plugins
+    x42-plugins
+    # VPN
+    mullvad-vpn
+    mullvad
+
     cloudflare-warp
     hugo
+
     # packages from home-manager
     vnstat
     nil
     mpv
     ffmpeg
     qpwgraph
-    clojure
-    babashka
-    leiningen
     clojure-lsp
-    graalvm-ce
     multimarkdown
     imagemagick
     ncdu
@@ -170,7 +180,6 @@ in
 
     ripgrep
     texlive.combined.scheme-full
-
     poppler_utils
 
     hunspell
@@ -183,7 +192,6 @@ in
     gtk3
     graphviz
     openssl
-    git
     stow
     tree
     ledger
