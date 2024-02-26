@@ -82,8 +82,16 @@ in
 
   programs.hyprland.enable = true;
   programs.browserpass.enable = true;
+
+  ## Check https://github.com/browserpass/browserpass-extension/issues/338
   programs.firefox.nativeMessagingHosts.browserpass = true;
+
   programs.light.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
   security.polkit.enable = true;
 
   services.xserver.wacom.enable = true;
