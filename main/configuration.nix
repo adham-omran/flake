@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 let
   dbus-sway-environment = pkgs.writeTextFile {
     name = "dbus-sway-environment";
@@ -34,13 +34,12 @@ in
     ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
 
-  networking.hostName = "t480";
+  networking.hostName = "gilgamesh";
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -305,64 +304,7 @@ in
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
-  services.kanata.enable = true;
-  services.kanata.package = pkgs.kanata;
 
-  services.kanata.keyboards.usb.devices = [
-    "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
-    "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-  ];
-
-  services.kanata.keyboards.usb.config = ''
-  (defvar
-    tap-timeout   150
-    hold-timeout  150
-    tt $tap-timeout
-    ht $hold-timeout
-  )
-
-  (defalias
-    qwt (layer-switch qwerty)
-    col (layer-switch colemak)
-    a (tap-hold $tt $ht a lmet)
-    r (tap-hold $tt $ht r lalt)
-    s (tap-hold $tt $ht s lctl)
-    t (tap-hold $tt $ht t lsft)
-
-    n (tap-hold $tt $ht n rsft)
-    e (tap-hold $tt $ht e rctl)
-    i (tap-hold $tt $ht i ralt)
-    o (tap-hold $tt $ht o rmet)
-
-  )
-
-  (defsrc
-      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-      caps a    s    d    f    g    h    j    k    l    ;    '    ret
-      lsft z    x    c    v    b    n    m    ,    .    /    rsft
-      lctl lmet lalt           spc            ralt    rctl
-  )
-
-  (deflayer colemak
-      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
-      caps @a   @r   @s  @t    d    h   @n   @e   @i    @o    '    ret
-      lsft z    x    c    v    b    k    m    ,    .    /    rsft
-      lctl lmet lalt           spc            @qwt    rctl
-  )
-
-  (deflayer qwerty
-      esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
-      grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-      caps a    s    d    f    g    h    j    k    l    ;    '    ret
-      lsft z    x    c    v    b    n    m    ,    .    /    rsft
-      lctl lmet lalt           spc            @col    rctl
-  )
-  '';
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -407,20 +349,7 @@ in
                 '';
   };
   services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
 
-    settings = {
-      START_CHARGE_THRESH_BAT0=75;
-      STOP_CHARGE_THRESH_BAT0=95;
-
-      START_CHARGE_THRESH_BAT1=75;
-      STOP_CHARGE_THRESH_BAT1=95;
-
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-    };
-  };
   virtualisation = {
       podman = {
       enable = true;
@@ -448,12 +377,6 @@ in
   };
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
   };
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.extraConfig = ''
@@ -462,7 +385,6 @@ in
 
   networking.extraHosts =
   ''
-    192.168.1.203    gilgamesh.home.arpa gilgamesh
-    100.109.223.43   jellyfin.home.arpa jellyfin
+    192.168.0.4      truenas.home.arpa truenas truenas.local
   '';
 }
