@@ -6,7 +6,6 @@ This is an overview about my NixOS system.
 
 # Cons about NixOS
 
-- Cloudflare WARP can not be setup easily.
 - Audio production is difficult due to no FHS support.
 - JavaFX does not run.
 
