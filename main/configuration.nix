@@ -56,7 +56,6 @@ in
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-  programs.dconf.enable = true;
   environment = {
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
@@ -80,18 +79,50 @@ in
     ]);
   };
 
-  programs.hyprland.enable = true;
-  programs.browserpass.enable = true;
+  programs = {
+    tmux = {
+      enable = true;
+
+      plugins = with pkgs; [
+        tmuxPlugins.better-mouse-mode
+      ];
+
+      extraConfig = ''
+              set -g default-terminal "xterm-256color"
+              set -ga terminal-overrides ",*256col*:Tc"
+              set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+              set-environment -g COLORTERM "truecolor"
+                '';
+    };
+
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+    };
+
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gnome3";
+    };
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+
+    firefox.nativeMessagingHosts.browserpass = true;
+    fish.enable = true;
+    browserpass.enable = true;
+    hyprland.enable = true;
+    light.enable = true;
+    dconf.enable = true;
+    adb.enable = true;
+  };
 
   ## Check https://github.com/browserpass/browserpass-extension/issues/338
-  programs.firefox.nativeMessagingHosts.browserpass = true;
 
-  programs.light.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
   security.polkit.enable = true;
 
   services.xserver.wacom.enable = true;
@@ -128,7 +159,6 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
   users.users.adham = {
     isNormalUser = true;
@@ -141,11 +171,6 @@ in
       firefox
     ];
     shell = pkgs.fish;
-  };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "gnome3";
   };
   services.openssh.enable = true;
   services.mullvad-vpn.enable = true;
@@ -319,10 +344,6 @@ in
     VST_PATH    = "$HOME/.vst:$HOME/.nix-profile/lib/vst:/run/current-system/sw/lib/vst";
   };
 
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
 
   services.vnstat.enable = true;
   services.mpd.user = "userRunningPipeWire";
@@ -359,20 +380,6 @@ in
       };
     };
   };
-  programs.tmux = {
-    enable = true;
-
-    plugins = with pkgs; [
-      tmuxPlugins.better-mouse-mode
-    ];
-
-    extraConfig = ''
-              set -g default-terminal "xterm-256color"
-              set -ga terminal-overrides ",*256col*:Tc"
-              set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-              set-environment -g COLORTERM "truecolor"
-                '';
-  };
   services.power-profiles-daemon.enable = false;
 
   virtualisation = {
@@ -385,7 +392,6 @@ in
     libvirtd.enable = true;
   };
 
-  programs.adb.enable = true;
   system.stateVersion = "23.11";
   nixpkgs.config.allowUnfree = true;
   nix = {
