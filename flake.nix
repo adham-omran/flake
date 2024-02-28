@@ -16,20 +16,6 @@
       lib = nixpkgs.lib;
     in {
       nixosConfigurations = {
-        nixos = lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.adham = {
-                imports = [ ./home.nix ];
-              };
-            }
-          ];
-        };
-
         t480 = lib.nixosSystem {
           inherit system;
           modules = [
