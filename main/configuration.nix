@@ -181,7 +181,11 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # terminal
+    tldr
+    fzf
     aria
+    # applications
     spotify
     # VPN
     mullvad-vpn
