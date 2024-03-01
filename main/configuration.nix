@@ -45,7 +45,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   services.xserver = {
     enable = true;
-    layout = "us";
+    xkb.layout = "us";
   };
 
   services.xserver.displayManager.gdm.enable = true;
