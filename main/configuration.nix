@@ -51,7 +51,8 @@ in
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = true;
-    plasma5.enable = false;
+    # requires unstable
+    # plasma6.enable = true;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
