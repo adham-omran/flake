@@ -181,6 +181,9 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # audio
+    reaper
+    airwindows-lv2
     # terminal
     tldr
     fzf
