@@ -179,6 +179,14 @@ in
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.enable = true;
+  systemd = {
+    packages = with pkgs; [cloudflare-warp];
+    targets.multi-user.wants = [ "warp-svc.service" ];
+    services.NetworkManager-wait-online.enable = false;
+    extraConfig = ''
+        DefaultTimeoutStopSec=10sec
+      '';
+  };
   environment.systemPackages = with pkgs; [
     # fonts
     corefonts
@@ -402,13 +410,9 @@ in
   hardware.opengl = {
     enable = true;
   };
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.extraConfig = ''
-  DefaultTimeoutStopSec=10sec
-  '';
 
   networking.extraHosts =
-  ''
+    ''
     192.168.0.4      truenas.home.arpa truenas truenas.local
   '';
 }
