@@ -325,8 +325,6 @@ in
         epkgs.vterm
         epkgs.jinx
       ]))
-
-    musescore
   ];
   xdg.portal = {
     enable = true;
