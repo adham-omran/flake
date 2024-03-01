@@ -9,6 +9,7 @@ This is an overview about my NixOS system.
 - Audio production is difficult due how Nix handles packages.
   - For example installing `airwindows-lv2` from nixpkgs does not make them
     appear when searched for by Reaper.
+  - [ ] Explore [musnix](https://github.com/musnix/musnix)
 - JavaFX does not run.
 
 <!-- Local Variables: -->
