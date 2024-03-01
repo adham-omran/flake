@@ -50,18 +50,14 @@ in
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
-    gnome.enable = true;
+    gnome.enable = false;
     # requires unstable
-    # plasma6.enable = true;
+    plasma6.enable = true;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   environment = {
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-    ];
-
     gnome.excludePackages = (with pkgs; [
       gnome-photos
       gnome-tour
