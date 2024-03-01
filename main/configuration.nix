@@ -188,6 +188,11 @@ in
       '';
   };
   environment.systemPackages = with pkgs; [
+    # communication
+    slack
+    zulip
+    telegram-desktop
+
     # fonts
     corefonts
     # audio
@@ -262,8 +267,6 @@ in
     obs-studio
     foliate
 
-    zulip
-    telegram-desktop
     spotify
     paper-gtk-theme
     pop-gtk-theme
@@ -384,10 +387,10 @@ in
   };
 
   virtualisation = {
-      podman = {
+    podman = {
       enable = true;
       defaultNetwork.settings.dns_enabled = true;
-      };
+    };
     docker.enable = true;
     lxd.enable = true;
     libvirtd.enable = true;
