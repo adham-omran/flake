@@ -43,20 +43,48 @@ in
   networking.networkmanager.enable = true;
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
+
   services.xserver = {
+    wacom.enable = true;
     enable = true;
+    desktopManager =
+      {
+        gnome.enable = false;
+        plasma6.enable = true;
+      };
+    displayManager.gdm.enable = true;
     xkb.layout = "us";
   };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager = {
-    gnome.enable = false;
-    # requires unstable
-    plasma6.enable = true;
-  };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  # services
+  services = {
+    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    ipp-usb.enable = true;
+    hardware.bolt.enable = true;
+    tailscale.enable = true;
+    printing.enable = true;
+    flatpak.enable = true;
+    gvfs.enable = true; # Mount, trash, and other functionalities
+    tumbler.enable = true; # Thumbnail support for images
+    syncthing = {
+      enable = true;
+      user = "adham";
+      configDir = "/home/adham/.config/syncthing";
+    };
+    blueman.enable = true;
+    dbus.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    openssh.enable = true;
+    mullvad-vpn.enable = true;
+    vnstat.enable = true;
+    power-profiles-daemon.enable = false;
+  };
   environment = {
     gnome.excludePackages = (with pkgs; [
       gnome-photos
@@ -122,40 +150,18 @@ in
 
   security.polkit.enable = true;
 
-  services.xserver.wacom.enable = true;
-  services.printing.enable = true;
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
-  services.ipp-usb.enable = true;
   hardware.sane.openFirewall = true;
-  services.hardware.bolt.enable = true;
-  services.tailscale.enable = true;
 
-  services.flatpak.enable = true;
   fonts.fontDir.enable = true;
 
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-
-  services.syncthing = {
-    enable = true;
-    user = "adham";
-    configDir = "/home/adham/.config/syncthing";
-  };
-
-  services.blueman.enable = true;
-  services.dbus.enable = true;
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+
   environment.shells = with pkgs; [ fish ];
   users.users.adham = {
     isNormalUser = true;
@@ -169,14 +175,10 @@ in
     ];
     shell = pkgs.fish;
   };
-  services.openssh.enable = true;
-  services.mullvad-vpn.enable = true;
 
   networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.enable = true;
-  systemd.packages = with pkgs; [cloudflare-warp];
-  systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
     # fonts
     corefonts
@@ -342,11 +344,6 @@ in
   };
 
 
-  services.vnstat.enable = true;
-  services.mpd.user = "userRunningPipeWire";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
-  };
 
   fonts = {
     enableDefaultPackages = true;
@@ -377,7 +374,6 @@ in
       };
     };
   };
-  services.power-profiles-daemon.enable = false;
 
   virtualisation = {
       podman = {
