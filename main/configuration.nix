@@ -286,9 +286,9 @@ in
     wf-recorder
     # git
     git
-    # Sway
+    # Sway ; TODO Do I need this anymore?
     waybar
-    dbus   # make dbus-update-activation-environment available in the path
+    dbus
     dbus-sway-environment
     configure-gtk
     wayland
