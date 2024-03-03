@@ -59,6 +59,7 @@ in
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # services
   services = {
+    ollama.enable = true;
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
     ipp-usb.enable = true;
     hardware.bolt.enable = true;
