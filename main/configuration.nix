@@ -203,126 +203,126 @@ in
   environment.systemPackages = with pkgs; [
     # communication
     slack
-    zulip
     telegram-desktop
+    zulip
 
     # fonts
     corefonts
+
     # audio
-    reaper
     airwindows-lv2
+    reaper
+
     # terminal
-    tldr
-    fzf
     aria
+    fzf
+    tldr
+
     # applications
     spotify
-    # VPN
-    mullvad-vpn
-    mullvad
 
+    # VPN
     cloudflare-warp
     hugo
+    mullvad
+    mullvad-vpn
 
     # packages from home-manager
-    vnstat
-    nil
-    mpv
-    ffmpeg
-    qpwgraph
-    clojure-lsp
-    multimarkdown
-    imagemagick
-    ncdu
-    mysql80
     awscli2
-
-    zoom-us
-
+    clojure-lsp
+    ffmpeg
+    imagemagick
+    mpv
+    multimarkdown
+    mysql80
+    ncdu
+    nil
+    poppler_utils
+    qpwgraph
     ripgrep
     texlive.combined.scheme-full
-    poppler_utils
+    vnstat
+    zoom-us
 
+    # Dictionary
     hunspell
     hunspellDicts.en_US
 
-    yt-dlp
-    gnuplot
-    libnotify
-    direnv
-    gtk3
-    graphviz
-    openssl
-    stow
-    tree
-    ledger
-    neofetch
-    bat
-    btop
-    fd
-    dmidecode
-    powertop
-    wget
-    brightnessctl
-    pavucontrol
-    pass
-    element-desktop-wayland
-    zeal
-    gimp-with-plugins
-    qbittorrent
-    chromedriver
-    zotero
-    libreoffice-qt
     anki-bin
-    nodejs_20
-
-    google-chrome
-    obs-studio
+    bat
+    brightnessctl
+    btop
+    chromedriver
+    cliphist
+    direnv
+    dmidecode
+    dunst
+    element-desktop-wayland
+    fd
+    feh
+    ffcast
     foliate
-
-    spotify
-    paper-gtk-theme
-    pop-gtk-theme
+    foot
+    fuzzel
+    gimp-with-plugins
     gnome.adwaita-icon-theme
+    gnuplot
+    google-chrome
+    graphviz
+    gtk3
+    killall
+    ledger
+    libnotify
+    libreoffice-qt
+    neofetch
+    networkmanagerapplet
+    nodejs_20
+    obs-studio
+    openssl
+    paper-gtk-theme
+    pass
+    pavucontrol
+    pop-gtk-theme
+    powertop
+    qbittorrent
+    rofi
     scrot
+    spotify
+    stow
+    sway-contrib.grimshot
+    tree
+    wf-recorder
+    wget
     xclip
     xsel
-    feh
-    dunst
-    rofi
-    ffcast
-    networkmanagerapplet
-    cliphist
-    foot
-    sway-contrib.grimshot
-    fuzzel
-    wf-recorder
+    yt-dlp
+    zeal
+    zotero
     # git
     git
-    # Sway ; TODO Do I need this anymore?
-    waybar
-    dbus
-    dbus-sway-environment
+    # Tiling WM Utilities
     configure-gtk
-    wayland
-    xdg-utils # for opening default programs when clicking links
-    glib # gsettings
-    dracula-theme # gtk theme
-    gnome3.adwaita-icon-theme  # default gnome cursors
-    swaylock
-    swayidle
-    grim         # screenshot functionality
-    slurp        # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    bemenu       # wayland clone of dmenu
-    mako         # notification system developed by swaywm maintainer
-    wdisplays    # tool to configure displays
-
+    dbus
     foot
+    glib # gsettings
+    gnome3.adwaita-icon-theme  # default gnome cursors
+    grim
+    hyprpaper
+    slurp
+    swayidle
+    swaylock
+    waybar
     wayland
-    xdg-utils
+    wayland
+    wdisplays
+    wl-clipboard
     wl-clipboard
     wofi
+    xdg-utils
+    xdg-utils # for opening default programs when clicking links
+
+    # Printing
+    canon-cups-ufr2
 
     (python3.withPackages(ps: with ps; [ pandas requests
                                          epc orjson
@@ -331,29 +331,35 @@ in
                                          rapidfuzz
                                        ]))
 
-    hyprpaper
-    canon-cups-ufr2
+    # Virtualization
     OVMFFull
+    virt-manager
+
     unzip
     libsForQt5.okular
-    rsync
-
+    # SSH and GPG
     openssl
     pinentry
-    pinentry-gtk2
     pinentry-gnome
+    pinentry-gtk2
+    # Syncing
+    rsync
     syncthing
-    killall
-    virt-manager
+
+
+    # GNOME
     gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
     gnome.gnome-tweaks
+    gnomeExtensions.appindicator
+
+    # Emacs
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
         epkgs.vterm
         epkgs.jinx
       ]))
   ];
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -366,8 +372,6 @@ in
     LXVST_PATH  = "$HOME/.lxvst:$HOME/.nix-profile/lib/lxvst:/run/current-system/sw/lib/lxvst";
     VST_PATH    = "$HOME/.vst:$HOME/.nix-profile/lib/vst:/run/current-system/sw/lib/vst";
   };
-
-
 
   fonts = {
     enableDefaultPackages = true;
