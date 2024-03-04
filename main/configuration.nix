@@ -154,16 +154,25 @@ in
 
   security.polkit.enable = true;
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
-  hardware.sane.openFirewall = true;
+  hardware = {
+    opengl = {
+      enable = true;
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    sane = {
+      enable = true;
+      extraBackends = [ pkgs.sane-airscan ];
+      openFirewall = true;
+    };
+    pulseaudio.enable = false;
+  };
 
   fonts.fontDir.enable = true;
 
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   environment.shells = with pkgs; [ fish ];
