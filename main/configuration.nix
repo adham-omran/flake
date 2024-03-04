@@ -418,17 +418,13 @@ in
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
-  };
-
-  nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
-  nix.settings.auto-optimise-store = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-  hardware.opengl = {
-    enable = true;
+    settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   networking.extraHosts =
