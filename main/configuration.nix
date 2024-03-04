@@ -45,7 +45,6 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver = {
-    wacom.enable = true;
     enable = true;
     desktopManager =
       {
@@ -54,6 +53,7 @@ in
       };
     displayManager.gdm.enable = true;
     xkb.layout = "us";
+    wacom.enable = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -108,6 +108,7 @@ in
     ]);
   };
 
+  # programs
   programs = {
     tmux = {
       enable = true;
