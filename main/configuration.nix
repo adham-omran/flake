@@ -110,6 +110,7 @@ in
 
   # programs
   programs = {
+    virt-manager.enable = true;
     tmux = {
       enable = true;
 
@@ -334,7 +335,7 @@ in
 
     # Virtualization
     OVMFFull
-    virt-manager
+    # virt-manager
 
     unzip
     libsForQt5.okular
