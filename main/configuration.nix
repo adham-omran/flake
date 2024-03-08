@@ -359,8 +359,9 @@ in
 
     # Virtualization
     OVMFFull
-    # virt-manager
 
+    # Archives
+    p7zip
     unzip
 
     # Plasma 6 Extras
