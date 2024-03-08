@@ -59,6 +59,19 @@ in
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # services
   services = {
+    jack = {
+      jackd.enable = true;
+      # support ALSA only programs via ALSA JACK PCM plugin
+      alsa.enable = false;
+      # support ALSA only programs via loopback device (supports programs like Steam)
+      loopback = {
+        enable = true;
+        # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+        #dmixConfig = ''
+        #  period_size 2048
+        #'';
+      };
+    };
     ollama = {
       enable = true;
       acceleration = "rocm";
@@ -182,7 +195,7 @@ in
     isNormalUser = true;
     description = "adham";
     extraGroups = [
-      "networkmanager" "wheel" "adbusers" "video"
+      "networkmanager" "wheel" "adbusers" "video" "jackaudio"
       "docker" "libvirtd" "lp" "scanner" "audio" "input"
     ];
     packages = with pkgs; [
