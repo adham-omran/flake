@@ -362,7 +362,12 @@ in
     # virt-manager
 
     unzip
-    libsForQt5.okular
+
+    # Plasma 6 Extras
+    kdePackages.kclock
+    kdePackages.krdc
+    kdePackages.okular
+
     # SSH and GPG
     openssl
     pinentry
