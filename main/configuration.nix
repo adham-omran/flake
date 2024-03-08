@@ -231,7 +231,13 @@ in
 
     # audio
     airwindows-lv2
+    ardour
+    surge
+
+    kid3
+
     reaper
+
 
     # terminal
     aria
