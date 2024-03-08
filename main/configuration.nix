@@ -216,6 +216,11 @@ in
       '';
   };
   environment.systemPackages = with pkgs; [
+    # Wine
+    wineWowPackages.stable
+    winetricks
+    wineWowPackages.waylandFull
+
     # communication
     slack
     telegram-desktop
