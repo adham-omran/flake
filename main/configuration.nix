@@ -225,6 +225,7 @@ in
     slack
     telegram-desktop
     zulip
+    hexchat
 
     # fonts
     corefonts
