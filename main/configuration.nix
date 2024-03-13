@@ -49,7 +49,6 @@ in
     desktopManager =
       {
         gnome.enable = false;
-        plasma6.enable = true;
       };
     displayManager.gdm.enable = true;
     xkb.layout = "us";
@@ -59,6 +58,7 @@ in
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # services
   services = {
+    desktopManager.plasma6.enable = true;
     jack = {
       jackd.enable = true;
       # support ALSA only programs via ALSA JACK PCM plugin
