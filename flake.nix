@@ -4,9 +4,10 @@
   inputs =
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      musnix  = { url = "github:musnix/musnix"; };
     };
 
-  outputs = { nixpkgs, ... }:
+  outputs = { nixpkgs, musnix, ... }:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -22,6 +23,7 @@
         main = lib.nixosSystem {
           inherit system;
           modules = [
+            musnix.nixosModules.musnix
             ./main/configuration.nix
           ];
         };
