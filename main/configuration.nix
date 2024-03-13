@@ -368,6 +368,7 @@ in
     # Plasma 6 Extras
     kdePackages.kclock
     kdePackages.krdc
+    kdePackages.kcalc
     kdePackages.okular
 
     # SSH and GPG
