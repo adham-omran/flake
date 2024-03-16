@@ -377,6 +377,8 @@ in
     kdePackages.krdc
     kdePackages.kcalc
     kdePackages.okular
+    kdePackages.skanlite
+    kdePackages.skanpage
 
     # SSH and GPG
     openssl
