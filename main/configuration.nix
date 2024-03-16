@@ -147,7 +147,6 @@ in
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = "gnome3";
     };
 
     steam = {
@@ -381,8 +380,8 @@ in
     # SSH and GPG
     openssl
     pinentry
-    pinentry-gnome
-    pinentry-gtk2
+    # pinentry-gnome
+    # pinentry-gtk2
     # Syncing
     rsync
     syncthing
