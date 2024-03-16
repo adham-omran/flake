@@ -466,4 +466,6 @@ in
     ''
     192.168.0.4      truenas.home.arpa truenas truenas.local
   '';
+
+  musnix.enable = true;
 }
