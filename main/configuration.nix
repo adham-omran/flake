@@ -245,6 +245,13 @@ in
     fzf
     tldr
 
+    # utilities
+    pciutils
+    clinfo
+    glxinfo
+    vulkan-tools
+    wayland-utils
+
     # applications
     spotify
 
