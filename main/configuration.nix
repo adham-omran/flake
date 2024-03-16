@@ -232,8 +232,9 @@ in
     # audio
     airwindows-lv2
     ardour
+    gxplugins-lv2
+    guitarix
     surge
-
     kid3
 
     reaper
