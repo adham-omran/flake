@@ -214,6 +214,7 @@
 
 
     # terminal
+    radeontop
     aria
     fzf
     tldr
