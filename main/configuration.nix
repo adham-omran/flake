@@ -271,7 +271,7 @@
     foliate
     foot
     fuzzel
-    gimp-with-plugins
+    # gimp-with-plugins
     gnome.adwaita-icon-theme
     gnuplot
     google-chrome
