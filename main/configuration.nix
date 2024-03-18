@@ -411,10 +411,6 @@
   };
 
   virtualisation = {
-    podman = {
-      enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
     docker.enable = true;
     lxd.enable = true;
     libvirtd.enable = true;
