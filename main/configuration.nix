@@ -203,6 +203,8 @@
     corefonts
 
     # audio
+    yabridge
+    yabridgectl
     airwindows-lv2
     ardour
     gxplugins-lv2
