@@ -21,16 +21,14 @@
 
   services.xserver = {
     enable = true;
-    desktopManager =
-      {
-        gnome.enable = false;
-      };
+    desktopManager.gnome.enable = false;
     displayManager.gdm.enable = true;
     xkb.layout = "us";
     wacom.enable = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # services
   services = {
     desktopManager.plasma6.enable = true;
