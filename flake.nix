@@ -38,3 +38,7 @@
       };
     };
 }
+
+# Local Variables:
+# jinx-local-words: "Adham's github linux musnix nixos nixpkgs"
+# End:
