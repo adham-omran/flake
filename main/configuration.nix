@@ -12,8 +12,10 @@
     v4l2loopback
   ];
 
-  networking.hostName = "gilgamesh";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "gilgamesh";
+    networkmanager.enable = true;
+  };
   time.timeZone = "Asia/Baghdad";
   i18n.defaultLocale = "en_US.UTF-8";
 
