@@ -317,13 +317,10 @@
     slurp
     waybar
     wayland
-    wayland
     wdisplays
-    wl-clipboard
     wl-clipboard
     wofi
     xdg-utils
-    xdg-utils # for opening default programs when clicking links
 
     # Printing
     canon-cups-ufr2
