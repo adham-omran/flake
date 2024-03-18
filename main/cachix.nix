@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 let
   folder = ./cachix;
   toImport = name: value: folder + ("/" + name);
