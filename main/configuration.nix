@@ -340,6 +340,9 @@
     unzip
 
     # Plasma 6 Extras
+    kdePackages.akonadi
+    kdePackages.kontact
+    kdePackages.merkuro
     kdePackages.kclock
     kdePackages.krdc
     kdePackages.kcalc
