@@ -437,3 +437,7 @@
 
   musnix.enable = true;
 }
+
+# Local Variables:
+# jinx-local-words: "DefaultTimeoutStopSec JetBrains Naskh Noto Ss adbusers adham arpa config dmix dmixConfig ga gilgamesh gsettings jackaudio libvirtd loopback lp networkmanager rocm svc syncthing truecolor truenas"
+# End:
