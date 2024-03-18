@@ -350,8 +350,7 @@
     # SSH and GPG
     openssl
     pinentry
-    # pinentry-gnome
-    # pinentry-gtk2
+
     # Syncing
     rsync
     syncthing
