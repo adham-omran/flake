@@ -46,7 +46,7 @@
       };
     };
     ollama = {
-      enable = true;
+      enable = false;
       acceleration = "rocm";
     };
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
