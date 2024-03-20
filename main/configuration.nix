@@ -188,6 +188,13 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    babashka
+    clojure
+    quarto
+
+    # photography
+    darktable
+
     # Wine
     wineWowPackages.stable
     winetricks
@@ -214,12 +221,13 @@
 
     reaper
 
-
     # terminal
     radeontop
     aria
     fzf
     tldr
+    ncdu
+    nil
 
     # utilities
     pciutils
@@ -237,6 +245,9 @@
     mullvad
     mullvad-vpn
 
+    # media
+    spotify
+
     # packages from home-manager
     awscli2
     clojure-lsp
@@ -244,9 +255,6 @@
     imagemagick
     mpv
     multimarkdown
-    mysql80
-    ncdu
-    nil
     poppler_utils
     qpwgraph
     ripgrep
@@ -297,7 +305,6 @@
     qbittorrent
     rofi
     scrot
-    spotify
     stow
     sway-contrib.grimshot
     tree
@@ -343,6 +350,7 @@
     unzip
 
     # Plasma 6 Extras
+    # kdePackages.kamoso
     kdePackages.akonadi
     kdePackages.kontact
     kdePackages.merkuro
@@ -360,6 +368,7 @@
     # Syncing
     rsync
     syncthing
+    rclone
 
 
     # GNOME
