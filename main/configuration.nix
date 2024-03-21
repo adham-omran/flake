@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports =
     [
@@ -120,6 +120,8 @@
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
+      # TODO: Does not build if you do not specify it.
+      pinentryPackage = lib.mkForce pkgs.pinentry-qt;
     };
 
     steam = {
@@ -217,6 +219,7 @@
     gxplugins-lv2
     guitarix
     surge
+    # surge-XT # TODO: Even after #296917 this is broken in unstable.
     kid3
 
     reaper
@@ -325,7 +328,7 @@
     grim
     hyprpaper
     slurp
-    waybar
+    # waybar # TODO: Breaks with ERROR: Dependency "wireplumber-0.4" not found, tried pkgconfig
     wayland
     wdisplays
     wl-clipboard
