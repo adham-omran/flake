@@ -252,7 +252,7 @@
     spotify
 
     # packages from home-manager
-    awscli2
+    # awscli2 # https://github.com/NixOS/nixpkgs/issues/298023
     clojure-lsp
     ffmpeg
     imagemagick
