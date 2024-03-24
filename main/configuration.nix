@@ -218,8 +218,7 @@
     ardour
     gxplugins-lv2
     guitarix
-    surge
-    # surge-XT # TODO: Even after #296917 this is broken in unstable.
+    surge-XT
     kid3
 
     reaper
