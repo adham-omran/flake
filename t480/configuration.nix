@@ -148,6 +148,7 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    adobe-reader
     cloudflare-warp
     hugo
     # packages from home-manager
@@ -433,6 +434,9 @@ in
 
   programs.adb.enable = true;
   system.stateVersion = "23.11";
+  nixpkgs.config.permittedInsecurePackages = [
+                "adobe-reader-9.5.5"
+              ];
   nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
