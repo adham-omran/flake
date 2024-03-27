@@ -149,6 +149,7 @@ in
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
     adobe-reader
+    corefonts
     cloudflare-warp
     hugo
     # packages from home-manager
