@@ -321,6 +321,8 @@
     # git
     git
     # Tiling WM Utilities
+    xfce.thunar
+    mako
     dbus
     foot
     glib # gsettings
@@ -328,7 +330,7 @@
     grim
     hyprpaper
     slurp
-    # waybar # TODO: Breaks with ERROR: Dependency "wireplumber-0.4" not found, tried pkgconfig
+    waybar
     wayland
     wdisplays
     wl-clipboard
