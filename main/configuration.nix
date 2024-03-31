@@ -177,9 +177,13 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # clojure
     babashka
     clojure
     quarto
+
+    # ricing
+    eww
 
     # photography
     darktable
