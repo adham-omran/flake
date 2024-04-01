@@ -31,7 +31,7 @@
 
   # services
   services = {
-    desktopManager.plasma6.enable = true;
+    desktopManager.plasma6.enable = false;
     ollama = {
       enable = true;
       acceleration = "rocm";
