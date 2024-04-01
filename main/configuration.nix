@@ -21,7 +21,7 @@
 
   services.xserver = {
     enable = true;
-    desktopManager.gnome.enable = false;
+    desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
     xkb.layout = "us";
     wacom.enable = true;
@@ -69,7 +69,6 @@
     ]) ++ (with pkgs.gnome; [
       gnome-music
       gnome-terminal
-      gedit
       epiphany
       geary
       gnome-characters
