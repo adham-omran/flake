@@ -1,16 +1,18 @@
 # NixOS Flake
 
-This is an overview about my NixOS system.
+- [ ] An overview about my NixOS setup and use cases.
 
-- [ ] TODO
+# Pros about NixOS
+
+- Reproducible Audio production environment through [musnix](https://github.com/musnix/musnix).
+- Ardour.
+- Most Windows VSTs work with [yabridge](https://github.com/robbert-vdh/yabridge).
 
 # Cons about NixOS
 
-- Audio production is difficult in REAPER due how Nix handles packages.
-  - Ardour seems to be able to find VST and LV2 plugins installed with Nix.
-  - [ ] Explore [musnix](https://github.com/musnix/musnix)
-- JavaFX does not run.
+- Trying to use JavaFX from Clojure does not work.
+- [ ] Test JavaFX from Java.
 
 <!-- Local Variables: -->
-<!-- jinx-local-words: "Ardour Cloudflare JavaFX NixOS" -->
+<!-- jinx-local-words: "Ardour Cloudflare JavaFX NixOS VSTs" -->
 <!-- End: -->
