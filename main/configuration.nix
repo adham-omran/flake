@@ -176,6 +176,8 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # sunshine
+    sunshine
 
     # Clojure
     babashka
