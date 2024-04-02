@@ -176,7 +176,8 @@
       '';
   };
   environment.systemPackages = with pkgs; [
-    # clojure
+
+    # Clojure
     babashka
     clojure
     quarto
