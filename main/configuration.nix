@@ -215,7 +215,6 @@
     guitarix
     surge-XT
     kid3
-
     reaper
 
     # terminal
