@@ -341,6 +341,7 @@
 
     # Virtualization
     OVMFFull
+    swtpm
 
     # Archives
     p7zip
