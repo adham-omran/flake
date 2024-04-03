@@ -205,6 +205,7 @@
     corefonts
 
     # audio
+    musescore
     yabridge
     yabridgectl
     airwindows-lv2
