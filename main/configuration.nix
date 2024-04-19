@@ -312,9 +312,8 @@
     neofetch
     networkmanagerapplet
     nodejs_20
-    obs-studio
+
     openssl
-    paper-gtk-theme
     pass
     pavucontrol
     pop-gtk-theme
