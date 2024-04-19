@@ -179,6 +179,15 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # ai/ml
+    openai-whisper
+
+    # games
+    gnubg
+
+    # development
+    vscode-fhs
+
     # sunshine
     sunshine
 
@@ -208,6 +217,8 @@
     corefonts
 
     # audio
+    audacity
+    sonobus
     musescore
     yabridge
     yabridgectl
@@ -220,6 +231,7 @@
     reaper
 
     # terminal
+    jq
     radeontop
     aria
     fzf
@@ -278,9 +290,16 @@
     feh
     ffcast
     foliate
+    # dnkl Utilities
     foot
     fuzzel
+    fnott
+    wbg
+
+    # Screenshot
     gimp
+    swappy
+
     gnome.adwaita-icon-theme
     gnuplot
     google-chrome
