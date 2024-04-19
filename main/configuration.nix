@@ -32,6 +32,8 @@
 
   # services
   services = {
+    # Sway option
+    gnome.gnome-keyring.enable = true;
     desktopManager.plasma6.enable = false;
     ollama = {
       enable = true;
