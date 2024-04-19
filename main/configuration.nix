@@ -83,6 +83,7 @@
 
   # programs
   programs = {
+    noisetorch.enable = true;
     virt-manager.enable = true;
     tmux = {
       enable = true;
