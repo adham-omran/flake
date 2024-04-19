@@ -108,8 +108,7 @@
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      # TODO: Does not build if you do not specify it.
-      pinentryPackage = lib.mkForce pkgs.pinentry-qt;
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     steam = {
