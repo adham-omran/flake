@@ -28,7 +28,19 @@
     wacom.enable = true;
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    AWS_SHARED_CREDENTIALS_FILE = "$XDG_CONFIG_HOME/aws/credentials";
+    AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config";
+    HISTFILE = "$XDG_STATE_HOME/bash/history";
+    GRADLE_USER_HOME = "$XDG_DATA_HOME/gradle";
+    GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
+    XCOMPOSECACHE="$XDG_CACHE_HOME/X11/xcompose";
+  };
 
   # services
   services = {
