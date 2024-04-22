@@ -321,7 +321,7 @@
     ledger
     libnotify
     libreoffice-qt
-    neofetch
+    fastfetch
     networkmanagerapplet
     nodejs_20
 
