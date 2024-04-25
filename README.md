@@ -1,14 +1,28 @@
 # NixOS Flake
 
-- [ ] An overview about my NixOS setup and use cases.
+An overview about my NixOS setup and use cases.
 
-# Pros about NixOS
+# Use Cases
 
-- Reproducible developer setup.
+## Streaming
+
+- OBS with plugins from Flatpak appear to work better than Nixpkgs solution.
+
+## Gaming
+
+- Steam
+    - Proton runs the games I play with no issue.
+
+- Non-Steam
+    - Minecraft runs well.
+
+## Development
+
+- Nix Flakes set up my development environments.
 
 ## Audio
 
-- Reproducible Audio production environment through [musnix](https://github.com/musnix/musnix).
+- Reproducible Linux Audio production environment through [musnix](https://github.com/musnix/musnix).
 - Most Windows VSTs work with [yabridge](https://github.com/robbert-vdh/yabridge).
 
 # Upcoming Projects
@@ -22,6 +36,9 @@
 ## Audio VFIO
 
 - Passing a USB device to do audio mixing.
+    - This appears to work fine when passing a 6+ cores.
+    - [ ] Test the effectiveness of CPU pinning
+    - [ ] Find and test a benchmark mix
 
 # Pain Points
 
@@ -29,8 +46,11 @@
 
 # Cons about NixOS
 
-- None to me.
+- Learning resources are confusing.
+    - I thought learning about the `Nix` language would aid in understanding
+      `Nixpkgs` but turns out there's an entire manual for those because they
+      don't seem to build using `derivation`
 
 <!-- Local Variables: -->
-<!-- jinx-local-words: "Ardour Cloudflare JavaFX NixOS VSTs" -->
+<!-- jinx-local-words: "Ardour Cloudflare Flatpak JavaFX Lutris Minecraft NixOS Nixpkgs VSTs" -->
 <!-- End: -->
