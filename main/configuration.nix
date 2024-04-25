@@ -500,6 +500,16 @@
   '';
 
   musnix.enable = true;
+
+  # Remove limits for Lutris
+  security.pam.loginLimits = [
+    {
+      domain = "adham";
+      item = "nofile";
+      type = "hard";
+      value = "524288";
+    }
+  ];
 }
 
 # Local Variables:
