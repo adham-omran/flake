@@ -196,11 +196,15 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # android
+    scrcpy
+
     # ai/ml
     openai-whisper
 
     # games
     gnubg
+    lutris
 
     # development
     vscode-fhs
@@ -248,6 +252,7 @@
     reaper
 
     # terminal
+    xdg-ninja
     jq
     radeontop
     aria
