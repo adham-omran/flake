@@ -465,9 +465,11 @@
     };
   };
   users.groups.libvirtd.members = [ "root" "adham"];
+
   virtualisation = {
     docker.enable = true;
     lxd.enable = true;
+    spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
       qemu = {
