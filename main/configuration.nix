@@ -257,6 +257,7 @@
     reaper
 
     # terminal
+    neovim
     xdg-ninja
     jq
     radeontop
