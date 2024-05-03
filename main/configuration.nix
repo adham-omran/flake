@@ -327,7 +327,6 @@
     gimp
     swappy
 
-    gnome.adwaita-icon-theme
     gnuplot
     google-chrome
     graphviz
@@ -366,7 +365,6 @@
     dbus
     foot
     glib # gsettings
-    gnome3.adwaita-icon-theme  # default gnome cursors
     grim
     hyprpaper
     slurp
