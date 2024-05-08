@@ -5,9 +5,9 @@
       ./hardware-configuration.nix
       ./cachix.nix
     ];
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
@@ -25,8 +25,13 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager = {
     gnome.enable = true;
-    plasma5.enable = false;
   };
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
@@ -36,42 +41,22 @@
       elisa
     ];
 
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-terminal
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
   };
+
   programs.browserpass.enable = true;
   programs.firefox.nativeMessagingHosts.browserpass = true;
   programs.light.enable = true;
   security.polkit.enable = true;
 
-  services.xserver.wacom.enable = true;
   services.printing.enable = true;
   hardware.bluetooth.enable = true;
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
   services.ipp-usb.enable = true;
   hardware.sane.openFirewall = true;
-  services.hardware.bolt.enable = true;
   services.tailscale.enable = true;
-
   services.flatpak.enable = true;
   fonts.fontDir.enable = true;
-
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
 
   services.syncthing = {
     enable = true;
@@ -95,6 +80,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
   };
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
@@ -116,48 +107,27 @@
     pinentryFlavor = "gnome3";
   };
   services.openssh.enable = true;
-  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
-  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353];
   networking.firewall.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
-    wl-clipboard
-    foot
-    wayland
-    xdg-utils
-    glib # gsettings
-    swaylock
-    swayidle
-    (python3.withPackages(ps: with ps; [ pandas
-                                         requests
-                                         epc
-                                         orjson
-                                         sexpdata
-                                         six
-                                         setuptools
-                                         paramiko
-                                         rapidfuzz
-                                         pip
-                                       ]))
-    hyprpaper
-    canon-cups-ufr2
-    OVMFFull
-    slstatus
-    st
-    surf
-    tabbed
-    dmenu
-    unzip
-    cmatrix
-    libsForQt5.okular
-    rsync
+    fastfetch
+    git
+    stow
 
+    grim
+    slurp
+    wl-clipboard
+    mako
+
+    canon-cups-ufr2
+    rsync
     openssl
     pinentry
     pinentry-gtk2
     pinentry-gnome
     syncthing
     killall
-    virt-manager
+
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
     gnome.gnome-tweaks
@@ -171,10 +141,6 @@
           epkgs.jinx
         ]
       ));
-  };
-  services.mpd.user = "userRunningPipeWire";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
   };
 
   fonts = {
@@ -220,26 +186,9 @@
               set-environment -g COLORTERM "truecolor"
                 '';
   };
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
 
-    settings = {
-      START_CHARGE_THRESH_BAT0=75;
-      STOP_CHARGE_THRESH_BAT0=95;
-
-      START_CHARGE_THRESH_BAT1=75;
-      STOP_CHARGE_THRESH_BAT1=95;
-
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-    };
-  };
   virtualisation = {
     docker.enable = true;
-    waydroid.enable = true;
-    lxd.enable = true;
-    libvirtd.enable = true;
   };
 
   programs.adb.enable = true;
@@ -255,8 +204,8 @@
   nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+    dates = "daily";
+    options = "--delete-older-than 3d";
   };
   hardware.opengl = {
     enable = true;
