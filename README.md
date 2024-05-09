@@ -13,11 +13,11 @@ This is an overview about my NixOS system.
 
 # Home Manager
 
-I begain using home-manager again due to its ability to support different
-dotfiles *per individual machine*, this is most apperant in my Sway
-configuration which needs to be different from host to vm to laptop, especialy
+I began using home-manager again due to its ability to support different
+dotfiles *per individual machine*, this is most apparent in my Sway
+configuration which needs to be different from host to am to laptop, especially
 the displays section.
 
 <!-- Local Variables: -->
-<!-- jinx-local-words: "Cloudflare JavaFX NixOS" -->
+<!-- jinx-local-words: "Cloudflare JavaFX NixOS dotfiles nixpkgs" -->
 <!-- End: -->
