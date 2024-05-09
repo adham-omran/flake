@@ -40,7 +40,6 @@
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
     ];
-
   };
 
   programs.browserpass.enable = true;
@@ -113,6 +112,9 @@
     # Sway
     waybar
     sway-contrib.grimshot
+    cliphist
+    # Themes
+    bibata-cursors
     # Network Management
     networkmanager
     # Accounting
@@ -121,7 +123,7 @@
     python3
     # Audio Control GUI
     pavucontrol
-
+    # LSP Server for Nix
     nil
     wl-clipboard
     fuzzel

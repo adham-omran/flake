@@ -1,4 +1,4 @@
-{pkgs, config, lib, ...}:
+{config, lib, ...}:
 {
   home = {
     stateVersion = "23.11";
@@ -20,6 +20,15 @@
     enable = true;
     wrapperFeatures.gtk = true;
     config = {
+      input = {
+        "type:keyboard" = {
+          "xkb_numlock" = "enabled";
+          "xkb_layout"  = "us,iq";
+          "xkb_options" = "grp:shift_caps_toggle";
+          ## Avoid using both shifts since this is what I use to pass from
+          ## virtual machine to host.
+        };
+      };
       focus.wrapping = "workspace";
       startup = [
         { command = "emacs --daemon"; }
@@ -41,6 +50,7 @@
           "${modifier}+Comma" = "focus output left";
           "${modifier}+Period" = "focus output right";
           "Print" = "exec wl-copy < $(grimshot save area ~/pics/Screenshots/screenshot-$(date --iso-8601=s).png)";
+          "Mod4+Ctrl+v" = "exec cliphist list | fuzzel -d -w 50 --tabs=2 | cliphist decode | wl-copy";
 
           "${modifier}+c" = "kill";
           "${modifier}+t" = "exec emacsclient -c";
