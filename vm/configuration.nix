@@ -110,6 +110,26 @@
   networking.firewall.enable = true;
   services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
+    # Sway
+    waybar
+    sway-contrib.grimshot
+    # Network Management
+    networkmanager
+    # Accounting
+    ledger
+    # Utilities that use Python
+    python3
+    # Audio Control GUI
+    pavucontrol
+
+    nil
+    wl-clipboard
+    fuzzel
+    pass
+
+    hunspellDicts.en_US
+    aspell
+    aspellDicts.en
     fastfetch
     git
     stow

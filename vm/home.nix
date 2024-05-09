@@ -2,11 +2,6 @@
 {
   home = {
     stateVersion = "23.11";
-    packages = with pkgs; [
-      nil
-      wl-clipboard
-      fuzzel
-    ];
   };
 
   programs.git = {
@@ -25,6 +20,7 @@
     enable = true;
     wrapperFeatures.gtk = true;
     config = {
+      focus.wrapping = "workspace";
       startup = [
         { command = "emacs --daemon"; }
         { command = "foot -s"; }
@@ -34,7 +30,6 @@
         let
           modifier = config.wayland.windowManager.sway.config.modifier;
         in lib.mkOptionDefault {
-          "${modifier}+c" = "kill";
           "${modifier}+Shift+n" = "move left";
           "${modifier}+Shift+e" = "move down";
           "${modifier}+Shift+i" = "move up";
@@ -43,7 +38,11 @@
           "${modifier}+e" = "focus down";
           "${modifier}+i" = "focus up";
           "${modifier}+o" = "focus right";
+          "${modifier}+Comma" = "focus output left";
+          "${modifier}+Period" = "focus output right";
+          "Print" = "exec wl-copy < $(grimshot save area ~/pics/Screenshots/screenshot-$(date --iso-8601=s).png)";
 
+          "${modifier}+c" = "kill";
           "${modifier}+t" = "exec emacsclient -c";
         };
       gaps.inner = 10;
@@ -56,6 +55,11 @@
       bars = [
         {
           position = "top";
+          fonts = {
+            names = [ "JetBrains Mono" ];
+            size = 12.0;
+          };
+          command = "waybar";
         }
       ];
       menu = "fuzzel";
@@ -68,7 +72,16 @@
           res = "2560x1440@120Hz";
           scale = "1";
         };
+        DP-2 = {
+          pos = "0 0";
+          res = "2560x1440@120Hz";
+          scale = "1";
+        };
       };
     };
   };
 }
+
+# Local Variables:
+# jinx-local-words: "JetBrains adham babylon cliphist emacs emacsclient fuzzel jpg mnt omran wl"
+# End:
