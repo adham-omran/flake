@@ -109,10 +109,14 @@
   networking.firewall.enable = true;
   services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
+    btop
     # Sway
-    waybar
+    ## Screenshots
     sway-contrib.grimshot
+    ## Clipboard history
     cliphist
+    ## Edit screenshots
+    swappy
     # Themes
     bibata-cursors
     # Network Management
@@ -125,8 +129,11 @@
     pavucontrol
     # LSP Server for Nix
     nil
+    # Clipboard management
     wl-clipboard
+    # Application Menu
     fuzzel
+    # Password management
     pass
 
     hunspellDicts.en_US
