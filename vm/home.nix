@@ -1,4 +1,4 @@
-{config, lib, ...}:
+{pkgs, config, lib, ...}:
 {
   home = {
     stateVersion = "23.11";
@@ -15,7 +15,35 @@
   };
 
   services.blueman-applet.enable = true;
-
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        output = [
+          "DP-1"
+          "DP-2"
+        ];
+        modules-left = [ "sway/workspaces" "sway/mode" "sway/window" ];
+        modules-center = [ "clock" ];
+        modules-right = [ "tray" ];
+        "clock" = {
+          "format" = "{:%Y-%m-%d %H:%M %a W%V}";
+          "format-alt" = "{:%a, %d. %b  %H:%M}";
+        };
+        "tray" = {
+          "icon-size" = 21;
+          "spacing" = 10;
+        };
+        "sway/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+        };
+      };
+    };
+  };
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
