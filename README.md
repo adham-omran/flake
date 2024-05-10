@@ -18,6 +18,10 @@ dotfiles *per individual machine*, this is most apparent in my Sway
 configuration which needs to be different from host to am to laptop, especially
 the displays section.
 
+# Unified Branch
+
+- Perhaps unify both branches by using multiple inputs?
+
 <!-- Local Variables: -->
 <!-- jinx-local-words: "Cloudflare JavaFX NixOS dotfiles nixpkgs" -->
 <!-- End: -->
