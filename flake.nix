@@ -3,17 +3,21 @@
 
   inputs =
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+      ## Notes
+      ##
+      ## The name of the input attribute itself is arbitrary? I can use `stable`
+      ## just as I can use `nixpkgs`?
+      stable.url = "github:nixos/nixpkgs/nixos-23.11";
       home-manager = {
         url = "github:nix-community/home-manager/release-23.11";
-        inputs.nixpkgs.follows = "nixpkgs";
+        # inputs.stable.follows = "nixpkgs";
       };
     };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { stable, home-manager, ... }:
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
+      lib = stable.lib;
     in {
       nixosConfigurations = {
         t480 = lib.nixosSystem {
