@@ -113,8 +113,11 @@
     # Sway
     ## Screenshots
     sway-contrib.grimshot
-    ## Clipboard history
+    grim
+    slurp
+    ## Clipboard management
     cliphist
+    wl-clipboard
     ## Edit screenshots
     swappy
     # Themes
@@ -135,17 +138,19 @@
     fuzzel
     # Password management
     pass
-
+    # Graphs
+    graphviz
+    # Dictionaries
     hunspellDicts.en_US
     aspell
     aspellDicts.en
+    # Fun utility
     fastfetch
+    # Git
     git
+    # Dotfiles
     stow
 
-    grim
-    slurp
-    wl-clipboard
     canon-cups-ufr2
     rsync
     openssl
