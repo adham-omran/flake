@@ -15,6 +15,14 @@
   };
 
   services.blueman-applet.enable = true;
+  services.fnott = {
+    enable = true;
+    settings = {
+      main = {
+        default-timeout = 5;
+      };
+    };
+  };
   programs.waybar = {
     enable = true;
     settings = {

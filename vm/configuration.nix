@@ -146,8 +146,6 @@
     grim
     slurp
     wl-clipboard
-    mako
-
     canon-cups-ufr2
     rsync
     openssl
