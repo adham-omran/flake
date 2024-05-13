@@ -202,6 +202,9 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # moonlight
+    moonlight-qt
+
     # android
     scrcpy
 
@@ -454,6 +457,7 @@
       source-han-serif-japanese
 
       vazir-fonts
+      scheherazade-new
     ];
 
     fontconfig = {
