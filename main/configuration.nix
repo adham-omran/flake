@@ -56,7 +56,8 @@
     gnome.gnome-keyring.enable = true;
     desktopManager.plasma6.enable = false;
     ollama = {
-      enable = true;
+      ## Disable Ollama on NixOS since I'm using it on virtual machine.
+      enable = false;
       acceleration = "rocm";
     };
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
