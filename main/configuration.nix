@@ -507,7 +507,7 @@
 
   networking.extraHosts =
     ''
-    192.168.122.4        truenas.home.arpa truenas truenas.local
+    192.168.0.4        truenas.home.arpa truenas truenas.local
     '';
 
   musnix.enable = true;
