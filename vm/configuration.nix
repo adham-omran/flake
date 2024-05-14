@@ -110,6 +110,13 @@
   networking.firewall.enable = true;
   services.gnome.gnome-keyring.enable = true;
   environment.systemPackages = with pkgs; [
+    # Development Environments
+    clojure-lsp
+    direnv
+    # Media Play
+    vlc
+    # moonlight
+    moonlight-qt
     btop
     # Sway
     ## Screenshots
