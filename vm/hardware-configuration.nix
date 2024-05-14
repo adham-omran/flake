@@ -26,7 +26,7 @@
     };
 
   fileSystems."/mnt/pool" = {
-    device = "192.168.122.4:/mnt/pool";
+    device = "truenas.home.arpa:/mnt/pool";
     fsType = "nfs";
   };
 
