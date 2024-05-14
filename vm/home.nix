@@ -1,4 +1,4 @@
-{pkgs, config, lib, ...}:
+{config, lib, ...}:
 {
   home = {
     stateVersion = "23.11";
@@ -47,7 +47,7 @@
         };
         "sway/workspaces" = {
           disable-scroll = true;
-          all-outputs = true;
+          all-outputs = false;
         };
       };
     };
