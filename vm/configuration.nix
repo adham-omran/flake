@@ -105,6 +105,7 @@
     enableSSHSupport = true;
     pinentryFlavor = "gnome3";
   };
+  programs.noisetorch.enable = true;
   services.openssh.enable = true;
   networking.firewall.enable = true;
   services.gnome.gnome-keyring.enable = true;
