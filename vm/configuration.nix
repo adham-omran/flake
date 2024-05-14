@@ -240,6 +240,11 @@
     extraOptions = "experimental-features = nix-command flakes";
   };
 
+  networking.extraHosts =
+  ''
+    192.168.0.4 truenas.home.arpa
+  '';
+
   nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
   nix.settings.auto-optimise-store = true;
   nix.gc = {
