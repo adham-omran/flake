@@ -244,7 +244,7 @@
     hexchat
 
     # fonts
-    corefonts
+    # corefonts
 
     # audio
     audacity
