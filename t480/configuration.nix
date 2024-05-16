@@ -148,6 +148,7 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    nfs-utils
     moonlight-qt
     corefonts
     cloudflare-warp
@@ -156,11 +157,11 @@ in
     vnstat
     nil
     mpv
+    vlc
     ffmpeg
     qpwgraph
     clojure
     babashka
-    leiningen
     clojure-lsp
     graalvm-ce
     multimarkdown
@@ -191,6 +192,7 @@ in
     tree
     ledger
     neofetch
+    fastfetch
     bat
     btop
     fd
@@ -208,7 +210,6 @@ in
     zotero
     libreoffice-qt
     anki-bin
-    nodejs_20
 
     google-chrome
     obs-studio
@@ -244,7 +245,6 @@ in
     xdg-utils # for opening default programs when clicking links
     glib # gsettings
     dracula-theme # gtk theme
-    gnome3.adwaita-icon-theme  # default gnome cursors
     swaylock
     swayidle
     grim         # screenshot functionality
@@ -267,7 +267,6 @@ in
                                          rapidfuzz
                                        ]))
 
-    hyprpaper
     canon-cups-ufr2
     OVMFFull
     unzip
@@ -304,9 +303,6 @@ in
 
   services.vnstat.enable = true;
   services.mpd.user = "userRunningPipeWire";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
-  };
   services.kanata.enable = true;
   services.kanata.package = pkgs.kanata;
 
