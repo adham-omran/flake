@@ -432,18 +432,21 @@ in
   programs.adb.enable = true;
   system.stateVersion = "23.11";
   nixpkgs.config.allowUnfree = true;
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
+    settings = {
+      substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
-  nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
-  nix.settings.auto-optimise-store = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
