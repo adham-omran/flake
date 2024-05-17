@@ -40,7 +40,7 @@
         };
 
 
-        vm = lib-unstable.nixosSystem {
+        vm = lib-stable.nixosSystem {
           inherit system;
           modules = [
             ./vm/configuration.nix
