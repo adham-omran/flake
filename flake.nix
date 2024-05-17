@@ -5,9 +5,11 @@
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       musnix  = { url = "github:musnix/musnix"; };
+      home-manager.url = "github:nix-community/home-manager";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = { nixpkgs, musnix, ... }:
+  outputs = { nixpkgs, musnix, home-manager, ... }:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -25,6 +27,13 @@
           modules = [
             musnix.nixosModules.musnix
             ./main/configuration.nix
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.adham = {
+                imports = [ ./main/home.nix ];
+              };
+            }
           ];
         };
 
