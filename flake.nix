@@ -10,7 +10,7 @@
       home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
 
       home-manager-stable.url = "github:nix-community/home-manager";
-      home-manager-stable.inputs.stable.follows = "nixpkgs";
+      home-manager-stable.inputs.nixpkgs.follows = "stable";
     };
 
   outputs = { nixpkgs,
