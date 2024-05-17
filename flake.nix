@@ -13,7 +13,7 @@
   outputs = { nixpkgs, stable, musnix, home-manager, ... }:
     let
       system = "x86_64-linux";
-      lib = nixpkgs.lib;
+      lib-unstable = nixpkgs.lib;
     in {
       nixosConfigurations = {
         t480 = lib.nixosSystem {
@@ -23,7 +23,7 @@
           ];
         };
 
-        main = lib.nixosSystem {
+        main = lib-unstable.nixosSystem {
           inherit system;
           modules = [
             musnix.nixosModules.musnix
@@ -39,7 +39,7 @@
         };
 
 
-        vm = lib.nixosSystem {
+        vm = lib-unstable.nixosSystem {
           inherit system;
           modules = [
             ./vm/configuration.nix
