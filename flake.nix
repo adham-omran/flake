@@ -6,11 +6,19 @@
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       stable.url = "github:nixos/nixpkgs/nixos-23.11";
       musnix  = { url = "github:musnix/musnix"; };
-      home-manager.url = "github:nix-community/home-manager";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
+      home-manager-unstable.url = "github:nix-community/home-manager";
+      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
+
+      home-manager-stable.url = "github:nix-community/home-manager";
+      home-manager-stable.inputs.stable.follows = "nixpkgs";
     };
 
-  outputs = { nixpkgs, stable, musnix, home-manager, ... }:
+  outputs = { nixpkgs,
+              stable,
+              musnix,
+              home-manager-unstable,
+              home-manager-stable,
+              ... }:
     let
       system = "x86_64-linux";
       lib-unstable = nixpkgs.lib;
@@ -29,7 +37,7 @@
           modules = [
             musnix.nixosModules.musnix
             ./main/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager-unstable.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
@@ -44,7 +52,7 @@
           inherit system;
           modules = [
             ./vm/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager-stable.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
