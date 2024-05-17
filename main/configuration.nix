@@ -288,6 +288,7 @@
     mullvad-vpn
 
     # media
+    vlc
     spotify
 
     # packages from home-manager
