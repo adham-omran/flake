@@ -9,7 +9,7 @@
       home-manager-unstable.url = "github:nix-community/home-manager";
       home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
 
-      home-manager-stable.url = "github:nix-community/home-manager";
+      home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
       home-manager-stable.inputs.nixpkgs.follows = "stable";
     };
 
@@ -52,7 +52,7 @@
           inherit system;
           modules = [
             ./vm/configuration.nix
-            home-manager-unstable.nixosModules.home-manager {
+            home-manager-stable.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
