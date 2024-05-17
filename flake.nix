@@ -3,26 +3,28 @@
 
   inputs =
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      stable.url = "github:nixos/nixpkgs/nixos-23.11";
       musnix  = { url = "github:musnix/musnix"; };
+
+      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+      nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+
       home-manager-unstable.url = "github:nix-community/home-manager";
-      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs";
+      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
       home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
-      home-manager-stable.inputs.nixpkgs.follows = "stable";
+      home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-  outputs = { nixpkgs,
-              stable,
+  outputs = { nixpkgs-unstable,
+              nixpkgs-stable,
               musnix,
               home-manager-unstable,
               home-manager-stable,
               ... }:
     let
       system = "x86_64-linux";
-      lib-unstable = nixpkgs.lib;
-      lib-stable = stable.lib;
+      lib-unstable = nixpkgs-unstable.lib;
+      lib-stable = nixpkgs-stable.lib;
     in {
       nixosConfigurations = {
         t480 = lib-stable.nixosSystem {
