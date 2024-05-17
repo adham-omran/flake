@@ -202,6 +202,7 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    yambar
     # moonlight
     moonlight-qt
 
