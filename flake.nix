@@ -4,12 +4,13 @@
   inputs =
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      stable.url = "github:nixos/nixpkgs/nixos-23.11";
       musnix  = { url = "github:musnix/musnix"; };
       home-manager.url = "github:nix-community/home-manager";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = { nixpkgs, musnix, home-manager, ... }:
+  outputs = { nixpkgs, stable, musnix, home-manager, ... }:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
