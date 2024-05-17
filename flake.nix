@@ -52,7 +52,7 @@
           inherit system;
           modules = [
             ./vm/configuration.nix
-            home-manager-stable.nixosModules.home-manager {
+            home-manager-unstable.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
