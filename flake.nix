@@ -14,9 +14,10 @@
     let
       system = "x86_64-linux";
       lib-unstable = nixpkgs.lib;
+      lib-stable = stable.lib;
     in {
       nixosConfigurations = {
-        t480 = lib.nixosSystem {
+        t480 = lib-stable.nixosSystem {
           inherit system;
           modules = [
             ./t480/configuration.nix
