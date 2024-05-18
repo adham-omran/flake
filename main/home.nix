@@ -112,6 +112,7 @@ SyncState *
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+    checkConfig = false;
     config = {
       input = {
         "type:keyboard" = {
