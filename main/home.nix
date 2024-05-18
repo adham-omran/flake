@@ -107,7 +107,8 @@
             names = [ "JetBrains Mono" ];
             size = 12.0;
           };
-          command = "waybar";
+          command = "swaybar";
+          statusCommand = "while ~/.config/sway/status.sh; do sleep 1; done";
         }
       ];
       menu = "fuzzel";
