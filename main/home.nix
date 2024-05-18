@@ -54,6 +54,24 @@
     };
   };
 
+  accounts.email.accounts.default = {
+    primary = true;
+    msmtp = {
+      enable = true;
+      extraConfig = {
+        host = "smtp.fastmail.com";
+        from = "mail@adham-omran.com";
+        tls = "on";
+        tls_certcheck = "off";
+        "tls_starttls" = "off";
+        "port" = "465";
+        "auth" = "on";
+        "user" = "mail@adham-omran.com";
+        "password" = "${builtins.readFile "/home/adham/.fastmail-pass"}";
+      };
+    };
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
