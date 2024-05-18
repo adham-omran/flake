@@ -112,9 +112,9 @@
       ];
       menu = "fuzzel";
       output = {
-        # "*" = {
-        #   background = "/mnt/pool/home/adham/pics/wall/babylon.jpg fill";
-        # };
+        "*" = {
+          background = "~/pics/wall/babylon.jpg fill";
+        };
         DP-1 = {
           pos = "2560 0";
           res = "2560x1440@120Hz";
