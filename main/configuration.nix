@@ -202,7 +202,10 @@
       '';
   };
   environment.systemPackages = with pkgs; [
-    yambar
+    # mail
+    notmuch
+    msmtp
+
     # moonlight
     moonlight-qt
 
