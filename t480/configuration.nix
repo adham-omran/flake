@@ -148,6 +148,8 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # pomodoro
+    gnome.pomodoro
     cloudflare-warp
     hugo
     # packages from home-manager
