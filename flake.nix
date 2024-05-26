@@ -5,36 +5,36 @@
     {
       musnix  = { url = "github:musnix/musnix"; };
 
-      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-      nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+      nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
+      nixpkgs-23-11.url =   "github:nixos/nixpkgs/nixos-23.11";
 
       home-manager-unstable.url = "github:nix-community/home-manager";
-      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
+      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-24-05";
 
       home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
-      home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-stable";
+      home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-23-11";
     };
 
-  outputs = { nixpkgs-unstable,
-              nixpkgs-stable,
+  outputs = { nixpkgs-24-05,
+              nixpkgs-23-11,
               musnix,
               home-manager-unstable,
               home-manager-stable,
               ... }:
     let
       system = "x86_64-linux";
-      lib-unstable = nixpkgs-unstable.lib;
-      lib-stable = nixpkgs-stable.lib;
+      lib-24-05 = nixpkgs-24-05.lib;
+      lib-23-11 = nixpkgs-23-11.lib;
     in {
       nixosConfigurations = {
-        t480 = lib-stable.nixosSystem {
+        t480 = lib-23-11.nixosSystem {
           inherit system;
           modules = [
             ./t480/configuration.nix
           ];
         };
 
-        main = lib-unstable.nixosSystem {
+        main = lib-24-05.nixosSystem {
           inherit system;
           modules = [
             musnix.nixosModules.musnix
@@ -50,7 +50,7 @@
         };
 
 
-        vm = lib-stable.nixosSystem {
+        vm = lib-23-11.nixosSystem {
           inherit system;
           modules = [
             ./vm/configuration.nix
