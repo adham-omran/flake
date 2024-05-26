@@ -1,4 +1,4 @@
-{config, lib, ...}:
+{config, lib, pkgs, ...}:
 {
   home = {
     stateVersion = "23.11";
@@ -67,7 +67,9 @@
         "port" = "465";
         "auth" = "on";
         "user" = "mail@adham-omran.com";
-        "password" = "${builtins.readFile "/home/adham/.fastmail-pass"}";
+        # TODO: Move to `pass`.
+        "password" = "${pkgs.runCommand "cat" "/home/adham/.fastmail-pass"}";
+        # "password" = "${builtins.readFile "/home/adham/.fastmail-pass"}";
       };
     };
   };
@@ -172,9 +174,14 @@ SyncState *
         "*" = {
           background = "~/pics/wall/babylon.jpg fill";
         };
+        HDMI-A-1 = {
+          pos = "0 0";
+          res = "2560x1440@144Hz";
+          scale = "1";
+        };
         DP-1 = {
           pos = "2560 0";
-          res = "2560x1440@120Hz";
+          res = "2560x1440@144Hz";
           scale = "1";
         };
         DP-2 = {
