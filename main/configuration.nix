@@ -202,6 +202,12 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # looking glass
+    looking-glass-client
+
+    # android tools, flashing
+    android-tools
+
     # mail
     notmuch
     msmtp
@@ -426,6 +432,7 @@
 
 
     # GNOME
+    gnome.pomodoro
     gnome.adwaita-icon-theme
     gnome.gnome-tweaks
     gnomeExtensions.appindicator
