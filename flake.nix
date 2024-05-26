@@ -8,7 +8,7 @@
       nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
       nixpkgs-23-11.url =   "github:nixos/nixpkgs/nixos-23.11";
 
-      home-manager-unstable.url = "github:nix-community/home-manager";
+      home-manager-unstable.url = "github:nix-community/home-manager/release-24.05";
       home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-24-05";
 
       home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
