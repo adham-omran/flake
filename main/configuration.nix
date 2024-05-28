@@ -52,6 +52,8 @@
 
   # services
   services = {
+    # Remote Desktop for GNOME
+    gnome.gnome-remote-desktop.enable = true;
     # Sway option
     gnome.gnome-keyring.enable = true;
     desktopManager.plasma6.enable = false;
