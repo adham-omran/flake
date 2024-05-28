@@ -199,10 +199,48 @@
     shell = pkgs.fish;
   };
 
-  networking.firewall.allowedTCPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353
-                                          80 443 1401];
-  networking.firewall.allowedUDPPorts = [ 25565 80 433 5000 3000 8080 4010 53 631 5353
-                                          53 1194 1195 1196 1197 1300 1301 1302 1303 1400];
+  networking.firewall.allowedTCPPorts = [
+    8384
+    22000
+    25565
+    80
+    433
+    5000
+    3000
+    8080
+    4010
+    53
+    631
+    5353
+    80
+    443
+    1401
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    22000
+    21027
+    25565
+    80
+    433
+    5000
+    3000
+    8080
+    4010
+    53
+    631
+    5353
+    53
+    1194
+    1195
+    1196
+    1197
+    1300
+    1301
+    1302
+    1303
+    1400
+  ];
   networking.firewall.enable = true;
   systemd = {
     packages = with pkgs; [cloudflare-warp];
