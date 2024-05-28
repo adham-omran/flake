@@ -6,7 +6,7 @@
       musnix  = { url = "github:musnix/musnix"; };
 
       nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
-      nixpkgs-23-11.url =   "github:nixos/nixpkgs/nixos-23.11";
+      nixpkgs-23-11.url =   "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
 
       home-manager-unstable.url = "github:nix-community/home-manager/release-24.05";
       home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-24-05";
@@ -27,6 +27,7 @@
       lib-23-11 = nixpkgs-23-11.lib;
     in {
       nixosConfigurations = {
+
         t480 = lib-23-11.nixosSystem {
           inherit system;
           modules = [
