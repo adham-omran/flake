@@ -5,7 +5,7 @@
     {
       musnix  = { url = "github:musnix/musnix"; };
 
-      nixpkgs-24-05.url = "github:nixos/nixpkgs/nixos-24.05";
+      nixpkgs-24-05.url =   "github:nixos/nixpkgs/nixos-24.05";
       nixpkgs-23-11.url =   "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
 
       home-manager-unstable.url = "github:nix-community/home-manager/release-24.05";
