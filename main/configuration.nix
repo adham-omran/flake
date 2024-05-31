@@ -11,10 +11,10 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-    options vfio-pci ids=1002:73ff,1002:ab28
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  #   options vfio-pci ids=1002:73ff,1002:ab28
+  # '';
 
   # These modules are required for PCI passthrough, and must come before early modesetting stuff
   boot.kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" ];
