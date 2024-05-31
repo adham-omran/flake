@@ -52,6 +52,12 @@
 
   # services
   services = {
+    # Sunshine
+    sunshine = {
+      enable = true;
+      openFirewall = true;
+      capSysAdmin = true;
+    };
     # Remote Desktop for GNOME
     gnome.gnome-remote-desktop.enable = true;
     # Sway option
@@ -199,7 +205,19 @@
     shell = pkgs.fish;
   };
 
+  networking.firewall.allowedUDPPortRanges = [
+    { from = 47998; to = 48000; }
+    { from = 8000; to = 8010; }
+  ];
+
   networking.firewall.allowedTCPPorts = [
+    # sunshine
+    47984
+    47989
+    47990
+    48010
+
+    # others
     8384
     22000
     25565
@@ -276,9 +294,6 @@
 
     # development
     vscode-fhs
-
-    # sunshine
-    sunshine
 
     # Clojure
     babashka
