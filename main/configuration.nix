@@ -392,7 +392,6 @@
     direnv
     dmidecode
     dunst
-    element-desktop-wayland
     fd
     feh
     ffcast
