@@ -270,9 +270,6 @@
       '';
   };
   environment.systemPackages = with pkgs; [
-    # looking glass
-    looking-glass-client
-
     # android tools, flashing
     android-tools
 
@@ -321,19 +318,19 @@
     # fonts
     corefonts
 
-    # audio
-    audacity
-    sonobus
-    musescore
-    yabridge
-    yabridgectl
-    airwindows-lv2
-    ardour
-    gxplugins-lv2
-    guitarix
-    surge-XT
-    kid3
-    reaper
+    # audio, currently disabled
+    # audacity
+    # sonobus
+    # musescore
+    # yabridge
+    # yabridgectl
+    # airwindows-lv2
+    # ardour
+    # gxplugins-lv2
+    # guitarix
+    # surge-XT
+    # kid3
+    # reaper
 
     # terminal
     neovim
@@ -440,7 +437,6 @@
     # git
     git
     # Tiling WM Utilities
-    xfce.thunar
     mako
     dbus
     foot
