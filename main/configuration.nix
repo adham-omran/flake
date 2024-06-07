@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   imports =
     [
@@ -495,7 +495,10 @@
     gnome.pomodoro
     gnome.adwaita-icon-theme
     gnome.gnome-tweaks
+
     gnomeExtensions.appindicator
+    gnomeExtensions.clipboard-indicator
+
 
     # Emacs
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
