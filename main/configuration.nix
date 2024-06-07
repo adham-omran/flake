@@ -53,10 +53,6 @@
 
   # services
   services = {
-    mysql = {
-      enable = true;
-      package = pkgs.mysql80;
-    };
     # Sunshine
     sunshine = {
       enable = true;
@@ -274,9 +270,6 @@
       '';
   };
   environment.systemPackages = with pkgs; [
-    # mysql administration
-    mysql-workbench
-
     # android tools, flashing
     android-tools
 
