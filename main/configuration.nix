@@ -218,6 +218,7 @@
     47990
     48010
 
+    # TODO: Document service and port.
     # others
     8384
     22000
@@ -237,6 +238,7 @@
   ];
 
   networking.firewall.allowedUDPPorts = [
+    # TODO: Document service and port.
     22000
     21027
     25565
@@ -270,6 +272,7 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    
     # android tools, flashing
     android-tools
 
@@ -568,6 +571,7 @@
 
   system.stateVersion = "24.05";
   nixpkgs.config.allowUnfree = true;
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
