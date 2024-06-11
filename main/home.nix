@@ -193,19 +193,19 @@ SyncState *
     };
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-git;
-    extraPackages = (epkgs: [
-      epkgs.vterm
-      epkgs.jinx
-    ]);
-  };
+  # programs.emacs = {
+  #   enable = true;
+  #   package = pkgs.emacs-git;
+  #   extraPackages = (epkgs: [
+  #     epkgs.vterm
+  #     epkgs.jinx
+  #   ]);
+  # };
 
-  services.emacs = {
-    enable = true;
-    client.enable = true;
-  };
+  # services.emacs = {
+  #   enable = true;
+  #   client.enable = true;
+  # };
 }
 
 # Local Variables:

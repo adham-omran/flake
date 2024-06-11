@@ -503,11 +503,11 @@
     gnomeExtensions.clipboard-indicator
 
 
-    # ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
-    #   [
-    #     epkgs.vterm
-    #     epkgs.jinx
-    #   ]))
+    ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
+      [
+        epkgs.vterm
+        epkgs.jinx
+      ]))
   ];
 
   xdg.portal = {
