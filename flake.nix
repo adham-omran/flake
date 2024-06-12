@@ -13,6 +13,11 @@
 
       home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
       home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-23-11";
+
+      emacs = {
+        url = "github:nix-community/emacs-overlay/master";
+        inputs.nixpkgs.follows = "nixpkgs-24-05";
+      };
     };
 
   outputs = { nixpkgs-24-05,
@@ -20,6 +25,7 @@
               musnix,
               home-manager-unstable,
               home-manager-stable,
+              self,
               ... }:
     let
       system = "x86_64-linux";
@@ -37,6 +43,7 @@
 
         main = lib-24-05.nixosSystem {
           inherit system;
+          specialArgs = { inherit self system; };
           modules = [
             musnix.nixosModules.musnix
             ./main/configuration.nix

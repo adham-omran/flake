@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ self, config, pkgs, ... }:
 {
   imports =
     [
@@ -272,7 +272,7 @@
       '';
   };
   environment.systemPackages = with pkgs; [
-    
+
     # android tools, flashing
     android-tools
 
@@ -503,8 +503,7 @@
     gnomeExtensions.clipboard-indicator
 
 
-    # Emacs
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
       [
         epkgs.vterm
         epkgs.jinx
@@ -599,6 +598,10 @@
       type = "hard";
       value = "524288";
     }
+  ];
+
+  nixpkgs.overlays = [
+    self.inputs.emacs.overlay
   ];
 }
 
