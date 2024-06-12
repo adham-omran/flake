@@ -54,25 +54,25 @@
     };
   };
 
-  accounts.email.accounts.default = {
-    primary = true;
-    msmtp = {
-      enable = true;
-      extraConfig = {
-        host = "smtp.fastmail.com";
-        from = "mail@adham-omran.com";
-        tls = "on";
-        tls_certcheck = "off";
-        "tls_starttls" = "off";
-        "port" = "465";
-        "auth" = "on";
-        "user" = "mail@adham-omran.com";
-        # TODO: Move to `pass`.
-        "password" = "${pkgs.runCommand "cat" "/home/adham/.fastmail-pass"}";
-        # "password" = "${builtins.readFile "/home/adham/.fastmail-pass"}";
-      };
-    };
-  };
+  # accounts.email.accounts.default = {
+  #   primary = true;
+  #   msmtp = {
+  #     enable = true;
+  #     extraConfig = {
+  #       host = "smtp.fastmail.com";
+  #       from = "mail@adham-omran.com";
+  #       tls = "on";
+  #       tls_certcheck = "off";
+  #       tls_starttls = "off";
+  #       port = "465";
+  #       auth = "on";
+  #       user = "mail@adham-omran.com";
+  #       # TODO: Move to `pass`.
+  #       password = "${pkgs.runCommand "cat" "/home/adham/.fastmail-pass"}";
+  #       # "password" = "${builtins.readFile "/home/adham/.fastmail-pass"}";
+  #     };
+  #   };
+  # };
 
   programs.mbsync = {
     enable = true;

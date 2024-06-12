@@ -115,6 +115,21 @@
 
   # programs
   programs = {
+    msmtp = {
+      enable = true;
+      accounts = {
+        default = {
+          auth = true;
+          tls = true;
+          port = "465";
+          tls_starttls = "off";
+          from = "mail@adham-omran.com";
+          host = "smtp.fastmail.com";
+          user = "mail@adham-omran.com";
+          passwordeval = "cat /home/adham/.fastmail-pass";
+        };
+      };
+    };
     noisetorch.enable = true;
     virt-manager.enable = true;
     tmux = {
