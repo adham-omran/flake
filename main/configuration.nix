@@ -115,6 +115,7 @@
 
   # programs
   programs = {
+
     msmtp = {
       enable = true;
       accounts = {
@@ -127,6 +128,16 @@
           host = "smtp.fastmail.com";
           user = "mail@adham-omran.com";
           passwordeval = "cat /home/adham/.fastmail-pass";
+        };
+        work = {
+          auth = true;
+          tls = true;
+          port = "465";
+          tls_starttls = "off";
+          from = "adham.a@kapita.iq";
+          host = "smtp.gmail.com";
+          user = "adham.a@kapita.iq";
+          passwordeval = "gpg --quiet --for-your-eyes-only --no-tty --decrypt /home/adham/.password-store/accounts.google.com/adham.a@kapita.iq/app-password/mail.gpg";
         };
       };
     };
@@ -436,6 +447,7 @@
 
     openssl
     pass
+
     pavucontrol
     pop-gtk-theme
     powertop
