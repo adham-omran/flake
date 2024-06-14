@@ -34,7 +34,7 @@
     in {
       nixosConfigurations = {
 
-        t480 = lib-23-11.nixosSystem {
+        t480 = lib-24-05.nixosSystem {
           inherit system;
           modules = [
             ./t480/configuration.nix

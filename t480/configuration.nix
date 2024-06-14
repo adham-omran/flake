@@ -62,23 +62,6 @@ in
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
     ];
-
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-terminal
-      gedit
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
   };
 
   programs.hyprland.enable = true;
@@ -138,7 +121,7 @@ in
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
   services.openssh.enable = true;
 
@@ -257,9 +240,6 @@ in
     rsync
 
     openssl
-    pinentry
-    pinentry-gtk2
-    pinentry-gnome
     syncthing
     killall
     virt-manager
