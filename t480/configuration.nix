@@ -148,39 +148,30 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # corefonts
+    corefonts
+
     # pomodoro
     gnome.pomodoro
     cloudflare-warp
-    hugo
     # packages from home-manager
-    vnstat
     nil
     mpv
     ffmpeg
-    qpwgraph
     clojure
     babashka
-    leiningen
     clojure-lsp
     graalvm-ce
     multimarkdown
     imagemagick
     ncdu
-    mysql80
     awscli2
-
     zoom-us
-
     ripgrep
     texlive.combined.scheme-full
-
     poppler_utils
-
     hunspell
     hunspellDicts.en_US
-
-    yt-dlp
-    gnuplot
     libnotify
     direnv
     gtk3
@@ -194,7 +185,6 @@ in
     bat
     btop
     fd
-    dmidecode
     powertop
     wget
     brightnessctl
@@ -209,16 +199,12 @@ in
     libreoffice-qt
     anki-bin
     nodejs_20
-
     google-chrome
     obs-studio
     foliate
-
     zulip
     telegram-desktop
     spotify
-    paper-gtk-theme
-    pop-gtk-theme
     gnome.adwaita-icon-theme
     scrot
     xclip
@@ -228,11 +214,11 @@ in
     rofi
     ffcast
     networkmanagerapplet
-    cliphist
-    foot
-    sway-contrib.grimshot
-    fuzzel
-    wf-recorder
+    # cliphist
+    # foot
+    # sway-contrib.grimshot
+    # fuzzel
+    # wf-recorder
     # git
     git
     # Sway
@@ -243,35 +229,31 @@ in
     wayland
     xdg-utils # for opening default programs when clicking links
     glib # gsettings
-    dracula-theme # gtk theme
     gnome3.adwaita-icon-theme  # default gnome cursors
-    swaylock
-    swayidle
-    grim         # screenshot functionality
-    slurp        # screenshot functionality
+    # swaylock
+    # swayidle
+    # grim         # screenshot functionality
+    # slurp        # screenshot functionality
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    bemenu       # wayland clone of dmenu
-    mako         # notification system developed by swaywm maintainer
-    wdisplays    # tool to configure displays
+    # bemenu       # wayland clone of dmenu
+    # mako         # notification system developed by swaywm maintainer
+    # wdisplays    # tool to configure displays
 
-    foot
-    wayland
     xdg-utils
     wl-clipboard
-    wofi
 
     (python3.withPackages(ps: with ps; [ pandas requests
                                          epc orjson
                                          sexpdata six
-                                         setuptools paramiko
+                                         setuptools
+                                         paramiko
+                                         pyautogui
                                          rapidfuzz
                                        ]))
 
-    hyprpaper
     canon-cups-ufr2
     OVMFFull
     unzip
-    libsForQt5.okular
     rsync
 
     openssl
@@ -283,14 +265,13 @@ in
     virt-manager
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
+    gnomeExtensions.clipboard-indicator
     gnome.gnome-tweaks
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
       [
         epkgs.vterm
         epkgs.jinx
       ]))
-
-    musescore
   ];
   xdg.portal = {
     enable = true;
@@ -298,23 +279,17 @@ in
   };
 
   programs.sway = {
-    enable = true;
+    enable = false;
     wrapperFeatures.gtk = true;
   };
 
   services.vnstat.enable = true;
-  services.mpd.user = "userRunningPipeWire";
-  systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
-  };
   services.kanata.enable = true;
   services.kanata.package = pkgs.kanata;
-
   services.kanata.keyboards.usb.devices = [
     "/dev/input/by-id/usb-SONiX_USB_DEVICE-event-kbd" ## external keyboard
     "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
   ];
-
   services.kanata.keyboards.usb.config = ''
   (defvar
     tap-timeout   150
@@ -424,10 +399,6 @@ in
     };
   };
   virtualisation = {
-      podman = {
-      enable = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;};
     docker.enable = true;
     lxd.enable = true;
     libvirtd.enable = true;
@@ -439,15 +410,15 @@ in
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
+    settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
-  nix.settings.substituters = [ "https://aseipp-nix-cache.freetls.fastly.net" ];
-  nix.settings.auto-optimise-store = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -464,7 +435,13 @@ in
 
   networking.extraHosts =
   ''
-    192.168.1.203    gilgamesh.home.arpa gilgamesh
-    100.109.223.43   jellyfin.home.arpa jellyfin
   '';
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchGit {
+      url = "https://github.com/nix-community/emacs-overlay.git";
+      ref = "master";
+      rev = "a5143ff8b6be9201f6b7aabe209a4c2a4a832ae3"; # change the revision
+    }))
+  ];
 }

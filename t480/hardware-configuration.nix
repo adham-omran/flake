@@ -23,10 +23,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/pool" = {
-    device = "truenas.home.arpa:/mnt/pool";
-    fsType = "nfs";
-  };
+  # fileSystems."/mnt/pool" = {
+  #   device = "truenas.home.arpa:/mnt/pool";
+  #   fsType = "nfs";
+  # };
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/b040c8e8-5615-420c-b1d4-9a2df1cdc6c9"; }
