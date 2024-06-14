@@ -100,8 +100,8 @@ Inbox ~/maildir/INBOX
 SubFolders Verbatim
 
 Channel fastmail
-Master :fastmail-remote:
-Slave :fastmail-local:
+Far :fastmail-remote:
+Near :fastmail-local:
 Patterns *
 Expunge None
 CopyArrivalDate yes
