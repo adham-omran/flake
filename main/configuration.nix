@@ -129,6 +129,16 @@
           user = "mail@adham-omran.com";
           passwordeval = "cat /home/adham/.fastmail-pass";
         };
+        lists = {
+          auth = true;
+          tls = true;
+          port = "465";
+          tls_starttls = "off";
+          from = "lists@adham-omran.com";
+          host = "smtp.fastmail.com";
+          user = "mail@adham-omran.com";
+          passwordeval = "cat /home/adham/.fastmail-pass";
+        };
         work = {
           auth = true;
           tls = true;
