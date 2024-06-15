@@ -308,6 +308,8 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # Brave Browser
+    brave
 
     # android tools, flashing
     android-tools
