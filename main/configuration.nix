@@ -359,20 +359,6 @@
     # fonts
     corefonts
 
-    # audio, currently disabled
-    # audacity
-    # sonobus
-    # musescore
-    # yabridge
-    # yabridgectl
-    # airwindows-lv2
-    # ardour
-    # gxplugins-lv2
-    # guitarix
-    # surge-XT
-    # kid3
-    # reaper
-
     # terminal
     neovim
     xdg-ninja
