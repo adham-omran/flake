@@ -506,18 +506,6 @@
     p7zip
     unzip
 
-    # Plasma 6 Extras
-    # kdePackages.kamoso
-    # kdePackages.akonadi
-    # kdePackages.kontact
-    # kdePackages.merkuro
-    # kdePackages.kclock
-    # kdePackages.krdc
-    # kdePackages.kcalc
-    # kdePackages.okular
-    # kdePackages.skanlite
-    # kdePackages.skanpage
-
     # SSH and GPG
     openssl
     pinentry
