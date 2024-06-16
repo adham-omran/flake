@@ -169,7 +169,7 @@
     };
 
     sway = {
-      enable = true;
+      enable = false;
       wrapperFeatures.gtk = true;
     };
 
@@ -188,7 +188,7 @@
     firefox.nativeMessagingHosts.browserpass = true;
     fish.enable = true;
     browserpass.enable = true;
-    hyprland.enable = true;
+    hyprland.enable = false;
     light.enable = true;
     dconf.enable = true;
     adb.enable = true;
