@@ -248,6 +248,9 @@
   ];
 
   networking.firewall.allowedTCPPorts = [
+    # barrier
+    24800
+
     # sunshine
     47984
     47989
@@ -274,6 +277,9 @@
   ];
 
   networking.firewall.allowedUDPPorts = [
+    # Barrie Ports
+    24800
+
     # TODO: Document service and port.
     22000
     21027
@@ -308,6 +314,9 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # Barrier
+    barrier
+
     # Brave Browser
     brave
 
