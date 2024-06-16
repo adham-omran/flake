@@ -477,7 +477,8 @@
     mako
     dbus
     foot
-    glib # gsettings
+    # gsettings
+    glib
     grim
     hyprpaper
     slurp
@@ -491,12 +492,17 @@
     # Printing
     canon-cups-ufr2
 
-    (python3.withPackages(ps: with ps; [ pandas requests
-                                         epc orjson
-                                         sexpdata six
-                                         setuptools paramiko
-                                         rapidfuzz
-                                       ]))
+    (python3.withPackages(ps: with ps; [
+      pandas
+      requests
+      epc
+      orjson
+      sexpdata
+      six
+      setuptools
+      paramiko
+      rapidfuzz
+    ]))
 
     # Virtualization
     OVMFFull
