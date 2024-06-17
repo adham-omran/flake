@@ -8,8 +8,8 @@
       nixpkgs-24-05.url =   "github:nixos/nixpkgs/nixos-24.05";
       nixpkgs-23-11.url =   "https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz";
 
-      home-manager-unstable.url = "github:nix-community/home-manager/release-24.05";
-      home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-24-05";
+      home-manager-24-05.url = "github:nix-community/home-manager/release-24.05";
+      home-manager-24-05.inputs.nixpkgs.follows = "nixpkgs-24-05";
 
       home-manager-stable.url = "github:nix-community/home-manager/release-23.11";
       home-manager-stable.inputs.nixpkgs.follows = "nixpkgs-23-11";
@@ -23,7 +23,7 @@
   outputs = { nixpkgs-24-05,
               nixpkgs-23-11,
               musnix,
-              home-manager-unstable,
+              home-manager-24-05,
               home-manager-stable,
               self,
               ... }:
@@ -47,7 +47,7 @@
           modules = [
             musnix.nixosModules.musnix
             ./main/configuration.nix
-            home-manager-unstable.nixosModules.home-manager {
+            home-manager-24-05.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.adham = {
