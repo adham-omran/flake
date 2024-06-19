@@ -131,6 +131,8 @@ in
   systemd.packages = with pkgs; [cloudflare-warp];
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
   environment.systemPackages = with pkgs; [
+    # Brave
+    brave
     # corefonts
     corefonts
 
