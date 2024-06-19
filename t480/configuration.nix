@@ -133,6 +133,8 @@ in
   environment.systemPackages = with pkgs; [
     # Brave
     brave
+    # Moonlight
+    moonlight-qt
     # corefonts
     corefonts
 
