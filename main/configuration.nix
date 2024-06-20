@@ -525,6 +525,7 @@
     # GNOME
     gnome.adwaita-icon-theme
     gnome.gnome-tweaks
+    gnome.pomodoro
 
     ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
       [
