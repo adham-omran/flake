@@ -532,6 +532,14 @@
         epkgs.vterm
         epkgs.jinx
       ]))
+
+    (aspellWithDicts (dicts: with dicts; [
+      ar
+      en
+      en-computers
+      en-science
+      es
+    ]))
   ];
 
   xdg.portal = {
