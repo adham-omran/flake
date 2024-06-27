@@ -318,7 +318,11 @@
         DefaultTimeoutStopSec=10sec
       '';
   };
+
   environment.systemPackages = with pkgs; [
+    # Bitwig
+    bitwig-studio
+
     # team
     teamviewer
 
