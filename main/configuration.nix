@@ -526,7 +526,7 @@
     gnome.gnome-tweaks
     gnome.pomodoro
 
-    ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs:
       [
         epkgs.vterm
         epkgs.jinx
