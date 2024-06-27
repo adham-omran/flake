@@ -64,10 +64,13 @@
     # Sway option
     gnome.gnome-keyring.enable = true;
     desktopManager.plasma6.enable = false;
+    # Ollama
     ollama = {
-      ## Disable Ollama on NixOS since I'm using it on virtual machine.
-      enable = false;
+      enable = true;
       acceleration = "rocm";
+      environmentVariables = {
+        HSA_OVERRIDE_GFX_VERSION = "10.3.1";
+      };
     };
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
     ipp-usb.enable = true;
