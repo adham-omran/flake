@@ -485,16 +485,7 @@
     mako
     dbus
     foot
-    # gsettings
-    glib
-    grim
-    hyprpaper
-    slurp
-    waybar
-    wayland
-    wdisplays
     wl-clipboard
-    wofi
     xdg-utils
 
     # Printing
