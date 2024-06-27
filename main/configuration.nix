@@ -53,6 +53,8 @@
 
   # services
   services = {
+    # TeamViewer
+    teamviewer.enable = true;
     # Sunshine
     sunshine = {
       enable = true;
@@ -317,6 +319,9 @@
       '';
   };
   environment.systemPackages = with pkgs; [
+    # team
+    teamviewer
+
     # Barrier
     barrier
 
