@@ -528,6 +528,7 @@
     gnome.adwaita-icon-theme
     gnome.gnome-tweaks
     gnome.pomodoro
+    gnomeExtensions.clipboard-indicator
 
     ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs:
       [
