@@ -253,7 +253,7 @@ in
     gnomeExtensions.appindicator
     gnomeExtensions.clipboard-indicator
     gnome.gnome-tweaks
-    ((emacsPackagesFor emacs-git).emacsWithPackages (epkgs:
+    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs:
       [
         epkgs.vterm
         epkgs.jinx
