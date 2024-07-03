@@ -349,7 +349,6 @@
 
     # games
     gnubg
-    lutris
 
     # development
     vscode-fhs
@@ -625,16 +624,6 @@
     '';
 
   musnix.enable = true;
-
-  # Remove limits for Lutris
-  security.pam.loginLimits = [
-    {
-      domain = "adham";
-      item = "nofile";
-      type = "hard";
-      value = "524288";
-    }
-  ];
 
   nixpkgs.overlays = [
     self.inputs.emacs.overlay
