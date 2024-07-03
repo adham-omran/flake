@@ -99,27 +99,9 @@
     vnstat.enable = true;
     power-profiles-daemon.enable = false;
   };
-  environment = {
-    gnome.excludePackages = (with pkgs; [
-      gnome-photos
-      gnome-tour
-    ]) ++ (with pkgs.gnome; [
-      gnome-music
-      gnome-terminal
-      epiphany
-      geary
-      gnome-characters
-      totem
-      tali
-      iagno
-      hitori
-      atomix
-    ]);
-  };
 
-  # programs
+  # Programs
   programs = {
-
     msmtp = {
       enable = true;
       accounts = {
@@ -319,6 +301,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Audio Production
+    reaper
+
     # Bitwig
     bitwig-studio
 
@@ -357,9 +342,6 @@
     babashka
     clojure
     quarto
-
-    # ricing
-    eww
 
     # photography
     darktable
