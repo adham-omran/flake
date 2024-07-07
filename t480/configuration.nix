@@ -64,7 +64,6 @@ in
     ];
   };
 
-  programs.hyprland.enable = true;
   programs.browserpass.enable = true;
   programs.firefox.nativeMessagingHosts.browserpass = true;
   programs.light.enable = true;
@@ -194,40 +193,18 @@ in
     spotify
     gnome.adwaita-icon-theme
     scrot
-    xclip
-    xsel
     feh
     dunst
     rofi
     ffcast
     networkmanagerapplet
-    # cliphist
-    # foot
-    # sway-contrib.grimshot
-    # fuzzel
-    # wf-recorder
+
     # git
     git
     # Sway
-    waybar
-    dbus   # make dbus-update-activation-environment available in the path
-    dbus-sway-environment
-    configure-gtk
-    wayland
-    xdg-utils # for opening default programs when clicking links
-    glib # gsettings
-    gnome3.adwaita-icon-theme  # default gnome cursors
-    # swaylock
-    # swayidle
-    # grim         # screenshot functionality
-    # slurp        # screenshot functionality
-    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    # bemenu       # wayland clone of dmenu
-    # mako         # notification system developed by swaywm maintainer
-    # wdisplays    # tool to configure displays
-
+    # For opening default programs when clicking links
     xdg-utils
-    wl-clipboard
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
 
     (python3.withPackages(ps: with ps; [ pandas requests
                                          epc orjson
