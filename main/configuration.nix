@@ -303,6 +303,9 @@
   environment.systemPackages = with pkgs; [
     # Audio Production
     reaper
+    yabridge
+    yabridgectl
+    guitarix
 
     # Bitwig
     bitwig-studio
