@@ -60,7 +60,6 @@
     configDir = "/home/adham/.config/syncthing";
   };
 
-  services.blueman.enable = true;
   services.dbus.enable = true;
   sound.enable = true;
   hardware.pulseaudio.enable = false;
