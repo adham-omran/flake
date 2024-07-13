@@ -151,8 +151,6 @@
     zotero
     libreoffice-qt
     anki-bin
-    nodejs_20
-    google-chrome
     obs-studio
     foliate
     zulip
@@ -160,11 +158,6 @@
     spotify
     gnome.adwaita-icon-theme
     scrot
-    feh
-    dunst
-    rofi
-    ffcast
-    networkmanagerapplet
 
     # git
     git
