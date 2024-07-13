@@ -18,10 +18,14 @@
     xkb.layout = "us";
   };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager = {
-    gnome.enable = true;
-    plasma5.enable = false;
+  services.xserver = {
+    displayManager = {
+      gdm.enable = true;
+    };
+    # Desktop Environment
+    desktopManager = {
+      gnome.enable = true;
+    };
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
