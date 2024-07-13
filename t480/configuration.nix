@@ -31,11 +31,6 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   programs.dconf.enable = true;
-  environment = {
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa
-    ];
-  };
 
   programs.browserpass.enable = true;
   programs.firefox.nativeMessagingHosts.browserpass = true;
