@@ -76,8 +76,16 @@
     isNormalUser = true;
     description = "adham";
     extraGroups = [
-      "networkmanager" "wheel" "adbusers" "video"
-      "docker" "libvirtd" "lp" "scanner" "audio" "input"
+      "adbusers"
+      "audio"
+      "docker"
+      "input"
+      "libvirtd"
+      "lp"
+      "networkmanager"
+      "scanner"
+      "video"
+      "wheel"
     ];
     packages = with pkgs; [
       firefox
