@@ -200,8 +200,6 @@
     pulseaudio.enable = false;
   };
 
-  fonts.fontDir.enable = true;
-
   sound.enable = true;
   security.rtkit.enable = true;
 
@@ -534,8 +532,10 @@
   };
 
   fonts = {
+    fontDir.enable = true;
     enableDefaultPackages = true;
     packages = with pkgs; [
+      ibm-plex
       amiri
       noto-fonts
       noto-fonts-cjk
