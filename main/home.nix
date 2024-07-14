@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, lib, ...}:
 {
   home = {
     stateVersion = "24.05";
