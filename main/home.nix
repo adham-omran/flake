@@ -12,6 +12,12 @@
             signByDefault = true;
             key = "4D37E0ADEE0B9138";
     };
+    extraConfig = {
+      gc = {
+        reflogexpire = "never";
+        reflogexpireunreachable = "never";
+      };
+    };
   };
 
   services.blueman-applet.enable = true;
