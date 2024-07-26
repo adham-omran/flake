@@ -67,7 +67,7 @@
     desktopManager.plasma6.enable = false;
     # Ollama
     ollama = {
-      enable = false;
+      enable = true;
       acceleration = "rocm";
       environmentVariables = {
         HSA_OVERRIDE_GFX_VERSION = "10.3.1";
