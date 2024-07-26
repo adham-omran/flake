@@ -423,6 +423,7 @@
     feh
     ffcast
     foliate
+
     # dnkl Utilities
     foot
     fuzzel
@@ -488,6 +489,16 @@
       rapidfuzz
     ]))
 
+    # R
+    (rWrapper.override {
+      packages = with rPackages;
+        [
+          ggplot2
+          dplyr
+          reticulate
+        ];
+    })
+
     # Virtualization
     OVMFFull
     swtpm
@@ -504,7 +515,6 @@
     rsync
     syncthing
     rclone
-
 
     # GNOME
     gnome.adwaita-icon-theme
