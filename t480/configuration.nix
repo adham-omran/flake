@@ -274,6 +274,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
+      ibm-plex
       amiri
       noto-fonts
       noto-fonts-cjk
