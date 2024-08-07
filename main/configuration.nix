@@ -52,6 +52,17 @@
 
   # services
   services = {
+    # Dictionary for Emacs
+    dictd = {
+      enable = true;
+      DBs = with pkgs.dictdDBs; [
+        wiktionary
+        wordnet
+        fra2eng
+        eng2fra
+      ];
+    };
+
     # TeamViewer
     teamviewer.enable = true;
     # Sunshine
