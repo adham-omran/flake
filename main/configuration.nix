@@ -12,11 +12,9 @@
     v4l2loopback
     xpadneo
   ];
-  boot.extraModprobeConfig = ''
-    options vfio-pci ids=1002:73ff,1002:ab28
-  '';
 
-  # These modules are required for PCI passthrough, and must come before early modesetting stuff
+  # These modules are required for PCI passthrough, and must come before early
+  # modesetting stuff
   boot.kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" ];
 
   boot.supportedFilesystems = [ "ntfs" ];
